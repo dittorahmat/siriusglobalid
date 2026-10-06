@@ -1,0 +1,17 @@
+# Tooling & agent workdirs — bukan bagian situs
+.agents/
+.claude/
+.commandcode/
+.hermes/
+.openhands/
+.pi/
+.qwen/
+.zcode/
+skills/
+skills-lock.json
+
+# OS & editor junk
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
