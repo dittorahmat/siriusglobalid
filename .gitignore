@@ -15,3 +15,8 @@ skills-lock.json
 Thumbs.db
 *.log
 .vscode/
+
+# Webhook secret - TIDAK BOLEH masuk repo. Tempatnya di $HOME server,
+# bukan di folder repo. Entri ini pengaman bila file nyasar ke clone.
+.gh-webhook-secret
+gh-webhook-secret.txt
