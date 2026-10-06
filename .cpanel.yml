@@ -5,5 +5,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html/
-    - /bin/cp index.html tentang.html layanan.html portofolio.html kontak.html 404.html robots.txt sitemap.xml $DEPLOYPATH
+    - /bin/cp index.html tentang.html layanan.html portofolio.html kontak.html 404.html robots.txt sitemap.xml gh-deploy.php $DEPLOYPATH
     - /bin/cp -R css js assets layanan $DEPLOYPATH

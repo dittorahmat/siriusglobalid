@@ -78,6 +78,10 @@ Pengecualian: perubahan non-frontend murni (`sitemap.xml`, `robots.txt`,
 - Workflow FTP (`.github/workflows/deploy.yml`) sudah dihapus karena
   firewall hosting memblokir IP GitHub runner (`ETIMEDOUT` port 21).
   Jangan kembalikan tanpa hasil tes konektivitas dari runner.
-- Opsi otomatis penuh (opsional, bila `exec` diizinkan hosting): endpoint
-  webhook kecil (mis. `deploy-webhook.php` di luar `public_html`) yang
-  menjalankan `git pull` + validasi secret GitHub. Belum diimplementasikan.
+- Opsi otomatis penuh: `gh-deploy.php` (di repo root, ikut ter-copy ke
+  `public_html`) menerima GitHub webhook (push ke `main`, validasi
+  `X-Hub-Signature-256`) lalu `git pull` + salin file situs. Setup sekali:
+  ganti `GH_WEBHOOK_SECRET` di file itu via File Manager, lalu di GitHub
+  repo Settings → Webhooks → Payload URL
+  `https://siriusglobal.id/gh-deploy.php` + Secret yang sama. Cek hasil di
+  `~/deploy.log`. Butuh `shell_exec` aktif di hosting.
