@@ -19,15 +19,15 @@
 $pub = __DIR__;
 $home = dirname($pub);
 
-$secretFile = $home . '/.gh-webhook-secret';
-if (!is_file($secretFile) && is_file($home . '/gh-webhook-secret.txt')) {
-    $secretFile = $home . '/gh-webhook-secret.txt';
-}
-$raw = is_file($secretFile) ? (string) @file_get_contents($secretFile) : '';
+$candidates = [$home . '/.gh-webhook-secret', $home . '/gh-webhook-secret.txt', $home . '/gh-webhook-secret'];
+$secretFile = '';
+foreach ($candidates as $c) { if (is_file($c)) { $secretFile = $c; break; } }
+$raw = ($secretFile !== '') ? (string) @file_get_contents($secretFile) : '';
 $raw = preg_replace("/^\xEF\xBB\xBF/", '', $raw); // buang BOM editor
 $secret = preg_replace('/\s+/', '', $raw); // buang spasi/newline tempelan
 if ($secret === '' || $secret === 'GANTI-DENGAN-SECRET-ACAK-PANJANG') {
     http_response_code(500);
+    @file_put_contents($home . '/deploy.log', json_encode(['at' => date('c'), 'auth' => 'secret file tidak terbaca', 'checked' => $candidates]) . PHP_EOL, FILE_APPEND);
     exit('secret belum dikonfigurasi di ~/.gh-webhook-secret');
 }
 
