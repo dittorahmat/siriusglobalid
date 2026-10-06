@@ -27,16 +27,16 @@ jobs:
           # dangerous-clean-slate default false: file lama di server TIDAK dihapus.
           log-level: minimal
           exclude:
-            - **/.git*/**
-            - **/.github/**
-            - .agents/**
-            - .claude/**
-            - .commandcode/**
-            - .hermes/**
-            - .openhands/**
-            - .pi/**
-            - .qwen/**
-            - .zcode/**
-            - skills/**
-            - **/*.md
-            - skills-lock.json
+            - "**/.git*/**"
+            - "**/.github/**"
+            - ".agents/**"
+            - ".claude/**"
+            - ".commandcode/**"
+            - ".hermes/**"
+            - ".openhands/**"
+            - ".pi/**"
+            - ".qwen/**"
+            - ".zcode/**"
+            - "skills/**"
+            - "**/*.md"
+            - "skills-lock.json"
