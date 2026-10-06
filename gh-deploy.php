@@ -23,7 +23,9 @@ $secretFile = $home . '/.gh-webhook-secret';
 if (!is_file($secretFile) && is_file($home . '/gh-webhook-secret.txt')) {
     $secretFile = $home . '/gh-webhook-secret.txt';
 }
-$secret = is_file($secretFile) ? trim((string) @file_get_contents($secretFile)) : '';
+$raw = is_file($secretFile) ? (string) @file_get_contents($secretFile) : '';
+$raw = preg_replace("/^\xEF\xBB\xBF/", '', $raw); // buang BOM editor
+$secret = preg_replace('/\s+/', '', $raw); // buang spasi/newline tempelan
 if ($secret === '' || $secret === 'GANTI-DENGAN-SECRET-ACAK-PANJANG') {
     http_response_code(500);
     exit('secret belum dikonfigurasi di ~/.gh-webhook-secret');
@@ -34,6 +36,7 @@ $sig = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? '';
 $expected = 'sha256=' . hash_hmac('sha256', $payload, $secret);
 if (!hash_equals($expected, $sig)) {
     http_response_code(403);
+    @file_put_contents($home . '/deploy.log', json_encode(['at' => date('c'), 'auth' => 'forbidden: secret tidak cocok']) . PHP_EOL, FILE_APPEND);
     exit('forbidden');
 }
 
