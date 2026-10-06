@@ -66,7 +66,10 @@ if (!function_exists('shell_exec')) {
     $log['error'] = 'clone tidak ditemukan di ' . $repo;
 } else {
     $log['git_which'] = trim((string) shell_exec('which git 2>&1'));
-    $log['pull'] = shell_exec('git -C ' . escapeshellarg($repo) . ' pull --ff-only 2>&1');
+    // Self-healing: mirror deploy, paksa bersih agar tak pernah
+    // terblokir "uncommitted changes" seperti tombol Deploy cPanel.
+    $log['fetch'] = shell_exec('git -C ' . escapeshellarg($repo) . ' fetch origin 2>&1');
+    $log['reset'] = shell_exec('git -C ' . escapeshellarg($repo) . ' reset --hard origin/main 2>&1');
     $files = ['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'privasi.html', 'syarat.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'];
     $copied = 0;
     foreach ($files as $f) {
