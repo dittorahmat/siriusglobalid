@@ -48,7 +48,7 @@ if (!function_exists('shell_exec')) {
 } else {
     $log['git_which'] = trim((string) shell_exec('which git 2>&1'));
     $log['pull'] = shell_exec('git -C ' . escapeshellarg($repo) . ' pull --ff-only 2>&1');
-    $files = ['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'];
+    $files = ['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'privasi.html', 'syarat.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'];
     $copied = 0;
     foreach ($files as $f) {
         if (@copy($repo . '/' . $f, $pub . '/' . $f)) {
