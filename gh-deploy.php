@@ -65,8 +65,62 @@ set_time_limit(120);
 $repo = $home . '/siriusglobalid';
 
 $log = ['at' => date('c'), 'repo' => $repo, 'home_used' => $home];
+$files = ['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'privasi.html', 'syarat.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'];
+$siteDirs = ['css', 'js', 'assets', 'layanan'];
+// Salin rekursif murni-PHP (pengganti cp -R saat shell mati).
+$rcopy = function ($s, $d) use (&$rcopy, &$copied) {
+    if (is_dir($s)) {
+        @mkdir($d, 0755, true);
+        foreach ((array) @scandir($s) as $e) {
+            if ($e === '.' || $e === '..') continue;
+            $rcopy($s . '/' . $e, $d . '/' . $e);
+        }
+    } elseif (@copy($s, $d)) { $copied++; }
+};
+$rrmdir = function ($d) use (&$rrmdir) {
+    if (!is_dir($d)) { @unlink($d); return; }
+    foreach ((array) @scandir($d) as $e) {
+        if ($e === '.' || $e === '..') continue;
+        $rrmdir($d . '/' . $e);
+    }
+    @rmdir($d);
+};
+$copied = 0;
 if (!function_exists('shell_exec')) {
-    $log['error'] = 'shell_exec dimatikan hosting ini';
+    // Jalur tanpa shell: unduh ZIP branch main + ekstrak via ZipArchive.
+    // Tidak butuh git, tidak butuh shell_exec.
+    $log['mode'] = 'zip';
+    if (!class_exists('ZipArchive')) {
+        $log['error'] = 'shell_exec mati dan ZipArchive tidak tersedia di hosting ini';
+    } elseif (!ini_get('allow_url_fopen')) {
+        $log['error'] = 'shell_exec mati dan allow_url_fopen mati di hosting ini';
+    } else {
+        $tmpBase = sys_get_temp_dir() . '/sgi-' . bin2hex(random_bytes(6));
+        $zipFile = $tmpBase . '.zip';
+        $dl = @copy('https://github.com/dittorahmat/siriusglobalid/archive/refs/heads/main.zip', $zipFile);
+        if (!$dl || !is_file($zipFile)) {
+            $log['error'] = 'gagal unduh ZIP main dari GitHub';
+        } else {
+            $zip = new ZipArchive();
+            if ($zip->open($zipFile) !== true) {
+                $log['error'] = 'gagal buka ZIP main';
+            } else {
+                $zip->extractTo($tmpBase);
+                $zip->close();
+                $roots = glob($tmpBase . '/*', GLOB_ONLYDIR);
+                $src = $roots ? $roots[0] : null;
+                if (!$src) {
+                    $log['error'] = 'isi ZIP tak terduga';
+                } else {
+                    foreach ($files as $f) { $rcopy($src . '/' . $f, $pub . '/' . $f); }
+                    foreach ($siteDirs as $dd) { $rcopy($src . '/' . $dd, $pub . '/' . $dd); }
+                    $log['copied_files'] = $copied;
+                }
+            }
+            @unlink($zipFile);
+            $rrmdir($tmpBase);
+        }
+    }
 } elseif (!is_dir($repo . '/.git')) {
     $log['error'] = 'clone tidak ditemukan di ' . $repo;
 } else {
@@ -75,7 +129,6 @@ if (!function_exists('shell_exec')) {
     // terblokir "uncommitted changes" seperti tombol Deploy cPanel.
     $log['fetch'] = shell_exec('git -C ' . escapeshellarg($repo) . ' fetch origin 2>&1');
     $log['reset'] = shell_exec('git -C ' . escapeshellarg($repo) . ' reset --hard origin/main 2>&1');
-    $files = ['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'privasi.html', 'syarat.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'];
     $copied = 0;
     foreach ($files as $f) {
         if (@copy($repo . '/' . $f, $pub . '/' . $f)) {
