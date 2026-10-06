@@ -3,9 +3,11 @@
 // PENTING: JANGAN taruh secret asli di file ini. Repo ini publik dan
 // setiap deploy MENIMPA public_html/gh-deploy.php dengan versi repo.
 // Cara pakai (cukup sekali):
-// 1. Via cPanel File Manager, buat file bernama  .gh-webhook-secret
-//    di HOME (sejajar public_html, BUKAN di dalamnya agar tak bisa
-//    diakses via browser). Aktifkan "Show Hidden Files" bila perlu.
+// 1. Via cPanel File Manager, buat file berisi secret di HOME
+//    (sejajar public_html, BUKAN di dalamnya agar tak bisa
+//    diakses via browser). Nama file bebas salah satu:
+//      .gh-webhook-secret   (perlu "Show Hidden Files" agar terlihat)
+//      gh-webhook-secret.txt  (terlihat biasa, paling mudah)
 //    Isinya 1 baris: secret acak panjang, sama persis dengan Secret
 //    di setting webhook GitHub.
 // 2. Di GitHub repo Settings -> Webhooks -> Add webhook:
@@ -18,6 +20,9 @@ $pub = __DIR__;
 $home = dirname($pub);
 
 $secretFile = $home . '/.gh-webhook-secret';
+if (!is_file($secretFile) && is_file($home . '/gh-webhook-secret.txt')) {
+    $secretFile = $home . '/gh-webhook-secret.txt';
+}
 $secret = is_file($secretFile) ? trim((string) @file_get_contents($secretFile)) : '';
 if ($secret === '' || $secret === 'GANTI-DENGAN-SECRET-ACAK-PANJANG') {
     http_response_code(500);
