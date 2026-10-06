@@ -57,10 +57,9 @@ if (($data['ref'] ?? '') !== 'refs/heads/main') {
 
 ignore_user_abort(true);
 set_time_limit(120);
-echo 'ok: deploy dimulai';
-if (function_exists('fastcgi_finish_request')) {
-    fastcgi_finish_request();
-}
+// SENGAJA sinkron: GitHub dan penguji melihat hasil JSON sebagai respons.
+// Jangan echo dulu + finish-request, karena di hosting ini proses
+// background sering mati sebelum menulis apa pun.
 
 // $pub dan $home sudah dihitung di atas (sebelum cek signature).
 $repo = $home . '/siriusglobalid';
@@ -88,8 +87,11 @@ if (!function_exists('shell_exec')) {
 }
 // Tulis ke dua tempat: HOME (utama) dan public_html (cadangan yang mudah
 // ditemukan). Isi log hanya path + output git, tanpa secret.
+// Respons juga membawa JSON yang sama agar terlihat di GitHub deliveries.
 $line = json_encode($log) . PHP_EOL;
 $wroteHome = (bool) @file_put_contents($home . '/deploy.log', $line, FILE_APPEND);
 if (!$wroteHome) {
     @file_put_contents($pub . '/deploy-webhook.log', $line, FILE_APPEND);
 }
+header('Content-Type: application/json');
+echo $line;
