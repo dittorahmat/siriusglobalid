@@ -33,17 +33,29 @@ if (function_exists('fastcgi_finish_request')) {
     fastcgi_finish_request();
 }
 
-$home = rtrim(getenv('HOME') ?: '', '/');
-$log = [];
-if ($home === '' || !function_exists('shell_exec')) {
-    $log[] = 'exec tidak tersedia di hosting ini';
+// Path diturunkan dari lokasi file ini (public_html/gh-deploy.php),
+// bukan dari env HOME yang sering kosong di PHP-FPM shared hosting.
+$pub = __DIR__;
+$home = dirname($pub);
+$repo = $home . '/siriusglobalid';
+$logfile = $home . '/deploy.log';
+
+$log = ['at' => date('c'), 'repo' => $repo];
+if (!function_exists('shell_exec')) {
+    $log['error'] = 'shell_exec dimatikan hosting ini';
+} elseif (!is_dir($repo . '/.git')) {
+    $log['error'] = 'clone tidak ditemukan di ' . $repo;
 } else {
-    $repo = $home . '/siriusglobalid';
-    $pub = $home . '/public_html';
-    $log[] = shell_exec('git -C ' . escapeshellarg($repo) . ' pull --ff-only 2>&1');
-    foreach (['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'] as $f) {
-        @copy($repo . '/' . $f, $pub . '/' . $f);
+    $log['git_which'] = trim((string) shell_exec('which git 2>&1'));
+    $log['pull'] = shell_exec('git -C ' . escapeshellarg($repo) . ' pull --ff-only 2>&1');
+    $files = ['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'];
+    $copied = 0;
+    foreach ($files as $f) {
+        if (@copy($repo . '/' . $f, $pub . '/' . $f)) {
+            $copied++;
+        }
     }
-    $log[] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/css') . ' ' . escapeshellarg($repo . '/js') . ' ' . escapeshellarg($repo . '/assets') . ' ' . escapeshellarg($repo . '/layanan') . ' ' . escapeshellarg($pub) . ' 2>&1');
+    $log['copied_files'] = $copied . '/' . count($files);
+    $log['copydirs'] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/css') . ' ' . escapeshellarg($repo . '/js') . ' ' . escapeshellarg($repo . '/assets') . ' ' . escapeshellarg($repo . '/layanan') . ' ' . escapeshellarg($pub) . ' 2>&1');
 }
-@file_put_contents($home . '/deploy.log', date('c') . ' ' . json_encode($log) . PHP_EOL, FILE_APPEND);
+@file_put_contents($logfile, json_encode($log) . PHP_EOL, FILE_APPEND);
