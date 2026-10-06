@@ -66,25 +66,18 @@ Kegagalan poin 1–3 = `Block`. Sisanya `MEDIUM/LOW` di tabel review.
 Pengecualian: perubahan non-frontend murni (`sitemap.xml`, `robots.txt`,
 `site-config.js` saja) tidak wajib review, tapi tetap wajib serve check.
 
-## CI/CD: deploy otomatis via FTP
+## CI/CD: deploy via cPanel Git Version Control (GitHub = source of truth)
 
-- Workflow: `.github/workflows/deploy.yml` — jalan tiap push ke `main`
-  (+ tombol manual `workflow_dispatch`). Action:
-  `SamKirkland/FTP-Deploy-Action@v4.3.5` (FTPS, port 21).
-- Secrets wajib di GitHub repo Settings → Secrets and variables → Actions:
-  `FTP_SERVER` (hostname saja, tanpa `ftp://`), `FTP_USERNAME`, `FTP_PASSWORD`.
-- Target default: `server-dir: /public_html/`. Ubah di workflow bila web root
-  berbeda (root FTP langsung / addon-domain).
-- File kerja (`AGENTS.md`, `.agents/`, `skills/`, dot-folder lain) otomatis
-  di-exclude, tidak naik ke server. File lama di server tidak dihapus
-  (`dangerous-clean-slate` default false).
-- Jika server menolak FTPS, ganti `protocol: ftps` → `ftp` di workflow.
-- PENTING (kasus nyata di proyek ini): port 21 terbuka dari Indonesia tapi
-  `ETIMEDOUT` dari GitHub runner = firewall hosting memblokir IP luar
-  (geo-block, mis. CSF/Imunify360). Perbaiki di sisi hosting: longgarkan
-  country-blocking untuk FTP, atau whitelist IP runner GitHub
-  (`api.github.com/meta` → key `actions`), atau pindah ke SFTP/self-hosted
-  runner. Jangan utak-atik workflow sebelum konektivitas lolos.
-- `exclude` custom sengaja tidak dipakai (pernah bikin run gagal 0 detik
-  tanpa job); repo sudah bersih via `.gitignore`, default action sudah
-  mengecualikan file `.git*`.
+- Alur resmi: push ke `main` di GitHub → di cPanel buka Git Version Control →
+  clone `https://github.com/dittorahmat/siriusglobalid.git` ke
+  `~/siriusglobalid` (JANGAN langsung ke `public_html` agar `.git` tidak
+  terekspos) → klik **Update from Remote** lalu **Deploy**.
+- File `.cpanel.yml` di repo root mengatur deploy: hanya file situs
+  (`*.html`, `css/`, `js/`, `assets/`, `layanan/`, `robots.txt`,
+  `sitemap.xml`) yang disalin ke `$HOME/public_html/`.
+- Workflow FTP (`.github/workflows/deploy.yml`) sudah dihapus karena
+  firewall hosting memblokir IP GitHub runner (`ETIMEDOUT` port 21).
+  Jangan kembalikan tanpa hasil tes konektivitas dari runner.
+- Opsi otomatis penuh (opsional, bila `exec` diizinkan hosting): endpoint
+  webhook kecil (mis. `deploy-webhook.php` di luar `public_html`) yang
+  menjalankan `git pull` + validasi secret GitHub. Belum diimplementasikan.

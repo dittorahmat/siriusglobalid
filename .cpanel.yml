@@ -1,0 +1,9 @@
+# cPanel Git Version Control: file ini dibaca otomatis saat klik
+# "Deploy" di cPanel. Hanya file situs yang disalin ke public_html
+# (AGENTS.md, .github/, .gitignore tidak ikut naik).
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html/
+    - /bin/cp index.html tentang.html layanan.html portofolio.html kontak.html 404.html robots.txt sitemap.xml $DEPLOYPATH
+    - /bin/cp -R css js assets layanan $DEPLOYPATH
