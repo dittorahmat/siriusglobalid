@@ -1,18 +1,32 @@
 <?php
 // Auto-deploy webhook: GitHub push ke main -> pull + salin file situs.
-// Cara pakai:
-// 1. File ini ter-copy otomatis ke public_html via .cpanel.yml.
-// 2. Via cPanel File Manager, ganti WEBHOOK_SECRET di bawah dengan string
-//    acak panjang (sama persis dengan Secret di setting webhook GitHub).
-// 3. Di GitHub repo Settings -> Webhooks -> Add webhook:
+// PENTING: JANGAN taruh secret asli di file ini. Repo ini publik dan
+// setiap deploy MENIMPA public_html/gh-deploy.php dengan versi repo.
+// Cara pakai (cukup sekali):
+// 1. Via cPanel File Manager, buat file bernama  .gh-webhook-secret
+//    di HOME (sejajar public_html, BUKAN di dalamnya agar tak bisa
+//    diakses via browser). Aktifkan "Show Hidden Files" bila perlu.
+//    Isinya 1 baris: secret acak panjang, sama persis dengan Secret
+//    di setting webhook GitHub.
+// 2. Di GitHub repo Settings -> Webhooks -> Add webhook:
 //    Payload URL: https://siriusglobal.id/gh-deploy.php
 //    Content type: application/json, Secret: <sama>, event: Just the push event.
 
-define('GH_WEBHOOK_SECRET', 'GANTI-DENGAN-SECRET-ACAK-PANJANG');
+// Path diturunkan dari lokasi file ini (public_html/gh-deploy.php),
+// bukan dari env HOME yang sering kosong di PHP-FPM shared hosting.
+$pub = __DIR__;
+$home = dirname($pub);
+
+$secretFile = $home . '/.gh-webhook-secret';
+$secret = is_file($secretFile) ? trim((string) @file_get_contents($secretFile)) : '';
+if ($secret === '' || $secret === 'GANTI-DENGAN-SECRET-ACAK-PANJANG') {
+    http_response_code(500);
+    exit('secret belum dikonfigurasi di ~/.gh-webhook-secret');
+}
 
 $payload = file_get_contents('php://input');
 $sig = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? '';
-$expected = 'sha256=' . hash_hmac('sha256', $payload, GH_WEBHOOK_SECRET);
+$expected = 'sha256=' . hash_hmac('sha256', $payload, $secret);
 if (!hash_equals($expected, $sig)) {
     http_response_code(403);
     exit('forbidden');
@@ -33,10 +47,7 @@ if (function_exists('fastcgi_finish_request')) {
     fastcgi_finish_request();
 }
 
-// Path diturunkan dari lokasi file ini (public_html/gh-deploy.php),
-// bukan dari env HOME yang sering kosong di PHP-FPM shared hosting.
-$pub = __DIR__;
-$home = dirname($pub);
+// $pub dan $home sudah dihitung di atas (sebelum cek signature).
 $repo = $home . '/siriusglobalid';
 $logfile = $home . '/deploy.log';
 
