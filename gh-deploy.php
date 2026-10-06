@@ -16,8 +16,15 @@
 
 // Path diturunkan dari lokasi file ini (public_html/gh-deploy.php),
 // bukan dari env HOME yang sering kosong di PHP-FPM shared hosting.
+// Beberapa hosting memakai symlink docroot, jadi pilih kandidat pertama
+// yang benar-benar ada.
 $pub = __DIR__;
-$home = dirname($pub);
+$homeCandidates = [dirname($pub)];
+if (($rp = realpath($pub)) !== false) { $homeCandidates[] = dirname($rp); }
+$envHome = getenv('HOME');
+if (is_string($envHome) && $envHome !== '') { $homeCandidates[] = $envHome; }
+$home = $pub;
+foreach ($homeCandidates as $c) { if (is_dir($c)) { $home = $c; break; } }
 
 $candidates = [$home . '/.gh-webhook-secret', $home . '/gh-webhook-secret.txt', $home . '/gh-webhook-secret'];
 $secretFile = '';
@@ -57,9 +64,8 @@ if (function_exists('fastcgi_finish_request')) {
 
 // $pub dan $home sudah dihitung di atas (sebelum cek signature).
 $repo = $home . '/siriusglobalid';
-$logfile = $home . '/deploy.log';
 
-$log = ['at' => date('c'), 'repo' => $repo];
+$log = ['at' => date('c'), 'repo' => $repo, 'home_used' => $home];
 if (!function_exists('shell_exec')) {
     $log['error'] = 'shell_exec dimatikan hosting ini';
 } elseif (!is_dir($repo . '/.git')) {
@@ -80,4 +86,10 @@ if (!function_exists('shell_exec')) {
     $log['copied_files'] = $copied . '/' . count($files);
     $log['copydirs'] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/css') . ' ' . escapeshellarg($repo . '/js') . ' ' . escapeshellarg($repo . '/assets') . ' ' . escapeshellarg($repo . '/layanan') . ' ' . escapeshellarg($pub) . ' 2>&1');
 }
-@file_put_contents($logfile, json_encode($log) . PHP_EOL, FILE_APPEND);
+// Tulis ke dua tempat: HOME (utama) dan public_html (cadangan yang mudah
+// ditemukan). Isi log hanya path + output git, tanpa secret.
+$line = json_encode($log) . PHP_EOL;
+$wroteHome = (bool) @file_put_contents($home . '/deploy.log', $line, FILE_APPEND);
+if (!$wroteHome) {
+    @file_put_contents($pub . '/deploy-webhook.log', $line, FILE_APPEND);
+}
