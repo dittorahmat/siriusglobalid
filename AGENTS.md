@@ -79,3 +79,12 @@ Pengecualian: perubahan non-frontend murni (`sitemap.xml`, `robots.txt`,
   di-exclude, tidak naik ke server. File lama di server tidak dihapus
   (`dangerous-clean-slate` default false).
 - Jika server menolak FTPS, ganti `protocol: ftps` → `ftp` di workflow.
+- PENTING (kasus nyata di proyek ini): port 21 terbuka dari Indonesia tapi
+  `ETIMEDOUT` dari GitHub runner = firewall hosting memblokir IP luar
+  (geo-block, mis. CSF/Imunify360). Perbaiki di sisi hosting: longgarkan
+  country-blocking untuk FTP, atau whitelist IP runner GitHub
+  (`api.github.com/meta` → key `actions`), atau pindah ke SFTP/self-hosted
+  runner. Jangan utak-atik workflow sebelum konektivitas lolos.
+- `exclude` custom sengaja tidak dipakai (pernah bikin run gagal 0 detik
+  tanpa job); repo sudah bersih via `.gitignore`, default action sudah
+  mengecualikan file `.git*`.
