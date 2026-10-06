@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const k = el.getAttribute("data-config");
       if (SITE[k] !== undefined) {
         if (el.tagName === "A" && (k === "phoneHref")) el.href = SITE[k];
-        else if (el.tagName === "A" && k === "email") el.href = "mailto:" + SITE[k];
+        else if (el.tagName === "A" && k === "email") { el.href = "mailto:" + SITE[k]; el.textContent = SITE[k]; }
         else el.textContent = SITE[k];
       }
     });
@@ -81,7 +81,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }));
   }
 
-  // Contact form (front-end only)
+  // Preselect service from ?layanan= (deep links from service pages)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const svc = params.get("layanan");
+    const need = document.getElementById("f-need");
+    if (svc && need && Array.from(need.options).some((o) => o.value === svc)) need.value = svc;
+  } catch (e) { /* noop */ }
+
+  // Contact form -> structured WhatsApp deep link (no backend needed)
   const form = document.querySelector("[data-contact-form]");
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -90,17 +98,43 @@ document.addEventListener("DOMContentLoaded", () => {
       let firstBad = null;
       form.querySelectorAll("[required]").forEach((inp) => {
         const wrap = inp.closest(".field");
-        const bad = !inp.value.trim() || (inp.type === "email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inp.value));
+        let bad;
+        if (inp.type === "checkbox") bad = !inp.checked;
+        else if (inp.type === "email") bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inp.value.trim());
+        else bad = !inp.value.trim();
         if (wrap) wrap.classList.toggle("invalid", bad);
         inp.setAttribute("aria-invalid", bad ? "true" : "false");
         if (bad && !firstBad) firstBad = inp;
         if (bad) valid = false;
       });
       if (!valid) { firstBad?.focus(); return; }
+      const get = (id) => ((document.getElementById(id) || {}).value || "").trim();
+      const textOf = (id) => {
+        const sel = document.getElementById(id);
+        return sel ? sel.options[sel.selectedIndex].text : "-";
+      };
+      const lines = [
+        "Halo Sirius Global Indonesia,",
+        "",
+        "Nama: " + get("f-name"),
+        "Perusahaan: " + (get("f-company") || "-"),
+        "Email: " + get("f-email"),
+        "WhatsApp: " + (get("f-wa") || "-"),
+        "Layanan: " + textOf("f-need"),
+        "Budget: " + textOf("f-budget"),
+        "Target: " + textOf("f-time"),
+        "",
+        "Kebutuhan:",
+        get("f-msg"),
+      ];
+      const base = (typeof SITE !== "undefined" && SITE.phoneHref) || "https://wa.me/6281510481010";
+      const url = base + "?text=" + encodeURIComponent(lines.join("\n"));
+      const link = form.querySelector("[data-form-wa]");
+      if (link) link.href = url;
       const ok = form.querySelector("[data-form-ok]");
       if (ok) ok.hidden = false;
-      form.querySelectorAll("input, textarea, select").forEach((i) => { if (i.type !== "submit") i.value = ""; });
-      form.querySelector("input")?.focus();
+      window.open(url, "_blank", "noopener");
+      if (link) link.focus({ preventScroll: false });
     });
   }
 });

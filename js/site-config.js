@@ -6,10 +6,10 @@ const SITE = {
   name: "PT Sirius Global Indonesia",
   short: "Sirius Global Indonesia",
   tagline: "Konsultan IT & Transformasi Digital",
-  email: "hello@siriusglobal.id",
-  phone: "+62 21 XXXX XXXX",
-  phoneHref: "https://wa.me/622100000000",
-  address: "Jakarta, Indonesia",
+  email: "sales@siriusglobal.id",
+  phone: "+62 815-1048-1010",
+  phoneHref: "https://wa.me/6281510481010",
+  address: "Gedung Wirausaha, Jl. HR Rasuna Said Kav. C5, Kuningan, Jakarta Selatan 12920",
   hours: "Senin-Jumat, 09.00-18.00 WIB",
-  mapEmbed: "https://www.google.com/maps?q=Jakarta,Indonesia&output=embed"
+  mapEmbed: "https://www.google.com/maps?q=Gedung+Wirausaha+HR+Rasuna+Said+Kav+C5+Jakarta+Selatan&output=embed"
 };

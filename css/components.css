@@ -149,6 +149,33 @@
 .pill { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 9px 17px; font-weight: 650; font-size: 0.9rem; cursor: pointer; }
 .pill.active { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
 
+/* Pricing tiers */
+.pricing-grid { align-items: stretch; }
+.price-card { display: flex; flex-direction: column; gap: 10px; }
+.price-card.featured { background: var(--navy-900); border-color: var(--navy-900); color: #fff; }
+.price-card.featured h3 { color: #fff; }
+.price-card.featured p, .price-card.featured li { color: #c6d4ee; }
+.price-tier {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--teal-600);
+}
+.price-card.featured .price-tier { color: #fff; }
+.price-value {
+  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em;
+  font-size: 1.5rem; font-variant-numeric: tabular-nums;
+}
+.price-card ul { list-style: none; padding: 0; display: grid; gap: 8px; font-size: 0.93rem; }
+.price-card ul li { display: flex; gap: 8px; align-items: flex-start; }
+.price-card .btn { margin-top: auto; }
+.price-note { margin-top: 16px; }
+
+/* Data tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; }
+.tier-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.93rem; }
+.tier-table th, .tier-table td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tier-table thead th { background: var(--bg-soft); font-family: var(--font-display); font-size: 0.86rem; }
+.tier-table tbody tr:last-child th, .tier-table tbody tr:last-child td { border-bottom: 0; }
+
 @media (max-width: 960px) {
   .main-nav, .header-actions .btn { display: none; }
   .menu-btn { display: inline-flex; }
