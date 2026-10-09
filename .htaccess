@@ -1,0 +1,19 @@
+# CMS Sirius: URL .html lama tetap hidup (301 ke .php), proteksi data/admin.
+RewriteEngine On
+
+# Kanonis .html -> .php (pertahankan query string, mis. ?layanan=)
+RewriteRule ^index\.html$ index.php [R=301,L,QSA]
+RewriteRule ^tentang\.html$ tentang.php [R=301,L,QSA]
+RewriteRule ^layanan\.html$ layanan.php [R=301,L,QSA]
+RewriteRule ^portofolio\.html$ portofolio.php [R=301,L,QSA]
+RewriteRule ^kontak\.html$ kontak.php [R=301,L,QSA]
+RewriteRule ^privasi\.html$ privasi.php [R=301,L,QSA]
+RewriteRule ^syarat\.html$ syarat.php [R=301,L,QSA]
+RewriteRule ^layanan/([a-z\-]+)\.html$ layanan/$1.php [R=301,L,QSA]
+
+# Jangan pernah sajikan file data / admin / tooling
+RewriteRule ^data/ - [F,L]
+RewriteRule ^tools/ - [F,L]
+<FilesMatch "^(admin\.json|\.htaccess)$">
+  Require all denied
+</FilesMatch>

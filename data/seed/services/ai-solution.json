@@ -1,0 +1,277 @@
+{
+  "updated_at": "",
+  "slug": "ai-solution",
+  "title": {
+    "id": "AI Implementation",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "AI implementation: chatbot, OCR, computer vision, forecasting. POC 4 minggu.",
+    "en": ""
+  },
+  "h1": {
+    "id": "AI Implementation",
+    "en": ""
+  },
+  "lead": {
+    "id": "POC 4 minggu yang jujur. Chatbot, OCR, vision QC, dan forecasting yang terukur ROI-nya.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=ai-solution",
+      "text": {
+        "id": "Konsultasi Gratis",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Yang Anda dapatkan",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "Chatbot knowledge-base (SOP/dokumen internal)",
+        "en": ""
+      },
+      {
+        "id": "OCR KTP, invoice & dokumen operasional",
+        "en": ""
+      },
+      {
+        "id": "Computer vision untuk QC/packaging",
+        "en": ""
+      },
+      {
+        "id": "Forecasting demand & predictive maintenance",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "POC",
+        "en": ""
+      },
+      "value": {
+        "id": "4 minggu",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Akurasi QC tipikal",
+        "en": ""
+      },
+      "value": {
+        "id": "97%+",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Deploy",
+        "en": ""
+      },
+      "value": {
+        "id": "On-prem / cloud",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal. Angka final kami tetapkan setelah audit data gratis, tergantung use-case dan volume data.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Mulai",
+          "en": ""
+        },
+        "name": {
+          "id": "POC 4 Minggu",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 40-120 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Satu use-case berdampak terbesar",
+            "en": ""
+          },
+          {
+            "id": "Model jalan di data Anda",
+            "en": ""
+          },
+          {
+            "id": "Keputusan lanjut atau tidak, tertulis",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Production Rollout",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 120-400 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Pipeline data sampai deployment",
+            "en": ""
+          },
+          {
+            "id": "Monitoring akurasi dan drift",
+            "en": ""
+          },
+          {
+            "id": "Serah terima model dan pipeline penuh",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Bulanan",
+          "en": ""
+        },
+        "name": {
+          "id": "Model Care",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 15-40 jt/bln",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Retraining dan tuning berkala",
+            "en": ""
+          },
+          {
+            "id": "Tambah use-case bertahap",
+            "en": ""
+          },
+          {
+            "id": "Laporan performa bulanan",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Audit data",
+          "en": ""
+        },
+        "d": {
+          "id": "1 minggu. Nilai kelayakan data. Bila belum layak, kami katakan terus terang.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "POC 4 minggu",
+          "en": ""
+        },
+        "d": {
+          "id": "Buktikan satu use-case di data asli Anda dengan metrik yang disepakati.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Production",
+          "en": ""
+        },
+        "d": {
+          "id": "4-8 minggu. Deploy, monitoring, dan serah terima ke tim internal.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Bagaimana jika data kami belum rapi?",
+        "en": ""
+      },
+      "a": {
+        "id": "Kami mulai dari audit data 1 minggu. Jika belum layak, kami katakan terus terang + roadmap perapihan.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Apakah model milik kami?",
+        "en": ""
+      },
+      "a": {
+        "id": "Ya. Pipeline, dataset olahan, dan bobot model diserahkan penuh.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Mulai dari POC kecil dulu?",
+      "en": ""
+    },
+    "d": {
+      "id": "Pilih satu use-case dengan dampak terbesar. Kami buktikan dalam 4 minggu.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=ai-solution",
+    "btn": {
+      "id": "Konsultasi Gratis",
+      "en": ""
+    }
+  }
+}

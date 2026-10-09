@@ -1,0 +1,72 @@
+{
+  "updated_at": "",
+  "meta_desc": {
+    "id": "Syarat layanan PT Sirius Global Indonesia: estimasi, lingkup kerja, dan ketentuan umum kerjasama.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Syarat Layanan",
+    "en": ""
+  },
+  "lead": {
+    "id": "Terakhir diperbarui: Oktober 2026.",
+    "en": ""
+  },
+  "sections": [
+    {
+      "h": {
+        "id": "Estimasi bukan penawaran final",
+        "en": ""
+      },
+      "p": {
+        "id": "Rentang harga di situs ini adalah estimasi awal untuk perencanaan budget. Angka final dan lingkup kerja yang mengikat ditetapkan dalam dokumen proposal dan kontrak setelah discovery.",
+        "en": ""
+      }
+    },
+    {
+      "h": {
+        "id": "Konsultasi gratis",
+        "en": ""
+      },
+      "p": {
+        "id": "Diskusi 30 menit pertama tidak berbayar dan tanpa komitmen. Rekomendasi dan estimasi kasar yang kami sampaikan bersifat umum sampai ada audit atau survei lanjutan.",
+        "en": ""
+      }
+    },
+    {
+      "h": {
+        "id": "Kekayaan intelektual",
+        "en": ""
+      },
+      "p": {
+        "id": "Kecuali disepakati lain, source code, dokumentasi, dan kredensial hasil pekerjaan diserahkan penuh kepada klien setelah pelunasan sesuai kontrak.",
+        "en": ""
+      }
+    },
+    {
+      "h": {
+        "id": "Hukum yang berlaku",
+        "en": ""
+      },
+      "p": {
+        "id": "Kerjasama tunduk pada hukum Republik Indonesia. Sengketa diselesaikan musyawarah dulu sebelum jalur hukum.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Siap mulai dengan discovery gratis?",
+      "en": ""
+    },
+    "d": {
+      "id": "Tanpa komitmen, dapat rekomendasi tertulis.",
+      "en": ""
+    },
+    "href": "kontak.php",
+    "btn": {
+      "id": "Konsultasi Gratis",
+      "en": ""
+    }
+  }
+}

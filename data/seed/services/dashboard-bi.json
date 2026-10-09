@@ -1,0 +1,281 @@
+{
+  "updated_at": "",
+  "slug": "dashboard-bi",
+  "title": {
+    "id": "Dashboard dan BI",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "Dashboard DSS: Power BI, Microsoft Fabric, dan Copilot. Monitor, prediksi, dan forecast dalam satu dasbor.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Dashboard dan Decision Support",
+    "en": ""
+  },
+  "lead": {
+    "id": "Ubah data operasional jadi keputusan harian. Power BI, Microsoft Fabric, dan Copilot: monitor, prediksi, dan forecast.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=dashboard-bi",
+      "text": {
+        "id": "Minta Quotation",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Yang Anda dapatkan",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "Model data dan warehouse Microsoft Fabric yang rapi dan terdokumentasi",
+        "en": ""
+      },
+      {
+        "id": "Dashboard Power BI prioritas: sales, stok, keuangan, dan operasional",
+        "en": ""
+      },
+      {
+        "id": "Forecast demand dan alert anomali otomatis",
+        "en": ""
+      },
+      {
+        "id": "Copilot enablement: tanya jawab data dengan bahasa sehari-hari",
+        "en": ""
+      },
+      {
+        "id": "Training analis internal sampai bisa kembangkan sendiri",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "Prototype dashboard",
+        "en": ""
+      },
+      "value": {
+        "id": "2 minggu",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Dashboard awal",
+        "en": ""
+      },
+      "value": {
+        "id": "5 dashboard",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Refresh data",
+        "en": ""
+      },
+      "value": {
+        "id": "Harian",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal. Angka final kami tetapkan setelah discovery gratis, tergantung sumber data dan jumlah dashboard.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Mulai",
+          "en": ""
+        },
+        "name": {
+          "id": "BI Audit dan Prototype",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 20-45 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Audit sumber data dan KPI",
+            "en": ""
+          },
+          {
+            "id": "1 dashboard prototype live",
+            "en": ""
+          },
+          {
+            "id": "Roadmap BI tertulis",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Fabric dan 5 Dashboard",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 80-200 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Warehouse Fabric plus pipeline data",
+            "en": ""
+          },
+          {
+            "id": "5 dashboard prioritas bisnis",
+            "en": ""
+          },
+          {
+            "id": "Forecast, alert, dan training analis",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Lanjutan",
+          "en": ""
+        },
+        "name": {
+          "id": "Copilot dan Retainer",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 25-60 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Copilot enablement untuk tim",
+            "en": ""
+          },
+          {
+            "id": "Retainer Rp 8-20 jt per bulan",
+            "en": ""
+          },
+          {
+            "id": "Dashboard baru tiap sprint",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Audit data",
+          "en": ""
+        },
+        "d": {
+          "id": "1 minggu. Petakan sumber data, kualitas, dan KPI yang benar-benar dipakai.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Model dan prototype",
+          "en": ""
+        },
+        "d": {
+          "id": "2-3 minggu. Bangun model data dan 1 dashboard yang bisa diklik dan dikritik.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Rollout dan training",
+          "en": ""
+        },
+        "d": {
+          "id": "2-4 minggu. Lengkapi dashboard, latih analis, serahkan dokumentasi.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Data kami masih di Excel, bisa jalan?",
+        "en": ""
+      },
+      "a": {
+        "id": "Bisa. Kami mulai dari merapikan sumber data dan pipeline otomatis, jadi Excel tidak lagi jadi penghambat.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Copilot butuh lisensi apa?",
+        "en": ""
+      },
+      "a": {
+        "id": "Kami petakan kebutuhan lisensi Microsoft 365 dan Power BI Anda dulu, supaya tidak ada biaya lisensi yang mubazir.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Laporan masih manual tiap Senin pagi?",
+      "en": ""
+    },
+    "d": {
+      "id": "Kami buatkan 1 dashboard live dalam 2 minggu sebagai bukti.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=dashboard-bi",
+    "btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  }
+}

@@ -65,8 +65,10 @@ set_time_limit(120);
 $repo = $home . '/siriusglobalid';
 
 $log = ['at' => date('c'), 'repo' => $repo, 'home_used' => $home];
-$files = ['index.html', 'tentang.html', 'layanan.html', 'portofolio.html', 'kontak.html', '404.html', 'privasi.html', 'syarat.html', 'robots.txt', 'sitemap.xml', 'gh-deploy.php'];
-$siteDirs = ['css', 'js', 'assets', 'layanan'];
+$files = ['index.php', 'tentang.php', 'layanan.php', 'portofolio.php', 'kontak.php', '404.php', 'privasi.php', 'syarat.php', 'robots.txt', 'sitemap.xml', '.htaccess', 'gh-deploy.php'];
+$siteDirs = ['css', 'js', 'assets', 'templates', 'includes', 'admin', 'layanan', 'tools'];
+// DATA PRODUKSI ($HOME/data/*.json + uploads) TIDAK PERNAH ditimpa:
+// seed hanya disalin bila file tujuan belum ada (lihat bawah).
 // Salin rekursif murni-PHP (pengganti cp -R saat shell mati).
 $rcopy = function ($s, $d) use (&$rcopy, &$copied) {
     if (is_dir($s)) {
@@ -114,6 +116,18 @@ if (!function_exists('shell_exec')) {
                 } else {
                     foreach ($files as $f) { $rcopy($src . '/' . $f, $pub . '/' . $f); }
                     foreach ($siteDirs as $dd) { $rcopy($src . '/' . $dd, $pub . '/' . $dd); }
+                    // Seed CMS: salin hanya bila belum ada (jangan timpa data produksi).
+                    foreach (['', '/services'] as $sub) {
+                        @mkdir($home . '/data/seed' . $sub, 0755, true);
+                        foreach ((array) @glob($src . '/data/seed' . $sub . '/*.json') as $sf) {
+                            $dest = $home . '/data/seed' . $sub . '/' . basename($sf);
+                            if (!is_file($dest)) { @copy($sf, $dest); }
+                        }
+                    }
+                    @mkdir($home . '/data/services', 0755, true);
+                    @mkdir($home . '/data/backups', 0755, true);
+                    @mkdir($home . '/data/ratelimit', 0755, true);
+                    @mkdir($pub . '/assets/uploads', 0755, true);
                     $log['copied_files'] = $copied;
                 }
             }
@@ -136,7 +150,10 @@ if (!function_exists('shell_exec')) {
         }
     }
     $log['copied_files'] = $copied . '/' . count($files);
-    $log['copydirs'] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/css') . ' ' . escapeshellarg($repo . '/js') . ' ' . escapeshellarg($repo . '/assets') . ' ' . escapeshellarg($repo . '/layanan') . ' ' . escapeshellarg($pub) . ' 2>&1');
+    $log['copydirs'] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/css') . ' ' . escapeshellarg($repo . '/js') . ' ' . escapeshellarg($repo . '/assets') . ' ' . escapeshellarg($repo . '/templates') . ' ' . escapeshellarg($repo . '/includes') . ' ' . escapeshellarg($repo . '/admin') . ' ' . escapeshellarg($repo . '/layanan') . ' ' . escapeshellarg($repo . '/tools') . ' ' . escapeshellarg($pub) . ' 2>&1');
+    // Seed CMS: hanya bila belum ada (cp -n), data produksi tidak tersentuh.
+    $log['seeddirs'] = shell_exec('mkdir -p ' . escapeshellarg($home . '/data/seed/services') . ' ' . escapeshellarg($home . '/data/services') . ' ' . escapeshellarg($home . '/data/backups') . ' ' . escapeshellarg($home . '/data/ratelimit') . ' ' . escapeshellarg($pub . '/assets/uploads') . ' 2>&1');
+    $log['seedcopy'] = shell_exec('/bin/cp -Rn ' . escapeshellarg($repo . '/data/seed/.') . ' ' . escapeshellarg($home . '/data/seed/') . ' 2>&1');
 }
 // Tulis ke dua tempat: HOME (utama) dan public_html (cadangan yang mudah
 // ditemukan). Isi log hanya path + output git, tanpa secret.

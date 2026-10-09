@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://siriusglobal.id/index.html</loc></url>
-  <url><loc>https://siriusglobal.id/tentang.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/app-development.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/ai-solution.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/iot.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/odoo-erp.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/fleet-management.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/infrastruktur.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/dashboard-bi.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/cybersecurity.html</loc></url>
-  <url><loc>https://siriusglobal.id/layanan/training.html</loc></url>
-  <url><loc>https://siriusglobal.id/privasi.html</loc></url>
-  <url><loc>https://siriusglobal.id/syarat.html</loc></url>
-  <url><loc>https://siriusglobal.id/portofolio.html</loc></url>
-  <url><loc>https://siriusglobal.id/kontak.html</loc></url>
+  <url><loc>https://siriusglobal.id/index.php</loc></url>
+  <url><loc>https://siriusglobal.id/tentang.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/app-development.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/ai-solution.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/iot.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/odoo-erp.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/fleet-management.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/infrastruktur.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/dashboard-bi.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/cybersecurity.php</loc></url>
+  <url><loc>https://siriusglobal.id/layanan/training.php</loc></url>
+  <url><loc>https://siriusglobal.id/privasi.php</loc></url>
+  <url><loc>https://siriusglobal.id/syarat.php</loc></url>
+  <url><loc>https://siriusglobal.id/portofolio.php</loc></url>
+  <url><loc>https://siriusglobal.id/kontak.php</loc></url>
 </urlset>

@@ -1,9 +1,13 @@
 # cPanel Git Version Control: file ini dibaca otomatis saat klik
-# "Deploy" di cPanel. Hanya file situs yang disalin ke public_html
-# (AGENTS.md, .github/, .gitignore tidak ikut naik).
+# "Deploy" di cPanel. Kode disalin ke public_html, DATA PRODUKSI
+# ($HOME/data/*.json + uploads) TIDAK PERNAH ditimpa: seed hanya
+# disalin bila file tujuan belum ada (cp -n).
 ---
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html/
-    - /bin/cp index.html tentang.html layanan.html portofolio.html kontak.html 404.html privasi.html syarat.html robots.txt sitemap.xml gh-deploy.php $DEPLOYPATH
-    - /bin/cp -R css js assets layanan $DEPLOYPATH
+    - /bin/cp index.php tentang.php layanan.php portofolio.php kontak.php privasi.php syarat.php 404.php robots.txt sitemap.xml gh-deploy.php .htaccess $DEPLOYPATH
+    - /bin/cp -R css js assets templates includes admin layanan tools $DEPLOYPATH
+    - mkdir -p $HOME/data/seed $HOME/data/services $HOME/data/backups $HOME/data/ratelimit $DEPLOYPATH/assets/uploads
+    - /bin/cp -Rn data/seed/. $HOME/data/seed/
+    - chmod 755 $HOME/data $HOME/data/seed $DEPLOYPATH/assets/uploads

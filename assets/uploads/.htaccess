@@ -1,0 +1,6 @@
+# Uploads: tidak ada eksekusi skrip di folder ini.
+php_flag engine off
+RemoveHandler .php .phtml .phar .cgi .pl
+<FilesMatch "\.(php|phtml|phar|cgi|pl|sh)$">
+  Require all denied
+</FilesMatch>

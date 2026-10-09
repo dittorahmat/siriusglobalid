@@ -1,0 +1,330 @@
+{
+  "updated_at": "",
+  "slug": "cybersecurity",
+  "title": {
+    "id": "Cybersecurity",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "Cybersecurity: assessment ISO 27001, EDR, SIEM, DLP, pentest. Kenali risiko sebelum diserang.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Cybersecurity Solutions",
+    "en": ""
+  },
+  "lead": {
+    "id": "Kenali risiko sebelum diserang. Assessment menyeluruh, hardening berlapis, dan monitoring yang memprioritaskan insiden penting.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=cybersecurity",
+      "text": {
+        "id": "Minta Quotation",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Risiko umum dan kontrolnya",
+      "en": ""
+    },
+    "body": {
+      "id": "Petakan dulu posisi Anda. Tabel ini jadi titik mulai setiap assessment kami.",
+      "en": ""
+    },
+    "checklist": []
+  },
+  "metrics": [],
+  "table": {
+    "head": [
+      {
+        "id": "Risiko bisnis",
+        "en": ""
+      },
+      {
+        "id": "Kontrol",
+        "en": ""
+      },
+      {
+        "id": "Hasil",
+        "en": ""
+      }
+    ],
+    "rows": [
+      [
+        {
+          "id": "PC karyawan terinfeksi",
+          "en": ""
+        },
+        {
+          "id": "EDR",
+          "en": ""
+        },
+        {
+          "id": "Kompromi endpoint berkurang",
+          "en": ""
+        }
+      ],
+      [
+        {
+          "id": "Ransomware",
+          "en": ""
+        },
+        {
+          "id": "EDR dan SIEM",
+          "en": ""
+        },
+        {
+          "id": "Deteksi dan isolasi lebih cepat",
+          "en": ""
+        }
+      ],
+      [
+        {
+          "id": "Data penting dicuri",
+          "en": ""
+        },
+        {
+          "id": "DLP",
+          "en": ""
+        },
+        {
+          "id": "Data rahasia terlindungi",
+          "en": ""
+        }
+      ],
+      [
+        {
+          "id": "Penyerang bergerak di jaringan internal",
+          "en": ""
+        },
+        {
+          "id": "NDR",
+          "en": ""
+        },
+        {
+          "id": "Pergerakan lateral terdeteksi",
+          "en": ""
+        }
+      ],
+      [
+        {
+          "id": "Celah di aplikasi",
+          "en": ""
+        },
+        {
+          "id": "Pentest",
+          "en": ""
+        },
+        {
+          "id": "Diperbaiki sebelum dieksploitasi",
+          "en": ""
+        }
+      ],
+      [
+        {
+          "id": "Serangan cloud",
+          "en": ""
+        },
+        {
+          "id": "XDR dan SIEM",
+          "en": ""
+        },
+        {
+          "id": "Visibilitas lintas lingkungan",
+          "en": ""
+        }
+      ]
+    ]
+  },
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal. Angka final kami tetapkan setelah discovery gratis, tergantung jumlah endpoint dan aplikasi.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Mulai",
+          "en": ""
+        },
+        "name": {
+          "id": "Security Assessment",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 25-60 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Evaluasi acuan ISO 27001 dan NIST",
+            "en": ""
+          },
+          {
+            "id": "Peta risiko plus prioritas investasi",
+            "en": ""
+          },
+          {
+            "id": "Laporan eksekutif dan teknis",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Hardening dan EDR",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 60-180 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Rollout EDR ke seluruh endpoint",
+            "en": ""
+          },
+          {
+            "id": "SIEM, DLP, dan NDR dasar",
+            "en": ""
+          },
+          {
+            "id": "Pentest 1 aplikasi plus playbook insiden",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Bulanan",
+          "en": ""
+        },
+        "name": {
+          "id": "Monitoring Retainer",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 12-35 jt/bln",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Monitoring SIEM plus triase alert",
+            "en": ""
+          },
+          {
+            "id": "Review keamanan bulanan",
+            "en": ""
+          },
+          {
+            "id": "Respons insiden prioritas",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Assessment",
+          "en": ""
+        },
+        "d": {
+          "id": "2-3 minggu. Evaluasi people, process, dan technology terhadap framework yang diakui.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Remediasi prioritas",
+          "en": ""
+        },
+        "d": {
+          "id": "3-6 minggu. Tutup celah terbesar dulu: endpoint, akses, dan backup.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Monitoring berkelanjutan",
+          "en": ""
+        },
+        "d": {
+          "id": "Opsi retainer. Alert penting diprioritaskan, bukan menumpuk tanpa dibaca.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Apakah sekali assessment cukup?",
+        "en": ""
+      },
+      "a": {
+        "id": "Assessment idealnya tahunan, karena ancaman dan sistem Anda berubah. Retainer monitoring menutup jeda di antaranya.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Apakah scanning mengganggu operasional?",
+        "en": ""
+      },
+      "a": {
+        "id": "Tidak. Pengujian berat kami jadwalkan di luar jam sibuk dan selalu sepengetahuan tim Anda.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Belum tahu posisi keamanan Anda?",
+      "en": ""
+    },
+    "d": {
+      "id": "Assessment 2 minggu memberi peta risiko plus prioritas yang bisa dipertanggungjawabkan ke direksi.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=cybersecurity",
+    "btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  }
+}

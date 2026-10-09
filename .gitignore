@@ -4,6 +4,7 @@
 .commandcode/
 .hermes/
 .openhands/
+.opencode/
 .pi/
 .qwen/
 .zcode/
@@ -20,3 +21,14 @@ Thumbs.db
 # bukan di folder repo. Entri ini pengaman bila file nyasar ke clone.
 .gh-webhook-secret
 gh-webhook-secret.txt
+
+# CMS runtime (produksi/lokal) - seed ikut repo, sisanya tidak.
+# (data/seed/*.json sengaja TIDAK di-ignore: itu konten awal.)
+data/*.json
+data/services/
+data/admin.json
+data/backups/
+data/ratelimit/
+data/cms-error.log
+assets/uploads/*
+!assets/uploads/.htaccess

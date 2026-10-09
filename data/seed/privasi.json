@@ -1,0 +1,72 @@
+{
+  "updated_at": "",
+  "meta_desc": {
+    "id": "Kebijakan privasi PT Sirius Global Indonesia: data yang kami kumpulkan dan cara kami melindunginya.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Kebijakan Privasi",
+    "en": ""
+  },
+  "lead": {
+    "id": "Terakhir diperbarui: Oktober 2026.",
+    "en": ""
+  },
+  "sections": [
+    {
+      "h": {
+        "id": "Data yang kami kumpulkan",
+        "en": ""
+      },
+      "p": {
+        "id": "Saat Anda mengisi formulir konsultasi, kami menerima nama, perusahaan, email, nomor WhatsApp, dan isi kebutuhan Anda. Bahasa situs (ID/EN) tersimpan di browser Anda sendiri dan tidak dikirim ke server kami.",
+        "en": ""
+      }
+    },
+    {
+      "h": {
+        "id": "Cara kami memakai data",
+        "en": ""
+      },
+      "p": {
+        "id": "Data dipakai semata untuk menindaklanjuti konsultasi Anda: menghubungi via email atau WhatsApp, menyusun rekomendasi, dan estimasi biaya. Kami tidak menjual data Anda ke pihak mana pun.",
+        "en": ""
+      }
+    },
+    {
+      "h": {
+        "id": "Penyimpanan dan penghapusan",
+        "en": ""
+      },
+      "p": {
+        "id": "Situs ini statis dan tidak menyimpan data formulir di server. Pesan Anda terkirim langsung sebagai chat WhatsApp ke tim kami. Minta penghapusan riwayat komunikasi kapan saja via <a href=\"mailto:sales@siriusglobal.id\">sales@siriusglobal.id</a>.",
+        "en": ""
+      }
+    },
+    {
+      "h": {
+        "id": "Kontak",
+        "en": ""
+      },
+      "p": {
+        "id": "PT Sirius Global Indonesia, Gedung Wirausaha, Jl. HR Rasuna Said Kav. C5, Kuningan, Jakarta Selatan 12920.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Ada pertanyaan soal data Anda?",
+      "en": ""
+    },
+    "d": {
+      "id": "Hubungi kami, kami jawab maksimal 1 hari kerja.",
+      "en": ""
+    },
+    "href": "kontak.php",
+    "btn": {
+      "id": "Hubungi Kami",
+      "en": ""
+    }
+  }
+}
