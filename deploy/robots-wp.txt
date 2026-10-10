@@ -1,0 +1,6 @@
+# robots.txt untuk instalasi WordPress (taruh di public_html/robots.txt).
+# Sitemap memakai sitemap inti WP yang dinamis mengikuti CPT
+# (layanan baru/hapus otomatis ikut, tanpa edit manual).
+User-agent: *
+Allow: /
+Sitemap: https://siriusglobal.id/wp-sitemap.xml

@@ -1,0 +1,76 @@
+{
+  "updated_at": "",
+  "meta_desc": {
+    "id": "PT Sirius Global Indonesia - konsultan IT untuk application development, AI implementation, IoT, ERP Odoo, dan fleet management.",
+    "en": ""
+  },
+  "hero_photo": {
+    "src": "https://picsum.photos/seed/sirius-engineering-team/880/1000",
+    "alt": {
+      "id": "Tim engineer Sirius Global Indonesia mengerjakan proyek di kantor",
+      "en": ""
+    },
+    "w": "880",
+    "h": "1000"
+  },
+  "kpi_counts": [
+    "18",
+    "9",
+    "40"
+  ],
+  "stat_counts": [
+    "120",
+    "40",
+    "9",
+    "60"
+  ],
+  "clients": [
+    {
+      "id": "Manufaktur",
+      "en": ""
+    },
+    {
+      "id": "Logistik dan Distribusi",
+      "en": ""
+    },
+    {
+      "id": "Pertambangan",
+      "en": ""
+    },
+    {
+      "id": "Ritel",
+      "en": ""
+    },
+    {
+      "id": "Pemerintahan",
+      "en": ""
+    },
+    {
+      "id": "Agribisnis",
+      "en": ""
+    }
+  ],
+  "case_imgs": [
+    {
+      "img": "https://picsum.photos/seed/odoo-erp-factory/640/400",
+      "alt": {
+        "id": "Pabrik yang memakai ERP Odoo untuk inventaris",
+        "en": ""
+      }
+    },
+    {
+      "img": "https://picsum.photos/seed/ai-vision-warehouse/640/400",
+      "alt": {
+        "id": "Inspeksi kemasan otomatis dengan computer vision di gudang",
+        "en": ""
+      }
+    },
+    {
+      "img": "https://picsum.photos/seed/fleet-trucks-highway/640/400",
+      "alt": {
+        "id": "Armada truk distribusi yang terpantau GPS",
+        "en": ""
+      }
+    }
+  ]
+}

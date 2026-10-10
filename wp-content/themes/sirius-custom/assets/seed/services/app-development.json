@@ -1,0 +1,277 @@
+{
+  "updated_at": "",
+  "slug": "app-development",
+  "title": {
+    "id": "Application Development",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "Jasa application development: web, mobile, API & integrasi.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Application Development",
+    "en": ""
+  },
+  "lead": {
+    "id": "Web, mobile dan API yang aman, cepat, dan siap scale, dengan dokumentasi penuh.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=app-development",
+      "text": {
+        "id": "Konsultasi Gratis",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Yang Anda dapatkan",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "Web portal & dashboard operasional",
+        "en": ""
+      },
+      {
+        "id": "Mobile Android/iOS & PWA",
+        "en": ""
+      },
+      {
+        "id": "REST API & integrasi ERP / payment / logistik",
+        "en": ""
+      },
+      {
+        "id": "QA berlapis + security hardening",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "Discovery",
+        "en": ""
+      },
+      "value": {
+        "id": "1-2 minggu",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Prototipe klikable",
+        "en": ""
+      },
+      "value": {
+        "id": "2-3 minggu",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Serah terima",
+        "en": ""
+      },
+      "value": {
+        "id": "Source + dokumen",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal. Angka final kami tetapkan setelah discovery gratis, tergantung kompleksitas dan integrasi.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Mulai",
+          "en": ""
+        },
+        "name": {
+          "id": "Prototype Klikable",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 25-60 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Alur pengguna dan desain layar",
+            "en": ""
+          },
+          {
+            "id": "Prototype yang bisa diklik dan diuji",
+            "en": ""
+          },
+          {
+            "id": "Estimasi build terbuka",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Full Build",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 90-300 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Web, mobile, dan API terintegrasi",
+            "en": ""
+          },
+          {
+            "id": "QA berlapis plus security hardening",
+            "en": ""
+          },
+          {
+            "id": "Source code dan dokumentasi penuh",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Bulanan",
+          "en": ""
+        },
+        "name": {
+          "id": "Retainer Pengembangan",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 12-35 jt/bln",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Sprint lanjutan tiap bulan",
+            "en": ""
+          },
+          {
+            "id": "SLA respons dan bugfix prioritas",
+            "en": ""
+          },
+          {
+            "id": "Laporan progres mingguan",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Discovery",
+          "en": ""
+        },
+        "d": {
+          "id": "1-2 minggu. Proses bisnis, pengguna, dan target sukses yang terukur.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Build sprint",
+          "en": ""
+        },
+        "d": {
+          "id": "4-12 minggu. Demo tiap sprint, Anda coba langsung tiap minggu.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Go-live dan support",
+          "en": ""
+        },
+        "d": {
+          "id": "Migrasi data, pelatihan, dan pendampingan pasca-rilis.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Teknologi apa yang dipakai?",
+        "en": ""
+      },
+      "a": {
+        "id": "Moderen & umum: JavaScript/TypeScript, Python, PostgreSQL, Docker. Dipilih yang tim Anda mudah rawat.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Apakah source code diserahkan?",
+        "en": ""
+      },
+      "a": {
+        "id": "Ya, penuh. Repository, kredensial, dan SOP.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Butuh estimasi kasar dalam 1 hari?",
+      "en": ""
+    },
+    "d": {
+      "id": "Kirim alur proses Anda. Kami balas opsi plus rentang biaya.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=app-development",
+    "btn": {
+      "id": "Konsultasi Gratis",
+      "en": ""
+    }
+  }
+}

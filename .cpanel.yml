@@ -1,13 +1,13 @@
 # cPanel Git Version Control: file ini dibaca otomatis saat klik
-# "Deploy" di cPanel. Kode disalin ke public_html, DATA PRODUKSI
-# ($HOME/data/*.json + uploads) TIDAK PERNAH ditimpa: seed hanya
-# disalin bila file tujuan belum ada (cp -n).
+# "Deploy" di cPanel. HANYA theme + importer yang di-deploy ke instalasi
+# WordPress. Core, plugin, uploads, wp-config.php, dan DB MySQL TIDAK
+# PERNAH disentuh deploy; ikut backup Softaculous/cPanel.
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=$HOME/public_html/
-    - /bin/cp index.php tentang.php layanan.php portofolio.php kontak.php privasi.php syarat.php 404.php robots.txt sitemap.xml gh-deploy.php .htaccess $DEPLOYPATH
-    - /bin/cp -R css js assets templates includes admin layanan tools $DEPLOYPATH
-    - mkdir -p $HOME/data/seed $HOME/data/services $HOME/data/backups $HOME/data/ratelimit $DEPLOYPATH/assets/uploads
-    - /bin/cp -Rn data/seed/. $HOME/data/seed/
-    - chmod 755 $HOME/data $HOME/data/seed $DEPLOYPATH/assets/uploads
+    - export WPTHEME=$HOME/public_html/wp-content/themes/sirius-custom/
+    - export WPTOOL=$HOME/public_html/wp-content/sgi-importer/
+    - mkdir -p $WPTHEME $WPTOOL
+    - /bin/cp -R wp-content/themes/sirius-custom/. $WPTHEME
+    - /bin/cp tools/sgi-importer.php tools/verify-seed.py $WPTOOL
+    - /bin/cp gh-deploy.php $HOME/public_html/gh-deploy.php

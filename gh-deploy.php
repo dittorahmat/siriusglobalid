@@ -64,9 +64,12 @@ set_time_limit(120);
 // $pub dan $home sudah dihitung di atas (sebelum cek signature).
 $repo = $home . '/siriusglobalid';
 
-$log = ['at' => date('c'), 'repo' => $repo, 'home_used' => $home];
-$files = ['index.php', 'tentang.php', 'layanan.php', 'portofolio.php', 'kontak.php', '404.php', 'privasi.php', 'syarat.php', 'robots.txt', 'sitemap.xml', '.htaccess', 'gh-deploy.php'];
-$siteDirs = ['css', 'js', 'assets', 'templates', 'includes', 'admin', 'layanan', 'tools'];
+$log = ['at' => date('c'), 'repo' => $repo, 'home_used' => $home, 'mode_wp' => 'theme-only'];
+// DEPLOY THEME-ONLY: git hanya menyalin theme + importer ke instalasi WP.
+// Core, plugin, uploads, wp-config.php, dan DB MySQL TIDAK PERNAH disentuh.
+$files = ['gh-deploy.php'];
+$siteDirs = ['wp-content/themes/sirius-custom']; // + tools/sgi-importer.php di bawah
+$toolFiles = ['tools/sgi-importer.php', 'tools/verify-seed.py'];
 // DATA PRODUKSI ($HOME/data/*.json + uploads) TIDAK PERNAH ditimpa:
 // seed hanya disalin bila file tujuan belum ada (lihat bawah).
 // Salin rekursif murni-PHP (pengganti cp -R saat shell mati).
@@ -116,18 +119,9 @@ if (!function_exists('shell_exec')) {
                 } else {
                     foreach ($files as $f) { $rcopy($src . '/' . $f, $pub . '/' . $f); }
                     foreach ($siteDirs as $dd) { $rcopy($src . '/' . $dd, $pub . '/' . $dd); }
-                    // Seed CMS: salin hanya bila belum ada (jangan timpa data produksi).
-                    foreach (['', '/services'] as $sub) {
-                        @mkdir($home . '/data/seed' . $sub, 0755, true);
-                        foreach ((array) @glob($src . '/data/seed' . $sub . '/*.json') as $sf) {
-                            $dest = $home . '/data/seed' . $sub . '/' . basename($sf);
-                            if (!is_file($dest)) { @copy($sf, $dest); }
-                        }
-                    }
-                    @mkdir($home . '/data/services', 0755, true);
-                    @mkdir($home . '/data/backups', 0755, true);
-                    @mkdir($home . '/data/ratelimit', 0755, true);
-                    @mkdir($pub . '/assets/uploads', 0755, true);
+                    // Importer: salin ke wp-content agar tersedia untuk WP-CLI.
+                    @mkdir($pub . '/wp-content/sgi-importer', 0755, true);
+                    foreach ($toolFiles as $tf) { $rcopy($src . '/' . $tf, $pub . '/wp-content/sgi-importer/' . basename($tf)); }
                     $log['copied_files'] = $copied;
                 }
             }
@@ -150,10 +144,9 @@ if (!function_exists('shell_exec')) {
         }
     }
     $log['copied_files'] = $copied . '/' . count($files);
-    $log['copydirs'] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/css') . ' ' . escapeshellarg($repo . '/js') . ' ' . escapeshellarg($repo . '/assets') . ' ' . escapeshellarg($repo . '/templates') . ' ' . escapeshellarg($repo . '/includes') . ' ' . escapeshellarg($repo . '/admin') . ' ' . escapeshellarg($repo . '/layanan') . ' ' . escapeshellarg($repo . '/tools') . ' ' . escapeshellarg($pub) . ' 2>&1');
-    // Seed CMS: hanya bila belum ada (cp -n), data produksi tidak tersentuh.
-    $log['seeddirs'] = shell_exec('mkdir -p ' . escapeshellarg($home . '/data/seed/services') . ' ' . escapeshellarg($home . '/data/services') . ' ' . escapeshellarg($home . '/data/backups') . ' ' . escapeshellarg($home . '/data/ratelimit') . ' ' . escapeshellarg($pub . '/assets/uploads') . ' 2>&1');
-    $log['seedcopy'] = shell_exec('/bin/cp -Rn ' . escapeshellarg($repo . '/data/seed/.') . ' ' . escapeshellarg($home . '/data/seed/') . ' 2>&1');
+    // Deploy theme-only: DB/uploads/core tidak tersentuh.
+    $log['copydirs'] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/wp-content/themes/sirius-custom') . ' ' . escapeshellarg($pub . '/wp-content/themes/') . ' 2>&1');
+    $log['copytools'] = shell_exec('mkdir -p ' . escapeshellarg($pub . '/wp-content/sgi-importer') . ' && /bin/cp ' . escapeshellarg($repo . '/tools/sgi-importer.php') . ' ' . escapeshellarg($repo . '/tools/verify-seed.py') . ' ' . escapeshellarg($pub . '/wp-content/sgi-importer/') . ' 2>&1');
 }
 // Tulis ke dua tempat: HOME (utama) dan public_html (cadangan yang mudah
 // ditemukan). Isi log hanya path + output git, tanpa secret.

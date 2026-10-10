@@ -1,0 +1,277 @@
+{
+  "updated_at": "",
+  "slug": "odoo-erp",
+  "title": {
+    "id": "ERP Odoo",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "Implementasi, migrasi & kustom Odoo ERP: sales, inventory, MRP, accounting.",
+    "en": ""
+  },
+  "h1": {
+    "id": "ERP Odoo",
+    "en": ""
+  },
+  "lead": {
+    "id": "Implementasi Odoo yang go-live. Blueprint proses, migrasi data, training, dan SLA.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=odoo-erp",
+      "text": {
+        "id": "Konsultasi Gratis",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Modul yang sering kami live-kan",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "Sales, Purchase & Inventory + barcode",
+        "en": ""
+      },
+      {
+        "id": "MRP / manufaktur + QC",
+        "en": ""
+      },
+      {
+        "id": "Accounting, invoice & pajak dasar",
+        "en": ""
+      },
+      {
+        "id": "HR, attendance & approval",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "Go-live tipikal",
+        "en": ""
+      },
+      "value": {
+        "id": "10-14 minggu",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Modul live",
+        "en": ""
+      },
+      "value": {
+        "id": "60+",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Training",
+        "en": ""
+      },
+      "value": {
+        "id": "Sampai bisa",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal di luar lisensi Odoo. Angka final kami tetapkan setelah gap analysis, tergantung modul dan kustomisasi.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Mulai",
+          "en": ""
+        },
+        "name": {
+          "id": "Blueprint",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 25-60 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Gap analysis proses vs modul Odoo",
+            "en": ""
+          },
+          {
+            "id": "Blueprint modul dan migrasi data",
+            "en": ""
+          },
+          {
+            "id": "Estimasi implementasi terbuka",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Implementasi",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 100-350 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Hingga 6 modul plus kustomisasi",
+            "en": ""
+          },
+          {
+            "id": "Migrasi data dan user training",
+            "en": ""
+          },
+          {
+            "id": "Go-live tipikal 10-14 minggu",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Bulanan",
+          "en": ""
+        },
+        "name": {
+          "id": "Support SLA",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 10-30 jt/bln",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Helpdesk dan bugfix prioritas",
+            "en": ""
+          },
+          {
+            "id": "Update dan backup terjadwal",
+            "en": ""
+          },
+          {
+            "id": "Pengembangan modul bertahap",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Gap analysis",
+          "en": ""
+        },
+        "d": {
+          "id": "1-2 minggu. Petakan proses Anda ke modul standar, tanpa overscope.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Build dan migrasi",
+          "en": ""
+        },
+        "d": {
+          "id": "8-12 minggu. Konfigurasi, kustom modul, dan migrasi data bertahap.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Go-live dan training",
+          "en": ""
+        },
+        "d": {
+          "id": "Pelatihan per peran dan pendampingan sampai tim mandiri.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Berapa lama sampai go-live?",
+        "en": ""
+      },
+      "a": {
+        "id": "Tipikal 10-14 minggu untuk 6 modul. Blueprint di awal memberi jadwal yang bisa dipegang.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Bagaimana soal lisensi Odoo?",
+        "en": ""
+      },
+      "a": {
+        "id": "Kami bantu pilih edisi Community atau Enterprise dan hitung kebutuhan lisensinya secara transparan.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Masih pakai Excel atau 4 sistem berbeda?",
+      "en": ""
+    },
+    "d": {
+      "id": "Audit proses 1 minggu. Kami petakan ke modul Odoo tanpa overscope.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=odoo-erp",
+    "btn": {
+      "id": "Konsultasi Gratis",
+      "en": ""
+    }
+  }
+}

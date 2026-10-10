@@ -1,0 +1,282 @@
+{
+  "updated_at": "",
+  "meta_desc": {
+    "id": "Studi kasus: Odoo ERP, AI vision, IoT, fleet management.",
+    "en": ""
+  },
+  "items": [
+    {
+      "cat": "erp",
+      "img": "https://picsum.photos/seed/odoo-erp-factory/640/400",
+      "alt": {
+        "id": "Lantai pabrik yang memakai ERP Odoo",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "ERP Odoo untuk Manufaktur",
+        "en": ""
+      },
+      "title": {
+        "id": "Go-live 6 modul dalam 14 minggu",
+        "en": ""
+      },
+      "desc": {
+        "id": "Stok akurat, closing 3× lebih cepat. Scope: sales, inventory, MRP, accounting.",
+        "en": ""
+      },
+      "results": [
+        {
+          "b": {
+            "id": "14 mgg",
+            "en": ""
+          },
+          "s": {
+            "id": "go-live",
+            "en": ""
+          }
+        },
+        {
+          "b": {
+            "id": "3×",
+            "en": ""
+          },
+          "s": {
+            "id": "closing",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "cat": "ai",
+      "img": "https://picsum.photos/seed/ai-vision-warehouse/640/400",
+      "alt": {
+        "id": "Inspeksi kemasan otomatis di gudang logistik",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "AI Vision untuk Logistik",
+        "en": ""
+      },
+      "title": {
+        "id": "QC kemasan otomatis 97,4%",
+        "en": ""
+      },
+      "desc": {
+        "id": "Dari 4 menit menjadi 20 detik per pallet. Kamera plus alert real-time.",
+        "en": ""
+      },
+      "results": [
+        {
+          "b": {
+            "id": "97,4%",
+            "en": ""
+          },
+          "s": {
+            "id": "akurasi",
+            "en": ""
+          }
+        },
+        {
+          "b": {
+            "id": "12×",
+            "en": ""
+          },
+          "s": {
+            "id": "lebih cepat",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "cat": "fleet",
+      "img": "https://picsum.photos/seed/fleet-trucks-highway/640/400",
+      "alt": {
+        "id": "Armada truk distribusi di jalan tol",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "Fleet untuk Distribusi",
+        "en": ""
+      },
+      "title": {
+        "id": "1.240 unit terpantau real-time",
+        "en": ""
+      },
+      "desc": {
+        "id": "BBM −11%, keterlambatan −38% dalam 6 bulan. Geofence plus scoring.",
+        "en": ""
+      },
+      "results": [
+        {
+          "b": {
+            "id": "−11%",
+            "en": ""
+          },
+          "s": {
+            "id": "BBM",
+            "en": ""
+          }
+        },
+        {
+          "b": {
+            "id": "−38%",
+            "en": ""
+          },
+          "s": {
+            "id": "delay",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "cat": "app",
+      "img": "https://picsum.photos/seed/retail-order-portal/640/400",
+      "alt": {
+        "id": "Kasir ritel memakai portal order digital",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "Aplikasi untuk Ritel",
+        "en": ""
+      },
+      "title": {
+        "id": "Portal order plus integrasi gudang",
+        "en": ""
+      },
+      "desc": {
+        "id": "Order digital, stok real-time, retur terpantau. Uptime 99,9%.",
+        "en": ""
+      },
+      "results": []
+    },
+    {
+      "cat": "iot",
+      "img": "https://picsum.photos/seed/coldchain-sensors/640/400",
+      "alt": {
+        "id": "Ruang pendingin dengan sensor suhu IoT",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "IoT untuk Cold-chain",
+        "en": ""
+      },
+      "title": {
+        "id": "120 titik suhu terpantau 24/7",
+        "en": ""
+      },
+      "desc": {
+        "id": "Alert WA otomatis, spoilage turun 62%.",
+        "en": ""
+      },
+      "results": []
+    },
+    {
+      "cat": "erp",
+      "img": "https://picsum.photos/seed/odoo-office-migration/640/400",
+      "alt": {
+        "id": "Tim finance memakai satu sistem Odoo",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "Odoo untuk Jasa",
+        "en": ""
+      },
+      "title": {
+        "id": "Migrasi dari 4 sistem ke 1 Odoo",
+        "en": ""
+      },
+      "desc": {
+        "id": "Invoice 2× lebih cepat, piutang terpantau harian.",
+        "en": ""
+      },
+      "results": []
+    },
+    {
+      "cat": "infra",
+      "img": "https://picsum.photos/seed/office-wifi-upgrade/640/400",
+      "alt": {
+        "id": "Kantor modern dengan jaringan WiFi baru",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "Infrastruktur untuk Perkantoran",
+        "en": ""
+      },
+      "title": {
+        "id": "WiFi 7 dan HCI live dalam 6 minggu",
+        "en": ""
+      },
+      "desc": {
+        "id": "Coverage penuh 4 lantai, komplain koneksi turun 90%.",
+        "en": ""
+      },
+      "results": [
+        {
+          "b": {
+            "id": "6 mgg",
+            "en": ""
+          },
+          "s": {
+            "id": "go-live",
+            "en": ""
+          }
+        },
+        {
+          "b": {
+            "id": "99,9%",
+            "en": ""
+          },
+          "s": {
+            "id": "uptime",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "cat": "bi",
+      "img": "https://picsum.photos/seed/sales-dashboard-bi/640/400",
+      "alt": {
+        "id": "Tim sales memantau dashboard performa",
+        "en": ""
+      },
+      "cat_t": {
+        "id": "Dashboard BI untuk Distribusi",
+        "en": ""
+      },
+      "title": {
+        "id": "5 dashboard live dalam 8 minggu",
+        "en": ""
+      },
+      "desc": {
+        "id": "Laporan Senin pagi yang manual kini otomatis tiap jam.",
+        "en": ""
+      },
+      "results": [
+        {
+          "b": {
+            "id": "5",
+            "en": ""
+          },
+          "s": {
+            "id": "dashboard",
+            "en": ""
+          }
+        },
+        {
+          "b": {
+            "id": "8 mgg",
+            "en": ""
+          },
+          "s": {
+            "id": "rollout",
+            "en": ""
+          }
+        }
+      ]
+    }
+  ]
+}

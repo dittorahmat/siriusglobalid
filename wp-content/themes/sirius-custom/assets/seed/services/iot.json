@@ -1,0 +1,277 @@
+{
+  "updated_at": "",
+  "slug": "iot",
+  "title": {
+    "id": "IoT Solutions",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "IoT: sensor, gateway, dashboard real-time untuk pabrik & logistik.",
+    "en": ""
+  },
+  "h1": {
+    "id": "IoT Solutions",
+    "en": ""
+  },
+  "lead": {
+    "id": "Sensor hingga dashboard dalam satu paket. Untuk pabrik, cold-chain, dan energi.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=iot",
+      "text": {
+        "id": "Konsultasi Gratis",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Yang Anda dapatkan",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "Sensor suhu, kelembapan, vibrasi, energi",
+        "en": ""
+      },
+      {
+        "id": "Gateway LoRa / 4G / WiFi + edge buffer",
+        "en": ""
+      },
+      {
+        "id": "Dashboard real-time + alert WA/email otomatis",
+        "en": ""
+      },
+      {
+        "id": "Kalibrasi, instalasi & maintenance",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "Update interval",
+        "en": ""
+      },
+      "value": {
+        "id": "Real-time",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Offline buffer",
+        "en": ""
+      },
+      "value": {
+        "id": "7 hari",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Garansi perangkat",
+        "en": ""
+      },
+      "value": {
+        "id": "1 tahun",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal. Angka final kami tetapkan setelah survei lokasi gratis, tergantung titik sensor dan kondisi lapangan.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Mulai",
+          "en": ""
+        },
+        "name": {
+          "id": "Pilot 10 Titik",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 35-90 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "10 titik sensor plus gateway",
+            "en": ""
+          },
+          {
+            "id": "Dashboard dan alert otomatis",
+            "en": ""
+          },
+          {
+            "id": "Instalasi dan kalibrasi",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Rollout Site",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 90-250 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Cakupan penuh satu site",
+            "en": ""
+          },
+          {
+            "id": "Edge buffer dan integrasi ERP",
+            "en": ""
+          },
+          {
+            "id": "Training operator dan SOP",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Tahunan",
+          "en": ""
+        },
+        "name": {
+          "id": "Maintenance",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 5-15 jt/bln",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Kalibrasi berkala",
+            "en": ""
+          },
+          {
+            "id": "Penggantian perangkat garansi",
+            "en": ""
+          },
+          {
+            "id": "Monitoring konektivitas",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Survei lokasi",
+          "en": ""
+        },
+        "d": {
+          "id": "1 minggu. Titik ukur, sinyal, dan kebutuhan daya di lapangan.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Pilot",
+          "en": ""
+        },
+        "d": {
+          "id": "3-4 minggu. Pasang di 1 area, buktikan nilainya sebelum rollout.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Rollout dan SLA",
+          "en": ""
+        },
+        "d": {
+          "id": "Perluasan site plus maintenance dan garansi perangkat 1 tahun.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Apakah sensor tahan kondisi pabrik?",
+        "en": ""
+      },
+      "a": {
+        "id": "Ya. Kami memakai perangkat industrial berperingkat IP sesuai area, plus garansi 1 tahun.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Bagaimana bila internet di lokasi lambat?",
+        "en": ""
+      },
+      "a": {
+        "id": "Gateway menyimpan data 7 hari secara offline, lalu sinkron otomatis saat koneksi pulih.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Punya 1 lokasi untuk pilot?",
+      "en": ""
+    },
+    "d": {
+      "id": "Mulai dari 10 titik sensor. Buktikan nilainya sebelum rollout.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=iot",
+    "btn": {
+      "id": "Konsultasi Gratis",
+      "en": ""
+    }
+  }
+}

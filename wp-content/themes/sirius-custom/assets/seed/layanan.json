@@ -1,0 +1,343 @@
+{
+  "updated_at": "",
+  "meta_desc": {
+    "id": "Layanan: application development, AI implementation, IoT, Odoo ERP, fleet management.",
+    "en": ""
+  },
+  "cards": [
+    {
+      "icon": "◈",
+      "title": {
+        "id": "Application Development",
+        "en": ""
+      },
+      "desc": {
+        "id": "Web apps, mobile, API & integrasi. Stack modern, testing berlapis, dokumentasi penuh.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Web portal & dashboard",
+          "en": ""
+        },
+        {
+          "id": "Android/iOS & PWA",
+          "en": ""
+        },
+        {
+          "id": "Integrasi SAP/Odoo/API bank",
+          "en": ""
+        }
+      ],
+      "href": "layanan/app-development.php",
+      "btn": {
+        "id": "Detail Application Development →",
+        "en": ""
+      },
+      "cls": ""
+    },
+    {
+      "icon": "✦",
+      "title": {
+        "id": "AI Implementation",
+        "en": ""
+      },
+      "desc": {
+        "id": "Mulai dari POC 4 minggu: chatbot, OCR, vision QC, dan forecasting.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Chatbot knowledge-base",
+          "en": ""
+        },
+        {
+          "id": "OCR dokumen & KTP",
+          "en": ""
+        },
+        {
+          "id": "Computer vision QC",
+          "en": ""
+        }
+      ],
+      "href": "layanan/ai-solution.php",
+      "btn": {
+        "id": "Detail AI Implementation →",
+        "en": ""
+      },
+      "cls": " teal"
+    },
+    {
+      "icon": "⬡",
+      "title": {
+        "id": "IoT Solutions",
+        "en": ""
+      },
+      "desc": {
+        "id": "Sensor suhu, vibrasi, energi + gateway LoRa/4G dan dashboard real-time.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Monitoring pabrik & cold-chain",
+          "en": ""
+        },
+        {
+          "id": "Smart meter energi",
+          "en": ""
+        },
+        {
+          "id": "Alert WA/email otomatis",
+          "en": ""
+        }
+      ],
+      "href": "layanan/iot.php",
+      "btn": {
+        "id": "Detail IoT Solutions →",
+        "en": ""
+      },
+      "cls": ""
+    },
+    {
+      "icon": "▣",
+      "title": {
+        "id": "ERP Odoo",
+        "en": ""
+      },
+      "desc": {
+        "id": "Implementasi & kustom: Sales, Purchase, Inventory, MRP, Accounting, HR.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Gap analysis & blueprint",
+          "en": ""
+        },
+        {
+          "id": "Migrasi data & training",
+          "en": ""
+        },
+        {
+          "id": "Hosting & SLA support",
+          "en": ""
+        }
+      ],
+      "href": "layanan/odoo-erp.php",
+      "btn": {
+        "id": "Detail ERP Odoo →",
+        "en": ""
+      },
+      "cls": " teal"
+    },
+    {
+      "icon": "⬢",
+      "title": {
+        "id": "Fleet Management",
+        "en": ""
+      },
+      "desc": {
+        "id": "GPS, BBM, e-lock, driver scoring & maintenance dalam satu dasbor.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "1.000+ unit siap",
+          "en": ""
+        },
+        {
+          "id": "Geofence & alert",
+          "en": ""
+        },
+        {
+          "id": "Integrasi Odoo/ERP",
+          "en": ""
+        }
+      ],
+      "href": "layanan/fleet-management.php",
+      "btn": {
+        "id": "Detail Fleet Management →",
+        "en": ""
+      },
+      "cls": ""
+    },
+    {
+      "icon": "⬣",
+      "title": {
+        "id": "Network dan Infrastruktur",
+        "en": ""
+      },
+      "desc": {
+        "id": "HCI, WiFi 7, switching, backup, dan firewall NGFW. Dari survei sampai operasional.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Virtualisasi HCI",
+          "en": ""
+        },
+        {
+          "id": "WiFi 7 dan switching",
+          "en": ""
+        },
+        {
+          "id": "Backup dan NGFW",
+          "en": ""
+        }
+      ],
+      "href": "layanan/infrastruktur.php",
+      "btn": {
+        "id": "Detail Infrastruktur →",
+        "en": ""
+      },
+      "cls": ""
+    },
+    {
+      "icon": "▤",
+      "title": {
+        "id": "Dashboard dan BI",
+        "en": ""
+      },
+      "desc": {
+        "id": "Power BI, Microsoft Fabric, dan Copilot. Monitor, prediksi, dan forecast.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Warehouse Fabric",
+          "en": ""
+        },
+        {
+          "id": "5 dashboard prioritas",
+          "en": ""
+        },
+        {
+          "id": "Forecast dan Copilot",
+          "en": ""
+        }
+      ],
+      "href": "layanan/dashboard-bi.php",
+      "btn": {
+        "id": "Detail Dashboard BI →",
+        "en": ""
+      },
+      "cls": " teal"
+    },
+    {
+      "icon": "⬔",
+      "title": {
+        "id": "Cybersecurity",
+        "en": ""
+      },
+      "desc": {
+        "id": "Assessment ISO 27001, EDR, SIEM, DLP, dan pentest. Kenali risiko sebelum diserang.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Assessment dan peta risiko",
+          "en": ""
+        },
+        {
+          "id": "EDR dan SIEM",
+          "en": ""
+        },
+        {
+          "id": "Pentest dan DLP",
+          "en": ""
+        }
+      ],
+      "href": "layanan/cybersecurity.php",
+      "btn": {
+        "id": "Detail Cybersecurity →",
+        "en": ""
+      },
+      "cls": ""
+    },
+    {
+      "icon": "✎",
+      "title": {
+        "id": "Corporate Training",
+        "en": ""
+      },
+      "desc": {
+        "id": "Training in-house Power BI, security, dan infra. Minimal 10 peserta.",
+        "en": ""
+      },
+      "points": [
+        {
+          "id": "Kurikulum sesuai level tim",
+          "en": ""
+        },
+        {
+          "id": "Lab hands-on dan materi",
+          "en": ""
+        },
+        {
+          "id": "Onsite atau online",
+          "en": ""
+        }
+      ],
+      "href": "layanan/training.php",
+      "btn": {
+        "id": "Detail Training →",
+        "en": ""
+      },
+      "cls": " teal"
+    }
+  ],
+  "models_heading": {
+    "id": "Tiga model kerjasama",
+    "en": ""
+  },
+  "models_body": {
+    "id": "Pilih cara kerja yang pas dengan kondisi Anda. Bisa digabung dalam satu kontrak.",
+    "en": ""
+  },
+  "models": [
+    {
+      "t": {
+        "id": "Project fixed-scope",
+        "en": ""
+      },
+      "d": {
+        "id": "Lingkup, jadwal, dan biaya dikunci di blueprint. Cocok untuk implementasi dan deployment.",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Retainer bulanan",
+        "en": ""
+      },
+      "d": {
+        "id": "Sprint lanjutan plus SLA support. Cocok untuk pengembangan bertahap dan monitoring.",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Training corporate",
+        "en": ""
+      },
+      "d": {
+        "id": "Batch in-house minimal 10 peserta. Cocok untuk menaikkan level tim internal.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Tidak yakin mulai dari mana?",
+      "en": ""
+    },
+    "d": {
+      "id": "Ikuti discovery 30 menit. Gratis, dapat blueprint kasar plus estimasi.",
+      "en": ""
+    },
+    "btn": {
+      "id": "Konsultasi Gratis",
+      "en": ""
+    },
+    "href": "kontak.php"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "updated_at": "",
+  "meta_desc": {
+    "id": "Profil PT Sirius Global Indonesia: konsultan IT untuk aplikasi, AI, IoT, Odoo ERP dan fleet management.",
+    "en": ""
+  },
+  "values": [
+    {
+      "t": {
+        "id": "Jujur",
+        "en": ""
+      },
+      "d": {
+        "id": "POC yang tidak feasible kami katakan tidak feasible, dengan alternatif.",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Rapi",
+        "en": ""
+      },
+      "d": {
+        "id": "Dokumentasi, testing, dan versioning bukan opsional.",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Terukur",
+        "en": ""
+      },
+      "d": {
+        "id": "Setiap fitur terhubung ke KPI operasional atau finansial.",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Tuntas",
+        "en": ""
+      },
+      "d": {
+        "id": "Go-live bukan akhir. Serah terima dan support sampai stabil.",
+        "en": ""
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "t": {
+        "id": "2017-2020",
+        "en": ""
+      },
+      "d": {
+        "id": "Mulai dari custom apps & integrasi untuk manufaktur dan distribusi.",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "2021-2023",
+        "en": ""
+      },
+      "d": {
+        "id": "Fokus ke Odoo ERP, IoT sensor, dan fleet tracking skala ribuan unit.",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "2024-sekarang",
+        "en": ""
+      },
+      "d": {
+        "id": "Praktik AI: OCR, chatbot knowledge-base, dan computer vision untuk QC.",
+        "en": ""
+      }
+    }
+  ],
+  "team": [
+    {
+      "t": {
+        "id": "Managing Director",
+        "en": ""
+      },
+      "d": {
+        "id": "Strategi, kemitraan, dan akuntabilitas hasil proyek",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Head of Engineering",
+        "en": ""
+      },
+      "d": {
+        "id": "Arsitektur aplikasi, kualitas, dan keamanan",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Head of ERP",
+        "en": ""
+      },
+      "d": {
+        "id": "Fungsional Odoo, rollout, dan adopsi pengguna",
+        "en": ""
+      }
+    },
+    {
+      "t": {
+        "id": "Head of AI dan IoT",
+        "en": ""
+      },
+      "d": {
+        "id": "Data, model AI, perangkat, dan integrasi",
+        "en": ""
+      }
+    }
+  ]
+}

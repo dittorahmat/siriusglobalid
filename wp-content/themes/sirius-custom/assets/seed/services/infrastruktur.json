@@ -1,0 +1,281 @@
+{
+  "updated_at": "",
+  "slug": "infrastruktur",
+  "title": {
+    "id": "Network dan Infrastruktur",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "Infrastruktur IT: virtualisasi HCI, WiFi 7, switching enterprise, backup, firewall NGFW. Survei sampai operasional.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Network dan Server Infrastructure",
+    "en": ""
+  },
+  "lead": {
+    "id": "Jaringan dan server yang cepat, aman, dan mudah dikelola. Kami kerjakan dari survei lokasi sampai operasional harian.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=infrastruktur",
+      "text": {
+        "id": "Minta Quotation",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Yang Anda dapatkan",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "Virtualisasi server HCI: compute, storage, dan backup dalam satu platform",
+        "en": ""
+      },
+      {
+        "id": "WiFi 7 dan enterprise switching: multi-gigabit, PoE, manajemen terpusat",
+        "en": ""
+      },
+      {
+        "id": "Backup dan cyber resilience: immutable backup, deteksi ransomware, recovery otomatis",
+        "en": ""
+      },
+      {
+        "id": "Firewall NGFW: Zero Trust access, SD-WAN, inspeksi trafik terenkripsi",
+        "en": ""
+      },
+      {
+        "id": "Dokumentasi topologi, kredensial, dan SOP operasional penuh",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "Survei dan desain",
+        "en": ""
+      },
+      "value": {
+        "id": "1-2 minggu",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Target uptime",
+        "en": ""
+      },
+      "value": {
+        "id": "99,9%",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Garansi perangkat",
+        "en": ""
+      },
+      "value": {
+        "id": "1 tahun",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal. Angka final kami tetapkan setelah discovery gratis, tergantung jumlah site dan perangkat.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Assessment",
+          "en": ""
+        },
+        "name": {
+          "id": "Audit Infrastruktur",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 15-35 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Audit jaringan dan server eksisting",
+            "en": ""
+          },
+          {
+            "id": "Heatmap WiFi dan uji beban",
+            "en": ""
+          },
+          {
+            "id": "Rekomendasi tertulis plus prioritas",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Deployment per Site",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 75-250 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "HCI, WiFi, switching, dan firewall",
+            "en": ""
+          },
+          {
+            "id": "Instalasi, migrasi, dan hardening",
+            "en": ""
+          },
+          {
+            "id": "Uji beban dan serah terima terdokumentasi",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Bulanan",
+          "en": ""
+        },
+        "name": {
+          "id": "Managed Infra",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 10-30 jt/bln",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Monitoring dan patching rutin",
+            "en": ""
+          },
+          {
+            "id": "SLA respons 4 jam kerja",
+            "en": ""
+          },
+          {
+            "id": "Laporan kesehatan bulanan",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Survei dan desain",
+          "en": ""
+        },
+        "d": {
+          "id": "1-2 minggu. Pengukuran lokasi, kapasitas, dan blueprint topologi.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Pengadaan dan instalasi",
+          "en": ""
+        },
+        "d": {
+          "id": "3-6 minggu. Instalasi perangkat, migrasi, dan konfigurasi keamanan.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Uji dan serah terima",
+          "en": ""
+        },
+        "d": {
+          "id": "1-2 minggu. Uji beban, pelatihan admin, dan dokumen operasional.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Apakah bisa dikerjakan bertahap per site?",
+        "en": ""
+      },
+      "a": {
+        "id": "Ya. Kami mulai dari site tersibuk sebagai pilot, lalu replikasi ke site lain dengan template yang sama.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Perangkat milik siapa?",
+        "en": ""
+      },
+      "a": {
+        "id": "Milik Anda penuh. Kami bantu spesifikasi, pengadaan, instalasi, dan garansi resmi prinsipal.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Jaringan lambat atau sering putus?",
+      "en": ""
+    },
+    "d": {
+      "id": "Audit 1 minggu, ketahuan biang masalahnya plus opsi perbaikannya.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=infrastruktur",
+    "btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  }
+}

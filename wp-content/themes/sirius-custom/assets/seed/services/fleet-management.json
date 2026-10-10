@@ -1,0 +1,277 @@
+{
+  "updated_at": "",
+  "slug": "fleet-management",
+  "title": {
+    "id": "Fleet Management",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "Fleet management: GPS, BBM, maintenance & driver scoring satu dasbor.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Fleet Management",
+    "en": ""
+  },
+  "lead": {
+    "id": "1.000+ unit terpantau real-time. GPS, BBM, maintenance, dan scoring driver.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=fleet",
+      "text": {
+        "id": "Konsultasi Gratis",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Yang Anda dapatkan",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "GPS tracking + geofence & alert",
+        "en": ""
+      },
+      {
+        "id": "Monitoring BBM + deteksi anomali",
+        "en": ""
+      },
+      {
+        "id": "Maintenance reminder berbasis KM/jam",
+        "en": ""
+      },
+      {
+        "id": "Driver scoring + integrasi Odoo/ERP",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "Unit aktif tipikal",
+        "en": ""
+      },
+      "value": {
+        "id": "1.240",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "BBM",
+        "en": ""
+      },
+      "value": {
+        "id": "−11%",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Keterlambatan",
+        "en": ""
+      },
+      "value": {
+        "id": "−38%",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "Estimasi awal. Angka final kami tetapkan setelah survei armada gratis, tergantung jumlah unit dan perangkat.",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "Mulai",
+          "en": ""
+        },
+        "name": {
+          "id": "Pilot 20 Unit",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 20-50 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Perangkat GPS dan instalasi 20 unit",
+            "en": ""
+          },
+          {
+            "id": "Dashboard, geofence, dan alert",
+            "en": ""
+          },
+          {
+            "id": "Ukur dampak BBM 1 bulan",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Rollout Armada",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 75-150 rb/unit/bln",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "GPS, sensor BBM, dan e-lock opsional",
+            "en": ""
+          },
+          {
+            "id": "Driver scoring dan maintenance reminder",
+            "en": ""
+          },
+          {
+            "id": "Integrasi Odoo atau ERP eksisting",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Tambahan",
+          "en": ""
+        },
+        "name": {
+          "id": "Integrasi ERP",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 30-80 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Data armada masuk pembukuan otomatis",
+            "en": ""
+          },
+          {
+            "id": "Rekonsiliasi BBM dan biaya per KM",
+            "en": ""
+          },
+          {
+            "id": "API dan dokumentasi integrasi",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Instalasi pilot",
+          "en": ""
+        },
+        "d": {
+          "id": "2 minggu. Pasang di 20 unit dan latih dispatcher Anda.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Ukur dampak",
+          "en": ""
+        },
+        "d": {
+          "id": "1 bulan. Bandingkan BBM dan ketepatan sebelum rollout penuh.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Rollout penuh",
+          "en": ""
+        },
+        "d": {
+          "id": "Bertahap per pool dengan target 1.000 lebih unit siap.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Apakah harus ganti GPS lama?",
+        "en": ""
+      },
+      "a": {
+        "id": "Tidak harus. Perangkat eksisting yang kompatibel kami integrasikan ke dasbor yang sama.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Data armada milik siapa?",
+        "en": ""
+      },
+      "a": {
+        "id": "Milik Anda penuh, tersimpan di server pilihan Anda, dan bisa diekspor kapan saja.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Punya 20 unit untuk pilot?",
+      "en": ""
+    },
+    "d": {
+      "id": "Pasang 2 minggu, ukur BBM dan OTP sebelum rollout penuh.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=fleet",
+    "btn": {
+      "id": "Konsultasi Gratis",
+      "en": ""
+    }
+  }
+}

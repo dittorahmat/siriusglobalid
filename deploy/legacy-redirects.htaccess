@@ -1,0 +1,14 @@
+# Snippet .htaccess - redirect URL lama ke permalink WP.
+# Taruh di public_html/.htaccess SEBELUM aturan WordPress (# BEGIN WordPress).
+# Detail layanan ditangani dinamis oleh theme (inc/redirects.php) agar
+# layanan baru/hapus ikut tanpa edit file ini.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^index\.(html|php)$ / [R=301,L]
+RewriteRule ^tentang\.(html|php)$ /tentang/ [R=301,L]
+RewriteRule ^layanan\.(html|php)$ /layanan/ [R=301,L]
+RewriteRule ^portofolio\.(html|php)$ /portofolio/ [R=301,L]
+RewriteRule ^kontak\.(html|php)$ /kontak/ [R=301,L]
+RewriteRule ^privasi\.(html|php)$ /privasi/ [R=301,L]
+RewriteRule ^syarat\.(html|php)$ /syarat/ [R=301,L]
+</IfModule>

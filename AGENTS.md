@@ -2,11 +2,16 @@
 
 ## Stack
 
-- Vanilla HTML + CSS + JS. No framework, no build step, no bundler.
-- Static hosting (cPanel / Nginx / GitHub Pages). Test locally with:
-  `python -m http.server 8000` lalu buka `http://localhost:8000/`
-- Fonts via Google Fonts. Bilingual ID (default) / EN via `js/i18n.js` (`data-i18n`, `data-i18n-html`).
-- Satu-satunya config yang boleh diedit untuk konten placeholder: `js/site-config.js`.
+- WordPress di `public_html` (instalasi Softaculous, MySQL) + custom theme
+  `wp-content/themes/sirius-custom/` (ID-only, port 1:1 layout PHP/JSON lama).
+  Git adalah source of truth HANYA untuk theme + importer (`wp-content/`,
+  `tools/sgi-importer.php`, `data/seed/` read-only); core/plugin/uploads/DB
+  ikut standar WP/Softaculous/cPanel backup, bukan git.
+- CSS/JS theme di-port dari `css/` + `js/main.js` lama (tanpa `js/i18n.js`,
+  tanpa `data-i18n`, tanpa toggle bahasa). Situs lama (`*.php` publik,
+  `admin/`, `includes/`, `templates/`) dipertahankan sebagai sumber migrasi.
+- Fonts via Google Fonts. ID-only (multilanguage di-scrap di change
+  `wp-mysql-id-only`; sisi `en` seed diabaikan).
 
 ## WAJIB: review frontend via better-interface
 
@@ -72,9 +77,10 @@ Pengecualian: perubahan non-frontend murni (`sitemap.xml`, `robots.txt`,
   clone `https://github.com/dittorahmat/siriusglobalid.git` ke
   `~/siriusglobalid` (JANGAN langsung ke `public_html` agar `.git` tidak
   terekspos) → klik **Update from Remote** lalu **Deploy**.
-- File `.cpanel.yml` di repo root mengatur deploy: hanya file situs
-  (`*.html`, `css/`, `js/`, `assets/`, `layanan/`, `robots.txt`,
-  `sitemap.xml`) yang disalin ke `$HOME/public_html/`.
+- File `.cpanel.yml` di repo root mengatur deploy: HANYA theme + importer
+  (`wp-content/themes/sirius-custom/`, `tools/sgi-importer.php`) yang disalin
+  ke instalasi WordPress. Core, plugin, `uploads`, `wp-config.php`, dan DB
+  MySQL TIDAK PERNAH disentuh deploy; ikut backup Softaculous/cPanel.
 - Workflow FTP (`.github/workflows/deploy.yml`) sudah dihapus karena
   firewall hosting memblokir IP GitHub runner (`ETIMEDOUT` port 21).
   Jangan kembalikan tanpa hasil tes konektivitas dari runner.

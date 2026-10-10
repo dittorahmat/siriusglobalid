@@ -1,0 +1,281 @@
+{
+  "updated_at": "",
+  "slug": "training",
+  "title": {
+    "id": "Corporate Training",
+    "en": ""
+  },
+  "meta_desc": {
+    "id": "Training IT in-house untuk perusahaan: Power BI, cybersecurity, infrastruktur. Minimal 10 peserta.",
+    "en": ""
+  },
+  "h1": {
+    "id": "Corporate Training",
+    "en": ""
+  },
+  "lead": {
+    "id": "Training in-house untuk tim Anda: Power BI, cybersecurity, dan infrastruktur. Minimal 10 peserta, di lokasi Anda atau online.",
+    "en": ""
+  },
+  "hero_cta": [
+    {
+      "style": "btn-primary",
+      "href": "../kontak.php?layanan=training",
+      "text": {
+        "id": "Minta Quotation",
+        "en": ""
+      }
+    },
+    {
+      "style": "btn-ghost",
+      "href": "../portofolio.php",
+      "text": {
+        "id": "Lihat Studi Kasus",
+        "en": ""
+      }
+    }
+  ],
+  "intro": {
+    "heading": {
+      "id": "Program yang tersedia",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "checklist": [
+      {
+        "id": "Power BI Training: dari dashboard pertama sampai model data dan DAX",
+        "en": ""
+      },
+      {
+        "id": "Cybersecurity Training: karyawan jadi lini pertahanan pertama, bukan titik lemah",
+        "en": ""
+      },
+      {
+        "id": "Infrastructure Training: kelola server, jaringan, dan backup dengan percaya diri",
+        "en": ""
+      },
+      {
+        "id": "Kurikulum disesuaikan dengan level dan studi kasus perusahaan Anda",
+        "en": ""
+      },
+      {
+        "id": "Materi, rekaman sesi, lab hands-on, dan evaluasi akhir",
+        "en": ""
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": {
+        "id": "Peserta",
+        "en": ""
+      },
+      "value": {
+        "id": "Min 10 orang",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Durasi per batch",
+        "en": ""
+      },
+      "value": {
+        "id": "1-3 hari",
+        "en": ""
+      }
+    },
+    {
+      "label": {
+        "id": "Lokasi",
+        "en": ""
+      },
+      "value": {
+        "id": "Onsite / online",
+        "en": ""
+      }
+    }
+  ],
+  "table": null,
+  "pricing": {
+    "heading": {
+      "id": "Paket dan estimasi",
+      "en": ""
+    },
+    "body": {
+      "id": "",
+      "en": ""
+    },
+    "tiers": [
+      {
+        "tier": {
+          "id": "1 hari",
+          "en": ""
+        },
+        "name": {
+          "id": "Workshop Intensif",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 15-30 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "1 topik fokus, 10-25 peserta",
+            "en": ""
+          },
+          {
+            "id": "Lab hands-on dan materi",
+            "en": ""
+          },
+          {
+            "id": "Evaluasi plus rekomendasi lanjut",
+            "en": ""
+          }
+        ],
+        "featured": false
+      },
+      {
+        "tier": {
+          "id": "Paling dipilih",
+          "en": ""
+        },
+        "name": {
+          "id": "Bootcamp 3 Hari",
+          "en": ""
+        },
+        "value": {
+          "id": "Rp 35-75 jt",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Kurikulum bertahap dasar sampai praktik",
+            "en": ""
+          },
+          {
+            "id": "Studi kasus dari data perusahaan Anda",
+            "en": ""
+          },
+          {
+            "id": "Sertifikat internal dan laporan hasil",
+            "en": ""
+          }
+        ],
+        "featured": true
+      },
+      {
+        "tier": {
+          "id": "Kuartalan",
+          "en": ""
+        },
+        "name": {
+          "id": "Corporate Academy",
+          "en": ""
+        },
+        "value": {
+          "id": "Custom",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "Multi-batch untuk beberapa divisi",
+            "en": ""
+          },
+          {
+            "id": "Jalur belajar per peran",
+            "en": ""
+          },
+          {
+            "id": "Pendampingan pasca training",
+            "en": ""
+          }
+        ],
+        "featured": false
+      }
+    ],
+    "quote_btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  },
+  "steps": {
+    "heading": {
+      "id": "Tahapan pengerjaan",
+      "en": ""
+    },
+    "items": [
+      {
+        "t": {
+          "id": "Analisis kebutuhan",
+          "en": ""
+        },
+        "d": {
+          "id": "1 minggu. Ukur level tim dan pilih topik yang berdampak langsung ke pekerjaan.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Pelaksanaan batch",
+          "en": ""
+        },
+        "d": {
+          "id": "1-3 hari. Praktik dominan, bukan ceramah. Peserta pulang membawa hasil kerja.",
+          "en": ""
+        }
+      },
+      {
+        "t": {
+          "id": "Evaluasi dan lanjut",
+          "en": ""
+        },
+        "d": {
+          "id": "Laporan hasil per peserta plus rekomendasi batch berikutnya bila perlu.",
+          "en": ""
+        }
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": {
+        "id": "Bisa diadakan di kantor kami?",
+        "en": ""
+      },
+      "a": {
+        "id": "Bisa. Jabodetabek kami datang onsite. Luar kota tersedia opsi online atau hybrid.",
+        "en": ""
+      }
+    },
+    {
+      "q": {
+        "id": "Apakah materi bisa memakai data perusahaan kami?",
+        "en": ""
+      },
+      "a": {
+        "id": "Ya, justru disarankan agar langsung relevan. Data Anda dilindungi NDA sebelum training dimulai.",
+        "en": ""
+      }
+    }
+  ],
+  "cta": {
+    "t": {
+      "id": "Tim perlu naik level kuartal ini?",
+      "en": ""
+    },
+    "d": {
+      "id": "Ceritakan jumlah peserta dan topiknya. Kami balas kurikulum dan estimasi batch.",
+      "en": ""
+    },
+    "href": "../kontak.php?layanan=training",
+    "btn": {
+      "id": "Minta Quotation",
+      "en": ""
+    }
+  }
+}
