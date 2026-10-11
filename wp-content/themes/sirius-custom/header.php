@@ -26,9 +26,7 @@ $current = get_queried_object();
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Sirius Global Indonesia">
-      <span class="brand-mark" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><path d="M32 10l4.6 9.6 10.5 1.4-7.7 7.3 1.9 10.4L32 33.7l-9.3 5 1.9-10.4-7.7-7.3 10.5-1.4z" fill="#fff"/><circle cx="32" cy="46.5" r="3.2" fill="#14A085"/></svg>
-      </span>
+      <span class="<?php echo esc_attr(sgi_logo_mark_class('header')); ?>" aria-hidden="true"><?php sgi_logo_mark('header'); ?></span>
       <span class="brand-name">Sirius Global<span>Indonesia · IT Consulting</span></span>
     </a>
     <nav class="main-nav" aria-label="Navigasi utama">

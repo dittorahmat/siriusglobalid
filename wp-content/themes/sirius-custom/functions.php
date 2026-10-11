@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/inc/helpers.php';
+require_once __DIR__ . '/inc/logo.php';
 require_once __DIR__ . '/inc/cpt.php';
 require_once __DIR__ . '/inc/meta.php';
 require_once __DIR__ . '/inc/options.php';
@@ -12,6 +13,13 @@ require_once __DIR__ . '/inc/import-page.php';
 function sgi_setup(): void {
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
+  add_theme_support('custom-logo', [
+    'height' => 60,
+    'width' => 240,
+    'flex-height' => true,
+    'flex-width' => true,
+    'header-text' => ['site-title', 'site-description'],
+  ]);
   register_nav_menus(['primary' => 'Navigasi utama']);
 }
 add_action('after_setup_theme', 'sgi_setup');

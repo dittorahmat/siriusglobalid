@@ -71,6 +71,20 @@ Kegagalan poin 1–3 = `Block`. Sisanya `MEDIUM/LOW` di tabel review.
 Pengecualian: perubahan non-frontend murni (`sitemap.xml`, `robots.txt`,
 `site-config.js` saja) tidak wajib review, tapi tetap wajib serve check.
 
+## Agent skills
+
+### Issue tracker
+
+Issue dilacak di GitHub Issues repo ini via `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Label triase default lima peran kanonis. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Layout single-context (satu `GLOSSARY.md` + `docs/adr/` di root). See `docs/agents/domain.md`.
+
 ## CI/CD: deploy via cPanel Git Version Control (GitHub = source of truth)
 
 - Alur resmi: push ke `main` di GitHub → di cPanel buka Git Version Control →

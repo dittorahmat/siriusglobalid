@@ -16,6 +16,9 @@
 }
 .brand-name { font-weight: 800; font-size: 1.02rem; line-height: 1.15; letter-spacing: -0.01em; }
 .brand-name span { display: block; font-weight: 600; font-size: 0.74rem; color: var(--ink-600); letter-spacing: 0.04em; }
+.brand-mark.has-logo { background: transparent; box-shadow: none; overflow: hidden; }
+.brand-mark .custom-logo { width: 100%; height: 100%; object-fit: contain; }
+.site-footer .brand-mark.has-logo { background: transparent; box-shadow: none; }
 .main-nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
 .main-nav a {
   font-weight: 600; font-size: 0.95rem; color: var(--ink-900);
