@@ -259,6 +259,68 @@ function sgi_import_all(string $seedDir): array {
     }
   }
 
+  // Menu utama bawaan (Beranda, Layanan, Kontak). Idempoten: tidak menimpa
+  // Menu editor yang sudah mengisi lokasi 'primary'.
+  if (function_exists('get_nav_menu_locations') && function_exists('wp_create_nav_menu') && function_exists('home_url')) {
+    $locs = get_nav_menu_locations();
+    $hasPrimary = !empty($locs['primary']) && ($m = wp_get_nav_menu_object($locs['primary'])) && !is_wp_error($m);
+    if (!$hasPrimary) {
+      $existing = function_exists('wp_get_nav_menu_object') ? wp_get_nav_menu_object('Navigasi utama') : null;
+      if ((!$existing || is_wp_error($existing))) {
+        $menuId = wp_create_nav_menu('Navigasi utama');
+      } else {
+        $menuId = (int)$existing->term_id;
+      }
+      if (!is_wp_error($menuId) && $menuId) {
+        $have = function_exists('wp_get_nav_menu_items') ? (array)wp_get_nav_menu_items($menuId) : [];
+        if (!$have) {
+          $seedItems = [
+            ['Beranda', home_url('/')],
+            ['Layanan', home_url('/layanan/')],
+            ['Kontak', home_url('/kontak/')],
+          ];
+          foreach ($seedItems as $i => $it) {
+            wp_update_nav_menu_item($menuId, 0, [
+              'menu-item-title' => $it[0],
+              'menu-item-url' => $it[1],
+              'menu-item-status' => 'publish',
+              'menu-item-position' => $i + 1,
+            ]);
+          }
+          $log['updated']++;
+        }
+        $locs = get_nav_menu_locations();
+        $locs['primary'] = $menuId;
+        if (function_exists('set_theme_mod')) set_theme_mod('nav_menu_locations', $locs);
+      }
+    }
+  }
+
+  // Halaman Kontak: isi kunci yang masih kosong, editan admin selalu menang.
+  if (function_exists('sgi_kontak_defaults')) {
+    $kDef = sgi_kontak_defaults();
+    $kSeedFile = $seedDir . '/kontak.json';
+    if (is_file($kSeedFile)) {
+      $kSeed = json_decode((string)file_get_contents($kSeedFile), true);
+      if (is_array($kSeed) && function_exists('sgi_imp_id')) {
+        $h1 = sgi_imp_id($kSeed['h1'] ?? '');
+        if ($h1 !== '') $kDef['hero_h1'] = $h1;
+      }
+    }
+    $kCur = (array)get_option('sgi_kontak', []);
+    $kChanged = false;
+    foreach ($kDef as $kk => $vv) {
+      if (!array_key_exists($kk, $kCur) || $kCur[$kk] === '' || $kCur[$kk] === []) {
+        $kCur[$kk] = $vv;
+        $kChanged = true;
+      }
+    }
+    if ($kChanged) {
+      update_option('sgi_kontak', $kCur);
+      $log['updated']++;
+    }
+  }
+
   if (php_sapi_name() === 'cli' && defined('WP_CLI') && WP_CLI) {
     WP_CLI::log(json_encode($log, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
   }

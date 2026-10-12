@@ -1,17 +1,23 @@
 <?php
 // page-kontak.php - Template: Kontak (info dari sgi_settings + form WA deep link).
+// Hero + pilihan dropdown dari option sgi_kontak (Settings > Sirius),
+// fallback ke nilai bawaan bila kosong.
 /* Template Name: Kontak */
 get_header();
 $st = sgi_settings();
-$needs = ['app-development' => 'Application Development', 'ai-solution' => 'AI Implementation', 'iot' => 'IoT Solutions', 'odoo-erp' => 'ERP Odoo', 'fleet-management' => 'Fleet Management', 'infrastruktur' => 'Network dan Infrastruktur', 'dashboard-bi' => 'Dashboard dan BI', 'cybersecurity' => 'Cybersecurity', 'training' => 'Corporate Training', 'other' => 'Lainnya / kombinasi'];
-$budgets = ['lt50' => 'Di bawah Rp 50 jt', '50-150' => 'Rp 50-150 jt', '150-500' => 'Rp 150-500 jt', 'gt500' => 'Di atas Rp 500 jt', 'unknown' => 'Belum tahu, minta arahan'];
-$times = ['urgent' => 'Mendesak, di bawah 1 bulan', '1-3mo' => '1-3 bulan', 'explore' => 'Masih eksplorasi'];
+$kk = function_exists('sgi_kontak') ? sgi_kontak() : [];
+$needs = $kk['needs'] ?? ['app-development' => 'Application Development', 'ai-solution' => 'AI Implementation', 'iot' => 'IoT Solutions', 'odoo-erp' => 'ERP Odoo', 'fleet-management' => 'Fleet Management', 'infrastruktur' => 'Network dan Infrastruktur', 'dashboard-bi' => 'Dashboard dan BI', 'cybersecurity' => 'Cybersecurity', 'training' => 'Corporate Training', 'other' => 'Lainnya / kombinasi'];
+$budgets = $kk['budgets'] ?? ['lt50' => 'Di bawah Rp 50 jt', '50-150' => 'Rp 50-150 jt', '150-500' => 'Rp 150-500 jt', 'gt500' => 'Di atas Rp 500 jt', 'unknown' => 'Belum tahu, minta arahan'];
+$times = $kk['times'] ?? ['urgent' => 'Mendesak, di bawah 1 bulan', '1-3mo' => '1-3 bulan', 'explore' => 'Masih eksplorasi'];
+$heroH1 = $kk['hero_h1'] ?? 'Ceritakan kebutuhan Anda, kami balas < 1 hari kerja';
+$formT = $kk['form_t'] ?? 'Formulir konsultasi';
+$formD = $kk['form_d'] ?? 'Isi detail kebutuhan. Pesan Anda terkirim sebagai chat WhatsApp terstruktur ke tim kami.';
 $pre = isset($_GET['layanan']) ? sanitize_key($_GET['layanan']) : '';
 ?>
 <section class="page-hero"><div class="container">
 <p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a> / <span>Kontak</span></p>
 <span class="eyebrow">Kontak</span>
-<h1>Ceritakan kebutuhan Anda, <span>kami balas &lt; 1 hari kerja</span></h1>
+<h1><?php echo esc_html($heroH1); ?></h1>
 </div></section>
 <section class="section"><div class="container contact-grid">
 <div class="info-card">
@@ -22,8 +28,8 @@ $pre = isset($_GET['layanan']) ? sanitize_key($_GET['layanan']) : '';
 <iframe title="Peta" style="border:1px solid var(--line);border-radius:14px;width:100%;height:260px" loading="lazy" src="<?php echo esc_attr($st['mapEmbed']); ?>"></iframe>
 </div>
 <div class="card">
-<h2>Formulir konsultasi</h2>
-<p class="small muted" style="margin-top:8px">Isi detail kebutuhan. Pesan Anda terkirim sebagai chat WhatsApp terstruktur ke tim kami.</p>
+<h2><?php echo esc_html($formT); ?></h2>
+<p class="small muted" style="margin-top:8px"><?php echo esc_html($formD); ?></p>
 <form data-contact-form novalidate style="margin-top:18px">
 <div class="grid grid-2">
 <div class="field"><label for="f-name">Nama lengkap</label><input id="f-name" name="name" required autocomplete="name" placeholder="Nama Anda" aria-describedby="e-name"><span class="error" id="e-name">Wajib diisi.</span></div>
