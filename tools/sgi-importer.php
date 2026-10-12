@@ -64,7 +64,7 @@ function sgi_imp_upsert(string $type, string $slug, string $title, string $statu
 
 function sgi_import_all(string $seedDir): array {
   $log = ['created' => 0, 'updated' => 0, 'skipped' => 0, 'errors' => []];
-  $limits = function_exists('sgi_limits') ? sgi_limits() : ['portfolio.items' => 24, 'service.faqs' => 20, 'service.tiers' => 6, 'service.checklist' => 20, 'service.metrics' => 8, 'service.steps' => 8, 'tentang.values' => 12, 'tentang.timeline' => 12, 'tentang.team' => 12, 'home.clients' => 12, 'home.cases' => 6];
+  $limits = function_exists('sgi_limits') ? sgi_limits() : ['portfolio.items' => 24, 'service.faqs' => 20, 'service.tiers' => 6, 'service.checklist' => 20, 'service.metrics' => 8, 'service.steps' => 8, 'tentang.values' => 12, 'tentang.timeline' => 12, 'tentang.team' => 12, 'home.clients' => 12, 'home.cases' => 6, 'home.services' => 8, 'home.why' => 6, 'home.steps' => 8, 'home.testi' => 6];
   $read = function (string $f) use (&$log) {
     if (!is_file($f)) { $log['errors'][] = "Hilang: $f"; return null; }
     $d = json_decode((string)file_get_contents($f), true);
@@ -86,19 +86,88 @@ function sgi_import_all(string $seedDir): array {
     }
   }
 
-  // Home.
+  // Home. Seed hanya mengisi kunci yang belum ada: editan admin via
+  // Settings > Sirius selalu menang, import ulang tidak menimpanya.
   if ($d = $read($seedDir . '/home.json')) {
     $hp = $d['hero_photo'] ?? [];
-    update_option('sgi_home', [
+    $heroSeed = $d['hero'] ?? [];
+    $ctaSeed = $d['cta'] ?? [];
+    $pairTD = function ($items) {
+      $out = [];
+      foreach ((array)$items as $x) {
+        if (!is_array($x)) continue;
+        $t = sgi_imp_id($x['t'] ?? '');
+        $dd = sgi_imp_id($x['d'] ?? '');
+        if ($t !== '' || $dd !== '') $out[] = ['t' => $t, 'd' => $dd];
+      }
+      return $out;
+    };
+    $seedHome = [
       'hero_photo' => ['src' => $hp['src'] ?? '', 'alt' => sgi_imp_id($hp['alt'] ?? ''), 'w' => (int)($hp['w'] ?? 880), 'h' => (int)($hp['h'] ?? 1000)],
+      'hero' => [
+        'eyebrow' => sgi_imp_id($heroSeed['eyebrow'] ?? ''), 'title_html' => sgi_imp_id($heroSeed['title_html'] ?? ''),
+        'lead' => sgi_imp_id($heroSeed['lead'] ?? ''), 'cta1' => sgi_imp_id($heroSeed['cta1'] ?? ''),
+        'cta1_href' => trim((string)($heroSeed['cta1_href'] ?? '')), 'cta2' => sgi_imp_id($heroSeed['cta2'] ?? ''),
+        'cta2_href' => trim((string)($heroSeed['cta2_href'] ?? '')),
+        'card1t' => sgi_imp_id($heroSeed['card1t'] ?? ''), 'card1a' => sgi_imp_id($heroSeed['card1a'] ?? ''),
+        'card1b' => sgi_imp_id($heroSeed['card1b'] ?? ''), 'card1c' => sgi_imp_id($heroSeed['card1c'] ?? ''),
+      ],
       'kpi_counts' => array_slice($d['kpi_counts'] ?? [], 0, 3),
+      'kpi_labels' => array_slice(array_map('sgi_imp_id', $d['kpi_labels'] ?? []), 0, 3),
       'stat_counts' => array_slice($d['stat_counts'] ?? [], 0, 4),
+      'stat_labels' => array_slice(array_map('sgi_imp_id', $d['stat_labels'] ?? []), 0, 4),
       'clients' => array_slice(array_map('sgi_imp_id', $d['clients'] ?? []), 0, 12),
+      'svc_eye' => sgi_imp_id($d['svc_eye'] ?? ''), 'svc_t' => sgi_imp_id($d['svc_t'] ?? ''), 'svc_d' => sgi_imp_id($d['svc_d'] ?? ''),
+      'combo_t' => sgi_imp_id($d['combo_t'] ?? ''), 'combo_d' => sgi_imp_id($d['combo_d'] ?? ''), 'combo_btn' => sgi_imp_id($d['combo_btn'] ?? ''),
+      'layanan_count' => max(1, min(8, (int)($d['layanan_count'] ?? 5))),
+      'layanan_hide' => array_map('sanitize_title', (array)($d['layanan_hide'] ?? [])),
+      'layanan_combo' => (string)($d['layanan_combo'] ?? '1'),
+      'why_t' => sgi_imp_id($d['why_t'] ?? ''), 'why' => $pairTD($d['why'] ?? []),
+      'proc_t' => sgi_imp_id($d['proc_t'] ?? ''), 'steps' => $pairTD($d['steps'] ?? []),
+      'cases_eye' => sgi_imp_id($d['cases_eye'] ?? ''), 'cases_t' => sgi_imp_id($d['cases_t'] ?? ''), 'cases_all' => sgi_imp_id($d['cases_all'] ?? ''),
+      'cases' => array_values(array_filter(array_map(function ($c) {
+        if (!is_array($c)) return null;
+        $cc = sgi_imp_id($c['c'] ?? ''); $t = sgi_imp_id($c['t'] ?? ''); $dd = sgi_imp_id($c['d'] ?? '');
+        return ($cc !== '' || $t !== '' || $dd !== '') ? ['c' => $cc, 't' => $t, 'd' => $dd] : null;
+      }, (array)($d['cases'] ?? [])))),
       'case_imgs' => array_slice(array_map(function ($c) {
         return ['img' => $c['img'] ?? '', 'alt' => sgi_imp_id($c['alt'] ?? '')];
       }, $d['case_imgs'] ?? []), 0, 6),
-    ]);
-    $log['updated']++;
+      'testi_t' => sgi_imp_id($d['testi_t'] ?? ''),
+      'testis' => array_values(array_filter(array_map(function ($t) {
+        if (!is_array($t)) return null;
+        $q = sgi_imp_id($t['q'] ?? ''); $by = sgi_imp_id($t['by'] ?? '');
+        return ($q !== '' || $by !== '') ? ['q' => $q, 'by' => $by] : null;
+      }, (array)($d['testis'] ?? [])))),
+      'cta' => [
+        't' => sgi_imp_id($ctaSeed['t'] ?? ''), 'd' => sgi_imp_id($ctaSeed['d'] ?? ''),
+        'b1' => sgi_imp_id($ctaSeed['b1'] ?? ''), 'b2' => sgi_imp_id($ctaSeed['b2'] ?? ''),
+      ],
+      'home_order' => array_values(array_filter(array_map('trim', array_map('strtolower', (array)($d['home_order'] ?? []))))),
+    ];
+    $bad = sgi_imp_check('home.clients', $seedHome['clients'], $limits)
+      ?: sgi_imp_check('home.cases', $seedHome['cases'], $limits)
+      ?: sgi_imp_check('home.why', $seedHome['why'], $limits)
+      ?: sgi_imp_check('home.steps', $seedHome['steps'], $limits)
+      ?: sgi_imp_check('home.testi', $seedHome['testis'], $limits);
+    if ($bad) {
+      $log['errors'][] = "home: $bad Dilewati, data lama utuh.";
+    } else {
+      $cur = (array)get_option('sgi_home', []);
+      foreach (['hero', 'cta'] as $k) {
+        if (isset($cur[$k]) && is_array($cur[$k])) {
+          // Seed mengisi sub-kunci yang masih kosong; editan admin menang.
+          $cur[$k] = array_merge($seedHome[$k], array_filter($cur[$k], function ($v) { return $v !== '' && $v !== []; }));
+        }
+      }
+      foreach ($seedHome as $k => $v) {
+        if (!array_key_exists($k, $cur) || $cur[$k] === '' || $cur[$k] === []) {
+          $cur[$k] = $v;
+        }
+      }
+      update_option('sgi_home', $cur);
+      $log['updated']++;
+    }
   }
 
   // Layanan: semua file services/*.json, slug apa pun diterima.

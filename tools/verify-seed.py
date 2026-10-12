@@ -15,6 +15,7 @@ LIMITS = {
     "service.checklist": 20, "service.metrics": 8, "service.steps": 8,
     "tentang.values": 12, "tentang.timeline": 12, "tentang.team": 12,
     "home.clients": 12, "home.cases": 6,
+    "home.services": 8, "home.why": 6, "home.steps": 8, "home.testi": 6,
 }
 fails = []
 
@@ -50,6 +51,20 @@ if h:
     check(len(h.get("stat_counts", [])) == 4, "home stats 4")
     check(len(h.get("clients", [])) <= LIMITS["home.clients"], "home clients<=12")
     check(len(h.get("case_imgs", [])) <= LIMITS["home.cases"], "home cases<=6")
+    check(len(h.get("kpi_labels", [])) == 3, "home kpi_labels 3")
+    check(len(h.get("stat_labels", [])) == 4, "home stat_labels 4")
+    check(len(h.get("why", [])) <= LIMITS["home.why"], "home why<=6")
+    check(len(h.get("steps", [])) <= LIMITS["home.steps"], "home steps<=8")
+    check(len(h.get("cases", [])) <= LIMITS["home.cases"], "home cases teks<=6")
+    check(len(h.get("testis", [])) <= LIMITS["home.testi"], "home testis<=6")
+    check(1 <= int(h.get("layanan_count", 5)) <= LIMITS["home.services"], "home layanan_count 1-8")
+    order = h.get("home_order", [])
+    valid = {"hero", "stats", "layanan", "why", "alur", "cases", "testi", "cta"}
+    check(bool(order) and set(order) <= valid, f"home_order valid {order}")
+    for key in ["eyebrow", "title_html", "lead", "cta1", "cta2", "card1t", "card1a", "card1b", "card1c"]:
+        check(bool(sid(h.get("hero", {}).get(key))), f"home hero.{key} ada sisi id")
+    for key in ["t", "d", "b1", "b2"]:
+        check(bool(sid(h.get("cta", {}).get(key))), f"home cta.{key} ada sisi id")
 
 # services: slug apa pun diterima, batas ditegakkan
 svc_files = sorted((SEED / "services").glob("*.json"))
