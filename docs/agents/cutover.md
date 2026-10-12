@@ -23,3 +23,8 @@ publik maupun di preview. Solusi: singkirkan front legacy.
   permalink. Simpan karantina 7–14 hari.
 - **Pasca-cutover**: resave Permalink, verifikasi `/` (logo, tanpa toggle
   ID/EN), redirect `.html`, `/wp-json/` hidup, editor blok normal kembali.
+- **Status: SELESAI 12 Okt 2026 ~13:09 WIB.** Delivery JSON `ran:true`,
+  `moved:22`, `missing:[]`, karantina `/home/sirj8632/legacy-20261012-130937`.
+  Verifikasi luar: `/` disajikan theme `sirius-custom` (`custom-logo`
+  `logo_sirius-FIX.png` 672×231 render di header), `/tentang.html` 301 ke
+  `/tentang/`, `/wp-json/` 200 JSON. Simpan karantina s/d ~26 Okt 2026.
