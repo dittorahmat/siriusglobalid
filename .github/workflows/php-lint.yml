@@ -1,7 +1,7 @@
 # Lint-only CI. Tidak menyentuh hosting sama sekali (tidak ada FTP/SSH/deploy).
 # Workflow deploy FTP dulu (.github/workflows/deploy.yml) dihapus karena firewall
-# hosting memblokir IP GitHub runner (ETIMEDOUT port 21). Job ini hanya cek
-# sintaks PHP theme + importer; deploy tetap via cPanel Git Version Control
+# Job ini cek sintaks PHP theme + importer (php-lint) dan uji perilaku theme
+# tanpa WordPress via stub (php-smoke: tools/sgi-smoke.php); deploy tetap via cPanel Git Version Control
 # sesuai AGENTS.md.
 name: lint
 
@@ -22,3 +22,9 @@ jobs:
             php -l "$f" || failed=1
           done
           exit $failed
+  php-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Uji perilaku theme tanpa WordPress (stub)
+        run: php tools/sgi-smoke.php

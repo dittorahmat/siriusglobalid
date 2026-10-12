@@ -10,3 +10,6 @@ PowerShell tool kehabisan memori. Aturan berikut menghindarinya:
 4. Jangan `Select-String` atas stream tak terbatas; batasi (`Select-Object -First N`)
    atau simpan ke file dulu lalu `Grep`.
 5. Panggilan jaringan sekuensial, bukan paralel dalam satu blok.
+6. Shell adalah PowerShell: tanpa `head`/`tail` (pakai `Select-Object -First N`),
+   tanpa heredoc `cat <<EOF` (untuk body multi-baris, tulis file via Write
+   tool lalu pakai flag `--body-file` / `--body-file` setara).
