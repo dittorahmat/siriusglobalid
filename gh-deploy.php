@@ -190,6 +190,12 @@ if (!is_file($marker) && $legacyPresent && !$frontIsWp && is_file($pub . '/wp-lo
     };
     foreach ((array) @glob($pub . '/*.html') as $f) { $mv($f, $quar . '/' . basename($f)); }
     foreach ((array) @glob($pub . '/layanan/*.html') as $f) { $mv($f, $quar . '/layanan/' . basename($f)); }
+    // Revisi 3 (12 Okt 2026): layanan/*.php JUGA dikarantina. Sembilan file
+    // legacy ini bila tertinggal membuat public_html/layanan/ tetap jadi
+    // direktori fisik; Apache lalu mendahulukan mod_dir di atas rewrite WP
+    // sehingga /layanan/ tak pernah sampai ke arsip CPT (insiden: 301 liar
+    // /layanan/ -> /layanan/index/ + 404).
+    foreach ((array) @glob($pub . '/layanan/*.php') as $f) { $mv($f, $quar . '/layanan/' . basename($f)); }
     foreach (['index.php', 'kontak.php', 'layanan.php', 'tentang.php', 'portofolio.php', 'privasi.php', 'syarat.php', '404.php'] as $f) { $mv($pub . '/' . $f, $quar . '/' . $f); }
     foreach (['css', 'js', 'admin', 'includes', 'templates'] as $d) {
       if (is_dir($pub . '/' . $d)) { $mv($pub . '/' . $d, $quar . '/' . $d); }

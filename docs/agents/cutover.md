@@ -28,3 +28,19 @@ publik maupun di preview. Solusi: singkirkan front legacy.
   Verifikasi luar: `/` disajikan theme `sirius-custom` (`custom-logo`
   `logo_sirius-FIX.png` 672×231 render di header), `/tentang.html` 301 ke
   `/tentang/`, `/wp-json/` 200 JSON. Simpan karantina s/d ~26 Okt 2026.
+- **Temuan pasca-cutover (12 Okt 2026, ~14:45 WIB):** `layanan/*.php` legacy
+  (9 file) TIDAK ikut dikarantina, sehingga `public_html/layanan/` tetap
+  menjadi direktori fisik. Apache (mod_dir) mendahulukan direktori fisik di
+  atas rewrite WP: `curl -I /layanan/` → 301 ke `/layanan/index/` (header
+  Apache murni, tanpa `X-Redirect-By: WordPress`) → 404 theme. Arsip CPT
+  `/layanan/` tak pernah tercapai; flush permalink tidak berpengaruh karena
+  request tak sampai ke WP. Perbaikan kode: cutover revisi 3 di `gh-deploy.php`
+  (`glob layanan/*.php` ikut dipindah). Karena marker sudah set, live TIDAK
+  diperbaiki otomatis — bersih manual via File Manager: pindahkan isi
+  `public_html/layanan/` (9× `*.php` + `.htaccess` bila ada) ke
+  `~/legacy-20261012-130937/layanan/`, cek cPanel Domains > Redirects untuk
+  aturan `layanan/index`, lalu tes `curl -I /layanan/` (harap 200) + resave
+  permalink.
+- **Resolusi (12 Okt 2026):** folder `public_html/layanan/` dihapus manual,
+  verifikasi `curl`: `/layanan/` 200 arsip ("Sembilan kapabilitas", 9 kartu),
+  `/layanan/app-development/` 200, `/layanan` 301 kanonis ke `/layanan/`.
