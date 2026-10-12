@@ -11,7 +11,7 @@ di-bake dari `data/seed/i18n.id.json` (bukan i18n runtime).
 | `templates/content-service.php` | `single-layanan.php` (baca postmeta) | Berlaku untuk slug apa pun |
 | `templates/content-portfolio.php` | `page-portofolio.php` + CPT `portfolio` | Filter 8 kategori dipertahankan |
 | `templates/content-tentang.php` | `page-tentang.php` | values/timeline/team dari meta JSON |
-| `templates/content-kontak.php` | `page-kontak.php` (form WA deep link) | Info dari opsi `sgi_settings` |
+| `templates/content-kontak.php` | `page-kontak.php` (form WA deep link) | Info dari opsi `sgi_settings`, hero + dropdown dari opsi `sgi_kontak` |
 | `templates/content-doc.php` | `page.php` generik (privasi/syarat/halaman baru) | Isi via editor blok |
 | `layanan/*.php` (9 file) | 1 CPT `layanan` + `single-layanan.php` | Slug bebas, tanpa daftar kunci |
 | `admin/` + `includes/` + `tools/setup-admin.php` | wp-admin + Settings > Sirius + meta boxes | Pensiun setelah cutover |
@@ -23,11 +23,24 @@ di-bake dari `data/seed/i18n.id.json` (bukan i18n runtime).
 
 Struktur konten di wp-admin:
 
+- Menu utama: Tampilan > Menu, lokasi Navigasi utama (Beranda, Layanan,
+  Kontak). Header + mobile-menu membaca Menu ini; kosong = fallback 3 item
+  bawaan. Seed otomatis saat aktivasi theme + Tools > Sirius Import.
 - Layanan: menu Layanan (CPT) — tambah/ubah/hapus bebas, slug apa pun.
 - Portofolio: menu Portofolio + taksonomi 8 kategori valid.
 - Halaman: Tentang / Layanan / Portofolio / Kontak (pilih Template) + Privasi / Syarat (generik).
 - Artikel: menu Posts memakai `index.php` bila suatu hari butuh blog.
-- Pengaturan situs: Settings > Sirius (kontak, KPI, klien).
+- Pengaturan situs: Settings > Sirius (kontak, KPI, klien, Halaman Kontak).
+
+## Konvensi penyimpanan (satu aturan untuk semua opsi)
+
+- **Editan admin selalu menang.** Import ulang (Tools > Sirius Import) hanya
+  mengisi kunci yang belum ada; tidak menimpa yang sudah disimpan.
+- **Kosong = bawaan.** Field Settings yang dikosongkan kembali ke nilai
+  bawaan kode saat dibaca (lihat `sgi_home()`, `sgi_kontak()`,
+  `sgi_default_nav()`). Form Settings menampilkan nilai tersimpan mentah.
+- Berlaku untuk: opsi `sgi_home`, opsi `sgi_kontak`, Menu utama (seed tidak
+  menimpa Menu yang sudah disusun editor).
 
 ## Beranda tanpa edit PHP (Settings > Sirius)
 
@@ -48,3 +61,16 @@ Struktur konten di wp-admin:
   otomatis disembunyikan.
 - Import ulang (Tools > Sirius Import) hanya mengisi kunci yang belum ada;
   editan admin tidak ditimpa.
+
+## Verifikasi perubahan
+
+- **Lokal (tanpa WordPress):** `php -l` per file + `php tools/sgi-smoke.php`
+  (stub WP: fallback nav, merge opsi, parse pasangan, render header).
+  Keduanya juga jalan di CI (`php-lint.yml`, job `php-lint` + `php-smoke`).
+  Ini pengganti sah "serve check" lokal; serve sungguhan butuh runtime WP.
+- **Pasca-deploy (produksi):** cek status via curl, contoh:
+  `curl -s -o NUL -w '%{http_code}' https://siriusglobal.id/` (harap 200),
+  `/layanan/`, `/layanan/app-development/`, `/kontak/`,
+  `/kontak/?layanan=odoo-erp` (dropdown terpraseleksi), `/tentang/`,
+  `/portofolio/` (tetap hidup meski tak di nav). Satu URL per panggilan
+  (lihat `docs/agents/shell-notes.md`).
