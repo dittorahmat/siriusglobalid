@@ -105,3 +105,10 @@ Layout single-context (satu `GLOSSARY.md` + `docs/adr/` di root). See `docs/agen
   repo Settings → Webhooks → Payload URL
   `https://siriusglobal.id/gh-deploy.php` + Secret yang sama. Cek hasil di
   `~/deploy.log`. Butuh `shell_exec` aktif di hosting.
+- `gh-deploy.php` memuat rutin cutover sekali-jalan (Okt 2026): saat webhook
+  push-ke-main pertama setelah kodenya ter-deploy, front statis legacy
+  (`index.html`, `*.php` legacy, `css/`, `js/`, `admin/`, `includes/`,
+  `templates/`) di-rename ke `~/legacy-<ts>/` (bukan hapus),
+  `.htaccess` di-backup + ditulis ulang (aturan WP + 301 `.html` + proteksi
+  `data/`), `index.php` standar WP dipulihkan. Marker
+  `~/.sgi-cutover-done` membuatnya idempoten. Status di `docs/agents/cutover.md`.

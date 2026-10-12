@@ -148,6 +148,82 @@ if (!function_exists('shell_exec')) {
     $log['copydirs'] = shell_exec('/bin/cp -R ' . escapeshellarg($repo . '/wp-content/themes/sirius-custom') . ' ' . escapeshellarg($pub . '/wp-content/themes/') . ' 2>&1');
     $log['copytools'] = shell_exec('mkdir -p ' . escapeshellarg($pub . '/wp-content/sgi-importer') . ' && /bin/cp ' . escapeshellarg($repo . '/tools/sgi-importer.php') . ' ' . escapeshellarg($repo . '/tools/verify-seed.py') . ' ' . escapeshellarg($pub . '/wp-content/sgi-importer/') . ' 2>&1');
 }
+// CUTOVER SEKALI-JALAN (disetujui user, Okt 2026): karena Apache selalu
+// menyajikan index.html statis sebelum WP sempat jalan (DirectoryIndex +
+// Trac #35263: Customizer pun tak bisa preview theme), front legacy harus
+// disingkirkan agar theme sirius-custom tampil. Rutin ini:
+// - Jalan SEKALI: ditandai marker $home/.sgi-cutover-done, dan hanya bila
+//   index.html legacy masih ada + wp-login.php ada (pengaman salah path).
+// - RENAME ke karantina $home/legacy-<ts>/ (bukan hapus) + backup .htaccess.
+// - Tulis ulang index.php standar WP + .htaccess (aturan WP + 301 .html lama
+//   + proteksi data warisan). Murni PHP murni (jalan tanpa shell_exec/git).
+// Rollback: kembalikan file karantina + .htaccess.bak-<ts>, simpan permalink.
+$cut = ['ran' => false];
+$marker = $home . '/.sgi-cutover-done';
+if (!is_file($marker) && is_file($pub . '/index.html') && is_file($pub . '/wp-login.php')) {
+  $cut['ran'] = true;
+  $ts = date('Ymd-His');
+  $quar = $home . '/legacy-' . $ts;
+  if (!@mkdir($quar, 0755, true) || !is_dir($quar)) {
+    $cut['error'] = 'gagal buat karantina di ' . $quar . '; cutover dibatalkan total';
+  } else {
+    $cut['quarantine'] = $quar;
+    $moved = []; $missing = [];
+    $mv = function ($s, $d) use (&$moved, &$missing) {
+      if (!file_exists($s)) { $missing[] = $s; return; }
+      $dd = dirname($d);
+      if (!is_dir($dd)) { @mkdir($dd, 0755, true); }
+      if (@rename($s, $d)) { $moved[] = $s; }
+      else { $missing[] = $s . ' (rename gagal)'; }
+    };
+    foreach ((array) @glob($pub . '/*.html') as $f) { $mv($f, $quar . '/' . basename($f)); }
+    foreach ((array) @glob($pub . '/layanan/*.html') as $f) { $mv($f, $quar . '/layanan/' . basename($f)); }
+    foreach (['index.php', 'kontak.php', 'layanan.php', 'tentang.php', 'portofolio.php', 'privasi.php', 'syarat.php', '404.php'] as $f) { $mv($pub . '/' . $f, $quar . '/' . $f); }
+    foreach (['css', 'js', 'admin', 'includes', 'templates'] as $d) {
+      if (is_dir($pub . '/' . $d)) { $mv($pub . '/' . $d, $quar . '/' . $d); }
+      else { $missing[] = $pub . '/' . $d; }
+    }
+    $cut['moved'] = count($moved); $cut['missing'] = $missing;
+    if (is_file($pub . '/.htaccess')) {
+      @copy($pub . '/.htaccess', $pub . '/.htaccess.bak-' . $ts);
+      $cut['htaccess_backup'] = '.htaccess.bak-' . $ts;
+    }
+    $newHt = <<<'HTACCESS'
+# Redirect URL statis lama ke URL WordPress (SEO, cegah 404 dari Google)
+RedirectMatch 301 ^/index\.html$ /
+RedirectMatch 301 ^/tentang\.html$ /tentang/
+RedirectMatch 301 ^/layanan\.html$ /layanan/
+RedirectMatch 301 ^/portofolio\.html$ /portofolio/
+RedirectMatch 301 ^/kontak\.html$ /kontak/
+RedirectMatch 301 ^/privasi\.html$ /privasi/
+RedirectMatch 301 ^/syarat\.html$ /syarat/
+RedirectMatch 301 ^/layanan/([a-z\-]+)\.html$ /layanan/$1/
+
+# BEGIN WordPress
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+# END WordPress
+
+# Proteksi data warisan (dari .htaccess CMS lama, dipertahankan).
+RewriteRule ^data/ - [F,L]
+<FilesMatch "^(admin\.json|\.htaccess)$">
+  Require all denied
+</FilesMatch>
+HTACCESS;
+    $cut['htaccess_written'] = (bool) @file_put_contents($pub . '/.htaccess', $newHt);
+    $wpIndex = "<?php\ndefine( 'WP_USE_THEMES', true );\nrequire __DIR__ . '/wp-blog-header.php';\n";
+    $cut['index_written'] = (bool) @file_put_contents($pub . '/index.php', $wpIndex);
+    @file_put_contents($marker, json_encode(['at' => date('c'), 'quarantine' => $quar, 'moved' => count($moved)]));
+    $cut['marker'] = $marker;
+    $cut['rollback'] = 'kembalikan file dari ' . $quar . ' + ' . $pub . '/.htaccess.bak-' . $ts;
+  }
+}
+$log['cutover'] = $cut;
 // Tulis ke dua tempat: HOME (utama) dan public_html (cadangan yang mudah
 // ditemukan). Isi log hanya path + output git, tanpa secret.
 // Respons juga membawa JSON yang sama agar terlihat di GitHub deliveries.
