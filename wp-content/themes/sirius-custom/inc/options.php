@@ -182,13 +182,24 @@ function sgi_options_render(): void {
   sgi_opt_input('sgi_cta_b1', 'Tombol CTA 1', (string)($cta['b1'] ?? ''));
   sgi_opt_input('sgi_cta_b2', 'Tombol CTA 2', (string)($cta['b2'] ?? ''));
   echo '<h2>Halaman Kontak</h2>';
-  echo '<p class="description">Nav header diatur via <a href="' . esc_url(admin_url('nav-menus.php')) . '">Tampilan &gt; Menu</a> (lokasi Navigasi utama). Kosongkan isian di bawah untuk memakai bawaan.</p>';
-  $k = function_exists('sgi_kontak') ? sgi_kontak() : [];
-  sgi_opt_input('sgi_k_hero_h1', 'Judul hero Kontak', (string)($k['hero_h1'] ?? ''));
-  sgi_opt_input('sgi_k_form_t', 'Judul formulir', (string)($k['form_t'] ?? ''));
-  sgi_opt_area('sgi_k_form_d', 'Pengantar formulir', (string)($k['form_d'] ?? ''), '', 2);
-  sgi_opt_area('sgi_k_needs', 'Kebutuhan (satu per baris "nilai | label", maks 20)', function_exists('sgi_kontak_pairs_text') ? sgi_kontak_pairs_text((array)($k['needs'] ?? [])) : '', 'Nilai dipakai untuk praseleksi ?layanan=. Contoh: app-development | Application Development', 10);
-  sgi_opt_area('sgi_k_budgets', 'Budget (satu per baris "nilai | label", maks 20)', function_exists('sgi_kontak_pairs_text') ? sgi_kontak_pairs_text((array)($k['budgets'] ?? [])) : '', '', 5);
-  sgi_opt_area('sgi_k_times', 'Target waktu (satu per baris "nilai | label", maks 20)', function_exists('sgi_kontak_pairs_text') ? sgi_kontak_pairs_text((array)($k['times'] ?? [])) : '', '', 3);
+  echo '<p class="description">Nav header diatur via <a href="' . esc_url(admin_url('nav-menus.php')) . '">Tampilan &gt; Menu</a> (lokasi Navigasi utama). Kosongkan isian di bawah untuk memakai bawaan; yang tampil adalah nilai tersimpan.</p>';
+  // Tampilkan nilai tersimpan mentah (bukan hasil merge) agar kolom yang
+  // dikosongkan benar-benar terlihat kosong.
+  $kRaw = function_exists('get_option') ? (array)get_option('sgi_kontak', []) : [];
+  $kDef = function_exists('sgi_kontak_defaults') ? sgi_kontak_defaults() : [];
+  $kVal = function (string $key) use ($kRaw, $kDef): string {
+    return array_key_exists($key, $kRaw) ? (string)$kRaw[$key] : (string)($kDef[$key] ?? '');
+  };
+  $kPairs = function (string $key) use ($kRaw, $kDef): string {
+    if (!function_exists('sgi_kontak_pairs_text')) return '';
+    $pairs = (array_key_exists($key, $kRaw) && is_array($kRaw[$key])) ? $kRaw[$key] : ($kDef[$key] ?? []);
+    return sgi_kontak_pairs_text((array)$pairs);
+  };
+  sgi_opt_input('sgi_k_hero_h1', 'Judul hero Kontak', $kVal('hero_h1'));
+  sgi_opt_input('sgi_k_form_t', 'Judul formulir', $kVal('form_t'));
+  sgi_opt_area('sgi_k_form_d', 'Pengantar formulir', $kVal('form_d'), '', 2);
+  sgi_opt_area('sgi_k_needs', 'Kebutuhan (satu per baris "nilai | label", maks 20)', $kPairs('needs'), 'Nilai dipakai untuk praseleksi ?layanan=. Contoh: app-development | Application Development', 10);
+  sgi_opt_area('sgi_k_budgets', 'Budget (satu per baris "nilai | label", maks 20)', $kPairs('budgets'), '', 5);
+  sgi_opt_area('sgi_k_times', 'Target waktu (satu per baris "nilai | label", maks 20)', $kPairs('times'), '', 3);
   echo '<p><button class="button button-primary" name="sgi_save" value="1">Simpan</button></p></form></div>';
 }

@@ -5,13 +5,13 @@
 /* Template Name: Kontak */
 get_header();
 $st = sgi_settings();
-$kk = function_exists('sgi_kontak') ? sgi_kontak() : [];
-$needs = $kk['needs'] ?? ['app-development' => 'Application Development', 'ai-solution' => 'AI Implementation', 'iot' => 'IoT Solutions', 'odoo-erp' => 'ERP Odoo', 'fleet-management' => 'Fleet Management', 'infrastruktur' => 'Network dan Infrastruktur', 'dashboard-bi' => 'Dashboard dan BI', 'cybersecurity' => 'Cybersecurity', 'training' => 'Corporate Training', 'other' => 'Lainnya / kombinasi'];
-$budgets = $kk['budgets'] ?? ['lt50' => 'Di bawah Rp 50 jt', '50-150' => 'Rp 50-150 jt', '150-500' => 'Rp 150-500 jt', 'gt500' => 'Di atas Rp 500 jt', 'unknown' => 'Belum tahu, minta arahan'];
-$times = $kk['times'] ?? ['urgent' => 'Mendesak, di bawah 1 bulan', '1-3mo' => '1-3 bulan', 'explore' => 'Masih eksplorasi'];
-$heroH1 = $kk['hero_h1'] ?? 'Ceritakan kebutuhan Anda, kami balas < 1 hari kerja';
-$formT = $kk['form_t'] ?? 'Formulir konsultasi';
-$formD = $kk['form_d'] ?? 'Isi detail kebutuhan. Pesan Anda terkirim sebagai chat WhatsApp terstruktur ke tim kami.';
+$kontak = function_exists('sgi_kontak') ? sgi_kontak() : [];
+$needs = $kontak['needs'] ?? ['app-development' => 'Application Development', 'ai-solution' => 'AI Implementation', 'iot' => 'IoT Solutions', 'odoo-erp' => 'ERP Odoo', 'fleet-management' => 'Fleet Management', 'infrastruktur' => 'Network dan Infrastruktur', 'dashboard-bi' => 'Dashboard dan BI', 'cybersecurity' => 'Cybersecurity', 'training' => 'Corporate Training', 'other' => 'Lainnya / kombinasi'];
+$budgets = $kontak['budgets'] ?? ['lt50' => 'Di bawah Rp 50 jt', '50-150' => 'Rp 50-150 jt', '150-500' => 'Rp 150-500 jt', 'gt500' => 'Di atas Rp 500 jt', 'unknown' => 'Belum tahu, minta arahan'];
+$times = $kontak['times'] ?? ['urgent' => 'Mendesak, di bawah 1 bulan', '1-3mo' => '1-3 bulan', 'explore' => 'Masih eksplorasi'];
+$heroH1 = $kontak['hero_h1'] ?? 'Ceritakan kebutuhan Anda, kami balas < 1 hari kerja';
+$formT = $kontak['form_t'] ?? 'Formulir konsultasi';
+$formD = $kontak['form_d'] ?? 'Isi detail kebutuhan. Pesan Anda terkirim sebagai chat WhatsApp terstruktur ke tim kami.';
 $pre = isset($_GET['layanan']) ? sanitize_key($_GET['layanan']) : '';
 ?>
 <section class="page-hero"><div class="container">
