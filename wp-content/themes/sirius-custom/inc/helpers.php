@@ -65,6 +65,86 @@ function sgi_pair_lines($raw, int $cols = 2): array {
   return $out;
 }
 
+// Menu utama: isi bawaan Beranda, Layanan, Kontak. Dipakai sebagai fallback
+// saat lokasi Menu 'primary' belum diisi + sebagai seed awal.
+function sgi_default_nav(): array {
+  if (!function_exists('home_url')) return [];
+  return [
+    ['href' => home_url('/'), 'label' => 'Beranda', 'key' => 'home'],
+    ['href' => home_url('/layanan/'), 'label' => 'Layanan', 'key' => 'layanan'],
+    ['href' => home_url('/kontak/'), 'label' => 'Kontak', 'key' => 'kontak'],
+  ];
+}
+
+// Menu utama dari Tampilan > Menu (lokasi 'primary'), dirender flat sebagai
+// <a> langsung agar cocok dengan CSS .main-nav a / .mobile-menu a.
+// Hanya item level atas yang dipakai (dropdown di luar scope ronde ini).
+// Fallback ke sgi_default_nav() bila Menu kosong agar header tak bolong.
+function sgi_primary_nav(): array {
+  $fallback = sgi_default_nav();
+  if (!function_exists('get_nav_menu_locations') || !function_exists('wp_get_nav_menu_items')) {
+    return $fallback;
+  }
+  $locs = get_nav_menu_locations();
+  if (empty($locs['primary'])) return $fallback;
+  $items = wp_get_nav_menu_items($locs['primary']);
+  if (!is_array($items) || !$items) return $fallback;
+  $out = [];
+  foreach ($items as $it) {
+    if (!isset($it->menu_item_parent) || (int)$it->menu_item_parent !== 0) continue;
+    $href = isset($it->url) ? (string)$it->url : '';
+    $label = isset($it->title) ? trim((string)$it->title) : '';
+    if ($href === '' || $label === '') continue;
+    $current = false;
+    if (function_exists('get_queried_object_id') && isset($it->object_id)) {
+      $current = (int)$it->object_id === (int)get_queried_object_id();
+    }
+    $out[] = ['href' => $href, 'label' => $label, 'key' => sanitize_title($label), 'current' => $current];
+  }
+  return $out ?: $fallback;
+}
+
+// Buat Menu "Navigasi utama" berisi 3 item bawaan bila lokasi 'primary'
+// belum punya Menu. Idempoten: tidak menimpa Menu editor yang sudah ada.
+function sgi_seed_primary_menu(): void {
+  if (!function_exists('get_nav_menu_locations') || !function_exists('wp_create_nav_menu')) return;
+  $locs = get_nav_menu_locations();
+  if (!empty($locs['primary'])) {
+    $m = wp_get_nav_menu_object($locs['primary']);
+    if ($m && !is_wp_error($m)) return;
+  }
+  $existing = wp_get_nav_menu_object('Navigasi utama');
+  if (!$existing || is_wp_error($existing)) {
+    $menuId = wp_create_nav_menu('Navigasi utama');
+    if (is_wp_error($menuId) || !$menuId) return;
+  } else {
+    $menuId = (int)$existing->term_id;
+  }
+  $have = function_exists('wp_get_nav_menu_items') ? (array)wp_get_nav_menu_items($menuId) : [];
+  if ($have) {
+    $locs['primary'] = $menuId;
+    set_theme_mod('nav_menu_locations', $locs);
+    return;
+  }
+  if (!function_exists('home_url')) return;
+  $items = [
+    ['Beranda', home_url('/')],
+    ['Layanan', home_url('/layanan/')],
+    ['Kontak', home_url('/kontak/')],
+  ];
+  foreach ($items as $i => $it) {
+    wp_update_nav_menu_item($menuId, 0, [
+      'menu-item-title' => $it[0],
+      'menu-item-url' => $it[1],
+      'menu-item-status' => 'publish',
+      'menu-item-position' => $i + 1,
+    ]);
+  }
+  $locs = get_nav_menu_locations();
+  $locs['primary'] = $menuId;
+  set_theme_mod('nav_menu_locations', $locs);
+}
+
 // Slug layanan yang dikenal (port CMS_SERVICE_SLUGS).
 function sgi_service_slugs(): array {
   return [
@@ -75,4 +155,85 @@ function sgi_service_slugs(): array {
 
 function sgi_portfolio_cats(): array {
   return ['erp', 'ai', 'fleet', 'app', 'iot', 'infra', 'sec', 'bi'];
+}
+
+// Halaman Kontak: nilai bawaan = nilai hardcode template saat ini.
+// Option `sgi_kontak` menimpa bila diisi via Settings > Sirius; kosong = fallback.
+function sgi_kontak_defaults(): array {
+  return [
+    'hero_h1' => 'Ceritakan kebutuhan Anda, kami balas < 1 hari kerja',
+    'form_t' => 'Formulir konsultasi',
+    'form_d' => 'Isi detail kebutuhan. Pesan Anda terkirim sebagai chat WhatsApp terstruktur ke tim kami.',
+    'needs' => [
+      'app-development' => 'Application Development',
+      'ai-solution' => 'AI Implementation',
+      'iot' => 'IoT Solutions',
+      'odoo-erp' => 'ERP Odoo',
+      'fleet-management' => 'Fleet Management',
+      'infrastruktur' => 'Network dan Infrastruktur',
+      'dashboard-bi' => 'Dashboard dan BI',
+      'cybersecurity' => 'Cybersecurity',
+      'training' => 'Corporate Training',
+      'other' => 'Lainnya / kombinasi',
+    ],
+    'budgets' => [
+      'lt50' => 'Di bawah Rp 50 jt',
+      '50-150' => 'Rp 50-150 jt',
+      '150-500' => 'Rp 150-500 jt',
+      'gt500' => 'Di atas Rp 500 jt',
+      'unknown' => 'Belum tahu, minta arahan',
+    ],
+    'times' => [
+      'urgent' => 'Mendesak, di bawah 1 bulan',
+      '1-3mo' => '1-3 bulan',
+      'explore' => 'Masih eksplorasi',
+    ],
+  ];
+}
+
+function sgi_kontak(): array {
+  $def = sgi_kontak_defaults();
+  $saved = function_exists('get_option') ? (array)get_option('sgi_kontak', []) : [];
+  foreach (['hero_h1', 'form_t', 'form_d'] as $k) {
+    if (isset($saved[$k]) && trim((string)$saved[$k]) !== '') {
+      $def[$k] = (string)$saved[$k];
+    }
+  }
+  foreach (['needs', 'budgets', 'times'] as $k) {
+    if (isset($saved[$k]) && is_array($saved[$k]) && $saved[$k]) {
+      $clean = [];
+      foreach ($saved[$k] as $v => $label) {
+        $v = trim((string)$v);
+        $label = trim((string)$label);
+        if ($v === '') continue;
+        $clean[$v] = $label !== '' ? $label : $v;
+      }
+      if ($clean) $def[$k] = $clean;
+    }
+  }
+  return $def;
+}
+
+// Parse textarea "nilai | label" per baris jadi assoc. Baris tanpa nilai dibuang,
+// label kosong = nilai. Maks 20 item.
+function sgi_kontak_pairs($raw): array {
+  $out = [];
+  foreach (preg_split('/\r?\n/', (string)$raw) as $ln) {
+    $ln = trim($ln);
+    if ($ln === '') continue;
+    $parts = array_map('trim', explode('|', $ln, 2));
+    $v = $parts[0] ?? '';
+    if ($v === '') continue;
+    $out[$v] = ($parts[1] ?? '') !== '' ? $parts[1] : $v;
+    if (count($out) >= 20) break;
+  }
+  return $out;
+}
+
+function sgi_kontak_pairs_text(array $pairs): string {
+  $out = [];
+  foreach ($pairs as $v => $label) {
+    $out[] = $v . (($label !== '' && $label !== $v) ? ' | ' . $label : '');
+  }
+  return implode("\n", $out);
 }

@@ -24,6 +24,10 @@ function sgi_setup(): void {
 }
 add_action('after_setup_theme', 'sgi_setup');
 
+// Seed Menu bawaan (Beranda, Layanan, Kontak) saat theme diaktifkan.
+// Idempoten: tidak menimpa Menu editor yang sudah ada.
+add_action('after_switch_theme', 'sgi_seed_primary_menu');
+
 function sgi_assets(): void {
   $uri = get_stylesheet_directory_uri();
   $dir = get_stylesheet_directory();

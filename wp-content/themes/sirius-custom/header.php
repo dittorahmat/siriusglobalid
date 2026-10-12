@@ -1,13 +1,16 @@
 <?php
 // header.php - port templates/header.php, ID-only (tanpa toggle bahasa).
+// Nav dari Menu WP (Tampilan > Menu, lokasi 'primary'); fallback 3 item
+// bawaan bila Menu kosong. Tentang/Portofolio dihapus dari bawaan (Q3,Q6).
 $s = sgi_settings();
-$nav = [
-  ['href' => home_url('/'), 'label' => 'Beranda', 'key' => 'home'],
-  ['href' => home_url('/tentang/'), 'label' => 'Tentang', 'key' => 'tentang'],
-  ['href' => home_url('/layanan/'), 'label' => 'Layanan', 'key' => 'layanan'],
-  ['href' => home_url('/portofolio/'), 'label' => 'Portofolio', 'key' => 'portofolio'],
-  ['href' => home_url('/kontak/'), 'label' => 'Kontak', 'key' => 'kontak'],
-];
+$nav = function_exists('sgi_primary_nav') ? sgi_primary_nav() : [];
+if (!$nav) {
+  $nav = [
+    ['href' => home_url('/'), 'label' => 'Beranda', 'key' => 'home'],
+    ['href' => home_url('/layanan/'), 'label' => 'Layanan', 'key' => 'layanan'],
+    ['href' => home_url('/kontak/'), 'label' => 'Kontak', 'key' => 'kontak'],
+  ];
+}
 $current = get_queried_object();
 ?>
 <!DOCTYPE html>
@@ -30,8 +33,8 @@ $current = get_queried_object();
       <span class="<?php echo esc_attr(sgi_brand_name_class('header')); ?>">Sirius Global<span>Indonesia · IT Consulting</span></span>
     </a>
     <nav class="main-nav" aria-label="Navigasi utama">
-      <?php foreach ($nav as $n): ?>
-        <a href="<?php echo esc_url($n['href']); ?>"><?php echo esc_html($n['label']); ?></a>
+      <?php foreach ($nav as $n): $cur = !empty($n['current']); ?>
+        <a href="<?php echo esc_url($n['href']); ?>"<?php echo $cur ? ' class="active" aria-current="page"' : ''; ?>><?php echo esc_html($n['label']); ?></a>
       <?php endforeach; ?>
     </nav>
     <div class="header-actions">
@@ -40,8 +43,8 @@ $current = get_queried_object();
     <button class="menu-btn" data-menu-btn aria-expanded="false" aria-label="Menu"><i></i><i></i><i></i></button>
   </div>
   <nav class="mobile-menu" data-mobile-menu aria-label="Menu seluler">
-    <?php foreach ($nav as $n): ?>
-      <a href="<?php echo esc_url($n['href']); ?>"><?php echo esc_html($n['label']); ?></a>
+    <?php foreach ($nav as $n): $cur = !empty($n['current']); ?>
+      <a href="<?php echo esc_url($n['href']); ?>"<?php echo $cur ? ' class="active" aria-current="page"' : ''; ?>><?php echo esc_html($n['label']); ?></a>
     <?php endforeach; ?>
     <a href="<?php echo esc_url(home_url('/kontak/')); ?>" style="background:var(--navy-900);color:#fff;text-align:center">Konsultasi Gratis</a>
   </nav>
