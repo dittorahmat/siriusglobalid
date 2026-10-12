@@ -160,7 +160,19 @@ if (!function_exists('shell_exec')) {
 // Rollback: kembalikan file karantina + .htaccess.bak-<ts>, simpan permalink.
 $cut = ['ran' => false];
 $marker = $home . '/.sgi-cutover-done';
-if (!is_file($marker) && is_file($pub . '/index.html') && is_file($pub . '/wp-login.php')) {
+// Guard longgar (revisi 2): front dianggap legacy bila index.php BUKAN milik WP
+// (tidak memuat wp-blog-header). Ini mencakup kasus index.html sudah dihapus
+// manual lebih dulu — CMS legacy (index.php) tetap menyajikan situs statis.
+// Bila front sudah WP, cutover dilewati (idempoten tanpa marker sekalipun).
+$frontPhp = is_file($pub . '/index.php') ? (string) @file_get_contents($pub . '/index.php') : '';
+$frontIsWp = $frontPhp !== '' && strpos($frontPhp, 'wp-blog-header') !== false;
+$legacyPresent = is_file($pub . '/index.html');
+if (!$legacyPresent && !$frontIsWp && is_file($pub . '/wp-login.php')) {
+  $legacyPresent = true;
+  $cut['note'] = 'index.html sudah hilang manual; cutover lanjut atas sisa legacy';
+}
+if ($frontIsWp) { $cut['note'] = 'front sudah WordPress; cutover dilewati'; }
+if (!is_file($marker) && $legacyPresent && !$frontIsWp && is_file($pub . '/wp-login.php')) {
   $cut['ran'] = true;
   $ts = date('Ymd-His');
   $quar = $home . '/legacy-' . $ts;
