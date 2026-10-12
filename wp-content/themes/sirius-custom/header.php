@@ -25,9 +25,9 @@ $current = get_queried_object();
 <a class="skip-link" href="#main">Lewati ke konten</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Sirius Global Indonesia">
+    <a class="<?php echo esc_attr(sgi_brand_class('header')); ?>" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Sirius Global Indonesia">
       <span class="<?php echo esc_attr(sgi_logo_mark_class('header')); ?>" aria-hidden="true"><?php sgi_logo_mark('header'); ?></span>
-      <span class="brand-name">Sirius Global<span>Indonesia · IT Consulting</span></span>
+      <span class="<?php echo esc_attr(sgi_brand_name_class('header')); ?>">Sirius Global<span>Indonesia · IT Consulting</span></span>
     </a>
     <nav class="main-nav" aria-label="Navigasi utama">
       <?php foreach ($nav as $n): ?>

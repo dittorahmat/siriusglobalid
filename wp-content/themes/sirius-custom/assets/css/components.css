@@ -19,6 +19,11 @@
 .brand-mark.has-logo { background: transparent; box-shadow: none; overflow: hidden; }
 .brand-mark .custom-logo { width: 100%; height: 100%; object-fit: contain; }
 .site-footer .brand-mark.has-logo { background: transparent; box-shadow: none; }
+/* Lockup landscape penuh (mis. globe + wordmark): slot melebar, teks theme
+   disembunyikan visual tapi tetap terbaca screen reader. */
+.brand-full-logo .brand-mark { width: auto; max-width: 230px; background: transparent; box-shadow: none; border-radius: 0; }
+.brand-full-logo .brand-mark .custom-logo { height: 42px; width: auto; max-width: 230px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .main-nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
 .main-nav a {
   font-weight: 600; font-size: 0.95rem; color: var(--ink-900);

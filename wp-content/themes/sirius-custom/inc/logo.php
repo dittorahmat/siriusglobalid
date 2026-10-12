@@ -45,6 +45,17 @@ function sgi_logo_mark_class(string $context = 'header'): string {
   return sgi_logo_id($context) > 0 ? 'brand-mark has-logo' : 'brand-mark';
 }
 
+// Class tambahan untuk anchor `.brand`: lockup landscape penuh saat logo ada
+// (teks theme disembunyikan visual tapi tetap terbaca screen reader).
+function sgi_brand_class(string $context = 'header'): string {
+  return sgi_logo_id($context) > 0 ? 'brand brand-full-logo' : 'brand';
+}
+
+// Class untuk teks brand: disembunyikan visual saat logo lockup tampil.
+function sgi_brand_name_class(string $context = 'header'): string {
+  return sgi_logo_id($context) > 0 ? 'brand-name visually-hidden' : 'brand-name';
+}
+
 function sgi_customize_logo(WP_Customize_Manager $wp_customize): void {
   $wp_customize->add_setting('sgi_footer_logo', [
     'type' => 'theme_mod',

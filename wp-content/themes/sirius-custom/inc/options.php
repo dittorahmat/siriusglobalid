@@ -31,7 +31,7 @@ function sgi_options_render(): void {
   }
   $s = sgi_settings(); $h = sgi_home();
   echo '<div class="wrap"><h1>Sirius</h1>';
-  echo '<p>Ganti logo bintang header/footer via <a href="' . esc_url(admin_url('customize.php?autofocus[section]=title_tagline')) . '">Tampilan &gt; Sesuaikan &gt; Identitas Situs</a> (Logo + Logo footer varian terang). Favicon via Ikon Situs di halaman yang sama.</p><form method="post">';
+  echo '<p>Ganti logo header/footer via <a href="' . esc_url(admin_url('customize.php?autofocus[section]=title_tagline')) . '">Tampilan &gt; Sesuaikan &gt; Identitas Situs</a> (Logo + Logo footer varian terang). Boleh lockup landscape penuh; jika kosong, tampil bintang + teks bawaan. Favicon via Ikon Situs di halaman yang sama.</p><form method="post">';
   wp_nonce_field('sgi_opts');
   foreach (['name' => 'Nama', 'email' => 'Email', 'phone' => 'Telepon', 'phoneHref' => 'Link WA', 'address' => 'Alamat', 'hours' => 'Jam', 'mapEmbed' => 'Embed peta'] as $k => $label) {
     echo '<p><label><strong>' . esc_html($label) . '</strong><br><input type="text" name="sgi_' . esc_attr($k) . '" value="' . esc_attr($s[$k]) . '" class="regular-text" style="max-width:640px;width:100%"></label></p>';

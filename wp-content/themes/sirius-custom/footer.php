@@ -4,7 +4,7 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" style="color:#fff" aria-label="Sirius Global Indonesia"><span class="<?php echo esc_attr(sgi_logo_mark_class('footer')); ?>" aria-hidden="true"><?php sgi_logo_mark('footer'); ?></span><span class="brand-name" style="color:#fff">Sirius Global<span style="color:#aebddb">Indonesia · IT Consulting</span></span></a>
+      <a class="<?php echo esc_attr(sgi_brand_class('footer')); ?>" href="<?php echo esc_url(home_url('/')); ?>" style="color:#fff" aria-label="Sirius Global Indonesia"><span class="<?php echo esc_attr(sgi_logo_mark_class('footer')); ?>" aria-hidden="true"><?php sgi_logo_mark('footer'); ?></span><span class="<?php echo esc_attr(sgi_brand_name_class('footer')); ?>" style="color:#fff">Sirius Global<span style="color:#aebddb">Indonesia · IT Consulting</span></span></a>
       <p class="small" style="margin-top:14px;color:#aebddb">Konsultan IT Indonesia untuk application development, AI, IoT, ERP Odoo, dan fleet management.</p>
     </div>
     <div><h4>Layanan</h4><ul><li><a href="<?php echo esc_url(home_url('/layanan/app-development/')); ?>">Application Development</a></li><li><a href="<?php echo esc_url(home_url('/layanan/ai-solution/')); ?>">AI Implementation</a></li><li><a href="<?php echo esc_url(home_url('/layanan/iot/')); ?>">IoT Solutions</a></li><li><a href="<?php echo esc_url(home_url('/layanan/odoo-erp/')); ?>">ERP Odoo</a></li><li><a href="<?php echo esc_url(home_url('/layanan/fleet-management/')); ?>">Fleet Management</a></li></ul></div>
