@@ -5,31 +5,12 @@
 // (.cpanel.yml hanya menyalin sgi-importer.php + verify-seed.py).
 declare(strict_types=1);
 
-// --- Stub WordPress: cukup untuk helpers + functions + render header. ---
-function add_action(...$a): void {}
-function add_theme_support(...$a): void {}
-function register_nav_menus(...$a): void {}
+// --- Stub WordPress: dipakai bersama harness UI (tools/wp-stubs.php). ---
+require __DIR__ . '/wp-stubs.php';
 $GLOBALS['sgi_smoke_options'] = [
   // Simulasi editan admin: hero dikosongkan (harus fallback), needs kustom.
   'sgi_kontak' => ['hero_h1' => '', 'needs' => ['kustom' => 'Layanan Kustom']],
 ];
-function get_option($k, $d = []) {
-  return array_key_exists($k, $GLOBALS['sgi_smoke_options']) ? $GLOBALS['sgi_smoke_options'][$k] : $d;
-}
-function get_theme_mod($k, $d = 0) { return $d; }
-function home_url($p = '/') { return 'https://siriusglobal.id' . $p; }
-function get_nav_menu_locations() { return []; }
-function get_queried_object() { return null; }
-function get_queried_object_id() { return 0; }
-function bloginfo($s) { if ($s === 'charset') echo 'UTF-8'; }
-function wp_head(): void {}
-function wp_body_open(): void {}
-function body_class() { echo 'class="home"'; }
-function wp_get_attachment_image(...$a) { return ''; }
-function esc_url($u) { return htmlspecialchars((string)$u, ENT_QUOTES, 'UTF-8'); }
-function esc_html($t) { return htmlspecialchars((string)$t, ENT_QUOTES, 'UTF-8'); }
-function esc_attr($t) { return htmlspecialchars((string)$t, ENT_QUOTES, 'UTF-8'); }
-function sanitize_title($t) { return strtolower(trim((string)preg_replace('/[^a-z0-9]+/i', '-', (string)$t), '-')); }
 
 require dirname(__DIR__) . '/wp-content/themes/sirius-custom/functions.php';
 
@@ -49,22 +30,48 @@ $check('nav href benar',
   && ($nav[1]['href'] ?? '') === 'https://siriusglobal.id/layanan/'
   && ($nav[2]['href'] ?? '') === 'https://siriusglobal.id/kontak/');
 
-// 2. Kontak: defaults + semantik merge (admin menang, kosong = bawaan).
+// 2. Settings: default CTA header + semantics "kosong = bawaan".
+$set = sgi_settings();
+$check('settings default ctaLabel/ctaHref',
+  ($set['ctaLabel'] ?? '') === 'Konsultasi Gratis' && ($set['ctaHref'] ?? '') === '/kontak/');
+$GLOBALS['sgi_smoke_options']['sgi_settings'] = ['ctaLabel' => '', 'ctaHref' => ''];
+$setEmpty = sgi_settings();
+$check('cta kosong -> bawaan',
+  ($setEmpty['ctaLabel'] ?? '') === 'Konsultasi Gratis' && ($setEmpty['ctaHref'] ?? '') === '/kontak/');
+unset($GLOBALS['sgi_smoke_options']['sgi_settings']);
+
+// 3. Rename nav: hanya judul yang berubah, atribut lain disalin apa adanya.
+$fakeItem = (object)[
+  'ID' => 42, 'object_id' => 7, 'object' => 'page', 'menu_item_parent' => 0,
+  'menu_order' => 2, 'type' => 'post_type', 'title' => 'Beranda',
+  'url' => 'https://siriusglobal.id/', 'description' => '', 'attr_title' => '',
+  'target' => '_blank', 'classes' => ['menu-item', 'custom-class'], 'xfn' => '',
+  'post_status' => 'publish',
+];
+$args = sgi_nav_item_update_args($fakeItem, 'Home');
+$check('nav rename hanya ganti judul',
+  $args['menu-item-title'] === 'Home'
+  && $args['menu-item-url'] === 'https://siriusglobal.id/'
+  && $args['menu-item-target'] === '_blank'
+  && $args['menu-item-classes'] === 'menu-item custom-class'
+  && $args['menu-item-position'] === 2);
+
+// 4. Kontak: defaults + semantik merge (admin menang, kosong = bawaan).
 $k = sgi_kontak();
 $check('kontak hero kosong -> fallback bawaan', ($k['hero_h1'] ?? '') === sgi_kontak_defaults()['hero_h1']);
 $check('kontak needs kustom admin menang', ($k['needs'] ?? []) === ['kustom' => 'Layanan Kustom']);
 $check('kontak budgets/bawaan utuh', count($k['budgets'] ?? []) === 5 && count($k['times'] ?? []) === 3);
 
-// 3. Parser pasangan "nilai | label".
+// 5. Parser pasangan "nilai | label".
 $p = sgi_kontak_pairs("a | Label A\nb\n| tanpa nilai\nc | ");
 $check('pairs buang baris tanpa nilai', $p === ['a' => 'Label A', 'b' => 'b', 'c' => 'c']);
 $check('pairs roundtrip', sgi_kontak_pairs(sgi_kontak_pairs_text(['a' => 'Label A', 'b' => 'b'])) === ['a' => 'Label A', 'b' => 'b']);
 
-// 4. Seed idempoten tanpa WP penuh.
+// 6. Seed idempoten tanpa WP penuh.
 sgi_seed_primary_menu();
 $check('seed tanpa WP penuh tidak crash', true);
 
-// 5. Render header: struktur nav desktop/mobile.
+// 7. Render header: struktur nav desktop/mobile.
 ob_start();
 require dirname(__DIR__) . '/wp-content/themes/sirius-custom/header.php';
 $html = ob_get_clean();
@@ -79,6 +86,87 @@ $check('mobile 3 link + CTA Konsultasi Gratis',
   substr_count($mobile, '<a href=') === 4 && str_contains($mobile, 'Konsultasi Gratis'));
 $check('meta viewport + skip-link + menu-btn', str_contains($html, 'name="viewport"')
   && str_contains($html, 'skip-link') && str_contains($html, 'aria-expanded="false"'));
+
+// 8. CTA header mengikuti sgi_settings (label + tautan absolut apa adanya).
+$GLOBALS['sgi_smoke_options']['sgi_settings'] = [
+  'ctaLabel' => 'Diskusi Gratis',
+  'ctaHref' => 'https://wa.me/628111',
+];
+ob_start();
+require dirname(__DIR__) . '/wp-content/themes/sirius-custom/header.php';
+$htmlCta = ob_get_clean();
+$htmlCta = substr($htmlCta, 0, (int)strpos($htmlCta, '</header>') + 10);
+$check('CTA header ikut setting',
+  substr_count($htmlCta, 'Diskusi Gratis') === 2
+  && substr_count($htmlCta, 'https://wa.me/628111') === 2
+  && !str_contains($htmlCta, '>Konsultasi Gratis<'));
+
+// 9. Settings: nilai mentah vs efektif, dan helper CTA header.
+$GLOBALS['sgi_smoke_options']['sgi_settings'] = ['ctaLabel' => '', 'ctaHref' => ''];
+$raw = sgi_settings_raw();
+$check('settings raw kosong tetap kosong', ($raw['ctaLabel'] ?? 'x') === '' && ($raw['ctaHref'] ?? 'x') === '');
+$check('settings baca kosong -> bawaan',
+  sgi_settings()['ctaLabel'] === 'Konsultasi Gratis' && sgi_settings()['ctaHref'] === '/kontak/');
+$ctaDefault = sgi_header_cta();
+$check('helper CTA header menormalkan href',
+  $ctaDefault['label'] === 'Konsultasi Gratis' && $ctaDefault['href'] === 'https://siriusglobal.id/kontak/');
+$mergedSeed = sgi_fill_missing_keys(['name' => 'Edit', 'legacy' => 'keep'], ['name' => 'Seed', 'email' => 'a@b.co']);
+$check('importer hanya mengisi key settings yang belum ada',
+  ($mergedSeed['name'] ?? '') === 'Edit' && ($mergedSeed['email'] ?? '') === 'a@b.co' && ($mergedSeed['legacy'] ?? '') === 'keep');
+
+// 10. Render halaman admin: semua panel + field tab lain ada di DOM.
+$_GET['tab'] = 'header';
+ob_start();
+sgi_options_render();
+$admin = ob_get_clean();
+$check('admin 4 panel', substr_count($admin, 'class="sgi-panel"') === 4);
+$required = ['sgi_ctaLabel', 'sgi_ctaHref', 'sgi_hero_title', 'sgi_why', 'sgi_k_needs', 'sgi_home_order', 'sgi_tab'];
+$missing = [];
+foreach ($required as $name) {
+  if (!str_contains($admin, 'name="' . $name . '"')) $missing[] = $name;
+}
+$check('admin semua field lintas tab ada' . ($missing ? ' (' . implode(',', $missing) . ')' : ''), !$missing);
+$check('admin tab berupa button tanpa role tablist dari server',
+  substr_count($admin, 'data-sgi-tab=') === 4 && !str_contains($admin, 'role="tablist"'));
+$check('admin placeholder CTA',
+  str_contains($admin, 'placeholder="Konsultasi Gratis"') && str_contains($admin, 'placeholder="/kontak/"'));
+$check('admin CTA menampilkan nilai mentah (kosong)',
+  str_contains($admin, 'name="sgi_ctaLabel" value=""') && str_contains($admin, 'name="sgi_ctaHref" value=""'));
+$adminIds = preg_match_all('/\sid="([^"]+)"/', $admin, $idm) ? $idm[1] : [];
+$adminDupes = array_keys(array_filter(array_count_values($adminIds), function ($c) { return $c > 1; }));
+$check('admin tanpa duplicate id', !$adminDupes);
+
+// 11. Handler simpan: email tidak valid tidak mengubah option.
+$GLOBALS['sgi_smoke_options']['sgi_settings'] = ['name' => 'Lama'];
+$_POST = ['sgi_save' => '1', 'sgi_tab' => 'header', 'sgi_name' => 'Baru', 'sgi_email' => 'bukan-email'];
+$redirect = '';
+try { sgi_options_handle_save(); } catch (SgiRedirect $e) { $redirect = $e->url; }
+$check('save email invalid ditolak tanpa ubah option',
+  str_contains($redirect, 'sgi_err=email')
+  && ($GLOBALS['sgi_smoke_options']['sgi_settings']['name'] ?? '') === 'Lama');
+
+// 12. Handler simpan: satu submit menulis settings + home + kontak dan
+// mempertahankan key yang tidak ikut di-post (mis. case_imgs, key settings lain).
+$GLOBALS['sgi_smoke_options']['sgi_settings'] = ['name' => 'Lama', 'legacy' => 'keep', 'ctaLabel' => 'Lama CTA'];
+$GLOBALS['sgi_smoke_options']['sgi_home'] = ['case_imgs' => [['img' => 'x']], 'hero' => ['eyebrow' => 'Lama']];
+$GLOBALS['sgi_smoke_options']['sgi_kontak'] = ['hero_h1' => 'Lama'];
+$_POST = [
+  'sgi_save' => '1', 'sgi_tab' => 'sections', 'sgi_email' => 'a@b.co', 'sgi_name' => 'Baru',
+  'sgi_ctaLabel' => 'Diskusi Gratis', 'sgi_ctaHref' => 'https://wa.me/1',
+  'sgi_hero_eyebrow' => 'Eyebrow Baru', 'sgi_k_hero_h1' => 'Kontak Baru',
+  'sgi_why' => 'Keunggulan | Isi', 'sgi_home_order' => 'hero,cta',
+];
+$redirect = '';
+try { sgi_options_handle_save(); } catch (SgiRedirect $e) { $redirect = $e->url; }
+$opt = $GLOBALS['sgi_smoke_options'];
+$check('save menulis settings + mempertahankan key lain',
+  ($opt['sgi_settings']['name'] ?? '') === 'Baru'
+  && ($opt['sgi_settings']['ctaLabel'] ?? '') === 'Diskusi Gratis'
+  && ($opt['sgi_settings']['legacy'] ?? '') === 'keep');
+$check('save menulis home + mempertahankan case_imgs',
+  ($opt['sgi_home']['hero']['eyebrow'] ?? '') === 'Eyebrow Baru' && isset($opt['sgi_home']['case_imgs']));
+$check('save menulis kontak', ($opt['sgi_kontak']['hero_h1'] ?? '') === 'Kontak Baru');
+$check('save redirect ke tab + updated', str_contains($redirect, 'tab=sections') && str_contains($redirect, 'updated=1'));
 
 if ($fail) {
   echo 'GAGAL: ' . count($fail) . ' cek.' . PHP_EOL;

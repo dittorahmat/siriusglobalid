@@ -2,7 +2,7 @@
 // header.php - port templates/header.php, ID-only (tanpa toggle bahasa).
 // Nav dari Menu WP (Tampilan > Menu, lokasi 'primary'); fallback 3 item
 // bawaan bila Menu kosong. Tentang/Portofolio dihapus dari bawaan (Q3,Q6).
-$s = sgi_settings();
+$cta = sgi_header_cta();
 $nav = function_exists('sgi_primary_nav') ? sgi_primary_nav() : [];
 if (!$nav) {
   $nav = [
@@ -38,7 +38,7 @@ $current = get_queried_object();
       <?php endforeach; ?>
     </nav>
     <div class="header-actions">
-      <a class="btn btn-primary btn-sm" href="<?php echo esc_url(home_url('/kontak/')); ?>">Konsultasi Gratis</a>
+      <a class="btn btn-primary btn-sm" href="<?php echo esc_url($cta['href']); ?>"><?php echo esc_html($cta['label']); ?></a>
     </div>
     <button class="menu-btn" data-menu-btn aria-expanded="false" aria-label="Menu"><i></i><i></i><i></i></button>
   </div>
@@ -46,7 +46,7 @@ $current = get_queried_object();
     <?php foreach ($nav as $n): $cur = !empty($n['current']); ?>
       <a href="<?php echo esc_url($n['href']); ?>"<?php echo $cur ? ' class="active" aria-current="page"' : ''; ?>><?php echo esc_html($n['label']); ?></a>
     <?php endforeach; ?>
-    <a href="<?php echo esc_url(home_url('/kontak/')); ?>" style="background:var(--navy-900);color:#fff;text-align:center">Konsultasi Gratis</a>
+    <a href="<?php echo esc_url($cta['href']); ?>" style="background:var(--navy-900);color:#fff;text-align:center"><?php echo esc_html($cta['label']); ?></a>
   </nav>
 </header>
 <main id="main">

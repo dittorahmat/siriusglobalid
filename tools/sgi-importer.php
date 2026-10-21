@@ -72,22 +72,25 @@ function sgi_import_all(string $seedDir): array {
     return $d;
   };
 
-  // Settings.
+  // Settings: hanya mengisi kunci yang belum ada. Editan admin (termasuk
+  // ctaLabel/ctaHref) tidak ditimpa saat import ulang.
   if ($d = $read($seedDir . '/settings.json')) {
     if (!is_email($d['email'] ?? '')) {
       $log['errors'][] = 'settings.json: email tidak valid, dilewati.';
     } else {
-      update_option('sgi_settings', [
+      $seedSettings = [
         'name' => $d['name'] ?? '', 'email' => $d['email'] ?? '', 'phone' => $d['phone'] ?? '',
         'phoneHref' => $d['phoneHref'] ?? '', 'address' => $d['address'] ?? '',
         'hours' => $d['hours'] ?? '', 'mapEmbed' => $d['mapEmbed'] ?? '',
-      ]);
+      ];
+      $current = (array)get_option('sgi_settings', []);
+      update_option('sgi_settings', sgi_fill_missing_keys($current, $seedSettings));
       $log['updated']++;
     }
   }
 
   // Home. Seed hanya mengisi kunci yang belum ada: editan admin via
-  // Settings > Sirius selalu menang, import ulang tidak menimpanya.
+  // Tampilan > Konten Situs selalu menang, import ulang tidak menimpanya.
   if ($d = $read($seedDir . '/home.json')) {
     $hp = $d['hero_photo'] ?? [];
     $heroSeed = $d['hero'] ?? [];

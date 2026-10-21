@@ -1,6 +1,6 @@
 <?php
 // front-page.php - renderer beranda ID-only. Seluruh copy dibaca dari opsi
-// `sgi_home` (Settings > Sirius); fallback bawaan dipakai bila opsi kosong.
+// `sgi_home` (Tampilan > Konten Situs); fallback bawaan dipakai bila opsi kosong.
 // Kartu layanan otomatis dari CPT layanan. Urutan tampil + on/off section
 // diatur via `home_order`: tiap section di-buffer lalu di-echo sesuai urutan.
 get_header();

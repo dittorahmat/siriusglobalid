@@ -1,6 +1,6 @@
 <?php
 // page-kontak.php - Template: Kontak (info dari sgi_settings + form WA deep link).
-// Hero + pilihan dropdown dari option sgi_kontak (Settings > Sirius),
+// Hero + pilihan dropdown dari option sgi_kontak (Tampilan > Konten Situs),
 // fallback ke nilai bawaan bila kosong.
 /* Template Name: Kontak */
 get_header();

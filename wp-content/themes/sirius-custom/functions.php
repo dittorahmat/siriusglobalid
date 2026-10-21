@@ -6,7 +6,10 @@ require_once __DIR__ . '/inc/helpers.php';
 require_once __DIR__ . '/inc/logo.php';
 require_once __DIR__ . '/inc/cpt.php';
 require_once __DIR__ . '/inc/meta.php';
+require_once __DIR__ . '/inc/options-fields.php';
+require_once __DIR__ . '/inc/options-save.php';
 require_once __DIR__ . '/inc/options.php';
+require_once __DIR__ . '/inc/admin.php';
 require_once __DIR__ . '/inc/redirects.php';
 require_once __DIR__ . '/inc/import-page.php';
 
@@ -44,16 +47,63 @@ function sgi_assets(): void {
 }
 add_action('wp_enqueue_scripts', 'sgi_assets');
 
-// Opsi site: settings + home (diisi importer, bisa diubah via Settings > Sirius).
-function sgi_settings(): array {
-  $defaults = [
+// Opsi site: settings + home (diisi importer, bisa diubah via Tampilan > Konten Situs).
+// Satu sumber daftar field: dipakai handler simpan dan render panel.
+function sgi_settings_fields(): array {
+  return [
+    'name' => ['label' => 'Nama', 'panel' => 'kontak'],
+    'email' => ['label' => 'Email', 'panel' => 'kontak'],
+    'phone' => ['label' => 'Telepon', 'panel' => 'kontak'],
+    'phoneHref' => ['label' => 'Link WA', 'panel' => 'kontak'],
+    'address' => ['label' => 'Alamat', 'panel' => 'kontak'],
+    'hours' => ['label' => 'Jam', 'panel' => 'kontak'],
+    'mapEmbed' => ['label' => 'Embed peta', 'panel' => 'kontak'],
+    'ctaLabel' => ['label' => 'Label tombol', 'panel' => 'header', 'placeholder' => 'Konsultasi Gratis'],
+    'ctaHref' => ['label' => 'Tautan tombol (/kontak/ atau https://...)', 'panel' => 'header', 'placeholder' => '/kontak/'],
+  ];
+}
+
+function sgi_settings_defaults(): array {
+  return [
     'name' => 'PT Sirius Global Indonesia', 'email' => 'sales@siriusglobal.id',
     'phone' => '+62 815-1048-1010', 'phoneHref' => 'https://wa.me/6281510481010',
     'address' => 'Gedung Wirausaha, Jl. HR Rasuna Said Kav. C5, Kuningan, Jakarta Selatan 12920',
     'hours' => 'Senin-Jumat, 09.00-18.00 WIB',
     'mapEmbed' => 'https://www.google.com/maps?q=Gedung+Wirausaha+HR+Rasuna+Said+Kav+C5+Jakarta+Selatan&output=embed',
+    'ctaLabel' => 'Konsultasi Gratis', 'ctaHref' => '/kontak/',
   ];
-  return array_merge($defaults, (array)get_option('sgi_settings', []));
+}
+
+function sgi_settings(): array {
+  $defaults = sgi_settings_defaults();
+  $out = array_merge($defaults, (array)get_option('sgi_settings', []));
+  // Kosong = bawaan (khusus CTA header, agar field yang dikosongkan tidak
+  // menghasilkan tombol tanpa teks/tautan).
+  foreach (['ctaLabel', 'ctaHref'] as $k) {
+    if (trim((string)($out[$k] ?? '')) === '') $out[$k] = $defaults[$k];
+  }
+  return $out;
+}
+
+// Nilai mentah untuk form: kunci yang belum pernah disimpan memakai default,
+// kunci yang dikosongkan tetap tampil kosong (kosong = bawaan saat dibaca).
+function sgi_settings_raw(): array {
+  $raw = (array)get_option('sgi_settings', []);
+  $defaults = sgi_settings_defaults();
+  $out = [];
+  foreach (sgi_settings_fields() as $key => $field) {
+    $out[$key] = array_key_exists($key, $raw) ? (string)$raw[$key] : (string)($defaults[$key] ?? '');
+  }
+  return $out;
+}
+
+// Tombol CTA header: satu akses untuk label + href yang sudah dinormalisasi.
+function sgi_header_cta(): array {
+  $s = sgi_settings();
+  return [
+    'label' => (string)$s['ctaLabel'],
+    'href' => sgi_home_href((string)$s['ctaHref'], '/kontak/'),
+  ];
 }
 
 function sgi_home(): array {

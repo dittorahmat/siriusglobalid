@@ -104,45 +104,66 @@ function sgi_primary_nav(): array {
   return $out ?: $fallback;
 }
 
+// Isi hanya kunci yang belum ada. Dipakai importer agar re-import tidak
+// menimpa editan admin (termasuk ctaLabel/ctaHref).
+function sgi_fill_missing_keys(array $current, array $seed): array {
+  foreach ($seed as $key => $value) {
+    if (!array_key_exists($key, $current)) $current[$key] = $value;
+  }
+  return $current;
+}
+
 // Buat Menu "Navigasi utama" berisi 3 item bawaan bila lokasi 'primary'
 // belum punya Menu. Idempoten: tidak menimpa Menu editor yang sudah ada.
-function sgi_seed_primary_menu(): void {
-  if (!function_exists('get_nav_menu_locations') || !function_exists('wp_create_nav_menu')) return;
+// Mengembalikan true bila menu berisi item (baru dibuat atau sudah ada).
+function sgi_seed_primary_menu(): bool {
+  if (!function_exists('get_nav_menu_locations') || !function_exists('wp_create_nav_menu')) return false;
   $locs = get_nav_menu_locations();
+  $menuId = 0;
   if (!empty($locs['primary'])) {
     $m = wp_get_nav_menu_object($locs['primary']);
-    if ($m && !is_wp_error($m)) return;
+    if ($m && !is_wp_error($m)) {
+      $have = function_exists('wp_get_nav_menu_items') ? (array)wp_get_nav_menu_items($m->term_id) : [];
+      if ($have) return true; // Menu editor sudah punya isi: jangan sentuh.
+      $menuId = (int)$m->term_id; // Menu ada tapi kosong: isi dengan bawaan.
+    }
   }
-  $existing = wp_get_nav_menu_object('Navigasi utama');
-  if (!$existing || is_wp_error($existing)) {
-    $menuId = wp_create_nav_menu('Navigasi utama');
-    if (is_wp_error($menuId) || !$menuId) return;
-  } else {
-    $menuId = (int)$existing->term_id;
+  if (!$menuId) {
+    $existing = wp_get_nav_menu_object('Navigasi utama');
+    if (!$existing || is_wp_error($existing)) {
+      $created = wp_create_nav_menu('Navigasi utama');
+      if (is_wp_error($created) || !$created) return false;
+      $menuId = (int)$created;
+    } else {
+      $menuId = (int)$existing->term_id;
+    }
   }
   $have = function_exists('wp_get_nav_menu_items') ? (array)wp_get_nav_menu_items($menuId) : [];
   if ($have) {
     $locs['primary'] = $menuId;
     set_theme_mod('nav_menu_locations', $locs);
-    return;
+    return true;
   }
-  if (!function_exists('home_url')) return;
+  if (!function_exists('home_url')) return false;
   $items = [
     ['Beranda', home_url('/')],
     ['Layanan', home_url('/layanan/')],
     ['Kontak', home_url('/kontak/')],
   ];
+  $ok = true;
   foreach ($items as $i => $it) {
-    wp_update_nav_menu_item($menuId, 0, [
+    $res = wp_update_nav_menu_item($menuId, 0, [
       'menu-item-title' => $it[0],
       'menu-item-url' => $it[1],
       'menu-item-status' => 'publish',
       'menu-item-position' => $i + 1,
     ]);
+    if (is_wp_error($res) || (int)$res <= 0) $ok = false;
   }
   $locs = get_nav_menu_locations();
   $locs['primary'] = $menuId;
   set_theme_mod('nav_menu_locations', $locs);
+  return $ok;
 }
 
 // Slug layanan yang dikenal (port CMS_SERVICE_SLUGS).
@@ -158,7 +179,7 @@ function sgi_portfolio_cats(): array {
 }
 
 // Halaman Kontak: nilai bawaan = nilai hardcode template saat ini.
-// Option `sgi_kontak` menimpa bila diisi via Settings > Sirius; kosong = fallback.
+// Option `sgi_kontak` menimpa bila diisi via Tampilan > Konten Situs; kosong = fallback.
 function sgi_kontak_defaults(): array {
   return [
     'hero_h1' => 'Ceritakan kebutuhan Anda, kami balas < 1 hari kerja',

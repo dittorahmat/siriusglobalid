@@ -1,0 +1,84 @@
+/* admin.css - hanya dimuat di Tampilan > Konten Situs.
+   Semua selector berprefiks .sgi- agar tidak menimpa gaya wp-admin. */
+
+.sgi-admin .sgi-panels {
+  padding-bottom: 8px;
+}
+
+body.sgi-admin-page {
+  scroll-padding-bottom: 88px;
+}
+
+.sgi-admin .sgi-panel {
+  margin-top: 8px;
+}
+
+.sgi-admin .sgi-panel > h2:first-child {
+  margin-top: 20px;
+}
+
+/* Tab: hanya menyembunyikan panel kalau JS aktif (progressive enhancement). */
+.sgi-admin.sgi-tabs--js .sgi-panel {
+  display: none;
+}
+
+.sgi-admin.sgi-tabs--js .sgi-panel.is-active {
+  display: block;
+}
+
+.sgi-admin .sgi-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sgi-admin .sgi-tabs .nav-tab {
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.sgi-admin .sgi-tabs .nav-tab:focus {
+  outline: 2px solid var(--wp-admin-theme-color, #2271b1);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+
+.sgi-admin .sgi-nav-child th {
+  padding-inline-start: 32px;
+}
+
+.sgi-admin .sgi-nav-preview {
+  margin: 8px 0 14px 20px;
+  list-style: disc;
+}
+
+.sgi-admin .sgi-nav-preview li {
+  margin-bottom: 6px;
+}
+
+.sgi-admin .sgi-nav-preview .description {
+  display: inline;
+  margin-left: 6px;
+}
+
+.sgi-admin .sgi-savebar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  margin-top: 24px;
+  padding: 12px 0 16px;
+  background: #fff;
+  border-top: 1px solid #dcdcde;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 782px) {
+  .sgi-admin .sgi-tabs {
+    border-bottom: 0;
+  }
+
+  .sgi-admin .sgi-tabs .nav-tab {
+    padding: 10px 12px;
+  }
+}
