@@ -69,5 +69,30 @@ function sgi_customize_logo(WP_Customize_Manager $wp_customize): void {
     'mime_type' => 'image',
     'priority' => 9,
   ]));
+
+  $wp_customize->add_setting('sgi_hero_photo', [
+    'type' => 'theme_mod',
+    'capability' => 'edit_theme_options',
+    'sanitize_callback' => 'absint',
+  ]);
+  $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'sgi_hero_photo', [
+    'label' => 'Foto Hero Beranda',
+    'description' => 'Upload foto hero beranda (menggantikan gambar default).',
+    'section' => 'title_tagline',
+    'mime_type' => 'image',
+    'priority' => 10,
+  ]));
+
+  $wp_customize->add_setting('sgi_footer_bg', [
+    'default' => '#0b2447',
+    'type' => 'theme_mod',
+    'capability' => 'edit_theme_options',
+    'sanitize_callback' => 'sanitize_hex_color',
+  ]);
+  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'sgi_footer_bg', [
+    'label' => 'Warna Latar Footer',
+    'description' => 'Pilih warna bernuansa gelap agar teks footer tetap terbaca jelas.',
+    'section' => 'colors',
+  ]));
 }
 add_action('customize_register', 'sgi_customize_logo');

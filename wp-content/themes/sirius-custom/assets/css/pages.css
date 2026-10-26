@@ -32,6 +32,8 @@
   display: grid; gap: 4px;
 }
 .hero-photo-card b { font-family: var(--font-display); font-size: 0.95rem; }
+.hero-photo-card a { color: var(--navy-700); text-decoration: underline; font-weight: 600; }
+.hero-photo-card a:hover { color: var(--teal-600); }
 .dash-card {
   position: relative; z-index: 1; background: rgba(255,255,255,0.98); color: var(--ink-900);
   border-radius: 16px; padding: 18px 20px; display: flex; gap: 16px; align-items: center; box-shadow: var(--shadow-md);

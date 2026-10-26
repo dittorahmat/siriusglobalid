@@ -80,9 +80,27 @@ function sgi_options_panel_hero(array $h): void {
   sgi_opt_input('sgi_hero_cta2', 'Tombol 2', (string)($hero['cta2'] ?? ''));
   sgi_opt_input('sgi_hero_cta2_href', 'Link tombol 2', (string)($hero['cta2_href'] ?? ''), '/layanan/');
   sgi_opt_input('sgi_hero_card1t', 'Judul kartu status', (string)($hero['card1t'] ?? ''));
-  sgi_opt_input('sgi_hero_card1a', 'Status baris 1', (string)($hero['card1a'] ?? ''));
-  sgi_opt_input('sgi_hero_card1b', 'Status baris 2', (string)($hero['card1b'] ?? ''));
-  sgi_opt_input('sgi_hero_card1c', 'Status baris 3', (string)($hero['card1c'] ?? ''));
+  
+  echo '<div style="background:#fff;border:1px solid #c3c4c7;border-radius:8px;padding:12px;margin:12px 0;max-width:640px">';
+  echo '<strong>Status Baris 1</strong>';
+  sgi_opt_input('sgi_hero_card1a', 'Teks baris 1', (string)($hero['card1a'] ?? ''), 'AI doing Administrative Faster 29%');
+  sgi_opt_input('sgi_hero_card1a_link_text', 'Kata yang jadi link (opsional)', (string)($hero['card1a_link_text'] ?? ''), 'Microsoft');
+  sgi_opt_input('sgi_hero_card1a_link_url', 'URL link (opsional)', (string)($hero['card1a_link_url'] ?? ''), 'https://...');
+  echo '</div>';
+
+  echo '<div style="background:#fff;border:1px solid #c3c4c7;border-radius:8px;padding:12px;margin:12px 0;max-width:640px">';
+  echo '<strong>Status Baris 2</strong>';
+  sgi_opt_input('sgi_hero_card1b', 'Teks baris 2', (string)($hero['card1b'] ?? ''), 'IoT reduce downtime 54%');
+  sgi_opt_input('sgi_hero_card1b_link_text', 'Kata yang jadi link (opsional)', (string)($hero['card1b_link_text'] ?? ''), 'Deloitte');
+  sgi_opt_input('sgi_hero_card1b_link_url', 'URL link (opsional)', (string)($hero['card1b_link_url'] ?? ''), 'https://...');
+  echo '</div>';
+
+  echo '<div style="background:#fff;border:1px solid #c3c4c7;border-radius:8px;padding:12px;margin:12px 0;max-width:640px">';
+  echo '<strong>Status Baris 3</strong>';
+  sgi_opt_input('sgi_hero_card1c', 'Teks baris 3', (string)($hero['card1c'] ?? ''), 'Cloud modernization lower ops costs 41%');
+  sgi_opt_input('sgi_hero_card1c_link_text', 'Kata yang jadi link (opsional)', (string)($hero['card1c_link_text'] ?? ''), 'IDC');
+  sgi_opt_input('sgi_hero_card1c_link_url', 'URL link (opsional)', (string)($hero['card1c_link_url'] ?? ''), 'https://...');
+  echo '</div>';
   echo '<h2>Angka &amp; klien</h2>';
   sgi_opt_area('sgi_kpi', 'KPI hero (3 baris "angka | label")', sgi_opt_join_pairs((array)$h['kpi_counts'], (array)$h['kpi_labels']), '', 3);
   sgi_opt_area('sgi_stats', 'Statistik (4 baris "angka | label")', sgi_opt_join_pairs((array)$h['stat_counts'], (array)$h['stat_labels']), '', 4);

@@ -2,6 +2,7 @@
 // functions.php - bootstrap theme Sirius Custom (ID-only).
 declare(strict_types=1);
 
+require_once __DIR__ . '/inc/i18n.php';
 require_once __DIR__ . '/inc/helpers.php';
 require_once __DIR__ . '/inc/logo.php';
 require_once __DIR__ . '/inc/cpt.php';
@@ -222,7 +223,7 @@ function sgi_home_service_cards(array $home): array {
     $slot = $icons[count($cards) % count($icons)];
     $cards[] = [
       'icon' => $slot[0], 'cls' => $slot[1],
-      't' => (string)$p->post_title, 'd' => $desc,
+      'id' => (int)$p->ID, 't' => (string)$p->post_title, 'd' => $desc,
       'url' => get_permalink((int)$p->ID),
     ];
     if (count($cards) >= $count) break;

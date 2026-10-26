@@ -63,12 +63,61 @@ function sgi_box_intro($post): void {
   sgi_field('_sgi_metrics', 'Metrik (satu per baris "label | value", maks 8)', (string)get_post_meta($post->ID, '_sgi_metrics', true), 'area');
 }
 
+
+function sgi_parse_tiers_input(string $raw): array {
+  $raw = trim($raw);
+  if ($raw === "") return [];
+  // Jika formatnya sudah JSON (misal hasil lama), decode langsung
+  if (str_starts_with($raw, "[") || str_starts_with($raw, "{")) {
+    $decoded = json_decode($raw, true);
+    if (is_array($decoded)) return $decoded;
+  }
+  // Format per baris: Tier | Nama | Harga | Fitur 1, Fitur 2 | featured
+  $lines = preg_split("/\r?\n/", $raw);
+  $tiers = [];
+  foreach ($lines as $ln) {
+    $ln = trim($ln);
+    if ($ln === "") continue;
+    $parts = array_map("trim", explode("|", $ln));
+    if (count($parts) < 3) continue;
+    $items = [];
+    if (!empty($parts[3])) {
+      $items = array_values(array_filter(array_map("trim", explode(",", $parts[3]))));
+    }
+    $isFeatured = isset($parts[4]) && in_array(strtolower($parts[4]), ["featured", "yes", "true", "1"], true);
+    $tiers[] = [
+      "tier" => $parts[0] ?? "",
+      "name" => $parts[1] ?? "",
+      "value" => $parts[2] ?? "",
+      "items" => $items,
+      "featured" => $isFeatured,
+    ];
+  }
+  return $tiers;
+}
+
+function sgi_format_tiers_for_editor(string $saved): string {
+  $saved = trim($saved);
+  if ($saved === "") return "";
+  $decoded = json_decode($saved, true);
+  if (!is_array($decoded)) return $saved;
+  $lines = [];
+  foreach ($decoded as $t) {
+    $items = implode(", ", (array)($t["items"] ?? []));
+    $feat = !empty($t["featured"]) ? " | featured" : "";
+    $lines[] = ($t["tier"] ?? "") . " | " . ($t["name"] ?? "") . " | " . ($t["value"] ?? "") . " | " . $items . $feat;
+  }
+  return implode("\n", $lines);
+}
+
 function sgi_box_pricing($post): void {
   sgi_field('_sgi_pricing_heading', 'Judul harga', (string)get_post_meta($post->ID, '_sgi_pricing_heading', true));
   sgi_field('_sgi_pricing_body', 'Subjudul harga', (string)get_post_meta($post->ID, '_sgi_pricing_body', true), 'area');
   sgi_field('_sgi_quote_btn', 'Teks tombol quotation', (string)get_post_meta($post->ID, '_sgi_quote_btn', true));
-  echo '<p><strong>Tiers (JSON, maks 6; satu boleh "featured": true)</strong><br><textarea name="_sgi_tiers" rows="8" style="width:100%;font-family:monospace">' . esc_textarea((string)get_post_meta($post->ID, '_sgi_tiers', true)) . '</textarea></p>';
-  echo '<p class="description">Format tiap tier: {"tier":"Mulai","name":"Prototype","value":"Rp 25-60 jt","items":["a","b"],"featured":false}</p>';
+  $val = (string)get_post_meta($post->ID, '_sgi_tiers', true);
+  $displayVal = sgi_format_tiers_for_editor($val);
+  echo '<p><strong>Paket Harga (1 baris per paket, maks 6)</strong><br><textarea name="_sgi_tiers" rows="8" style="width:100%;font-family:monospace" placeholder="Mulai | Prototype | Rp 25-60 jt | Web dashboard, REST API dasar&#10;Populer | MVP Siap Rilis | Rp 75-180 jt | Web + mobile, Payment gateway | featured&#10;Enterprise | Scale | Custom quote | Multi-tenant, Audit ISO/SOC">' . esc_textarea($displayVal) . '</textarea></p>';
+  echo '<p class="description">Format mudah (pisahkan dengan tanda |):<br><code>Tier | Nama Paket | Harga | Fitur 1, Fitur 2, Fitur 3 | featured (opsional)</code><br><em>*Boleh dikosongkan jika layanan tidak menggunakan paket harga.</em></p>';
 }
 
 function sgi_box_steps($post): void {
@@ -108,13 +157,15 @@ function sgi_save_layanan(int $post_id): void {
       wp_die(esc_html($m . ' Data tidak disimpan.'));
     }
   }
-  $tiers = json_decode((string)($_POST['_sgi_tiers'] ?? '[]'), true);
-  if (!is_array($tiers)) wp_die('Tiers bukan JSON valid. Data tidak disimpan.');
+  $raw_tiers = trim((string)($_POST['_sgi_tiers'] ?? ''));
+  $tiers = sgi_parse_tiers_input($raw_tiers);
   if ($m = sgi_over_limit('service.tiers', $tiers)) wp_die(esc_html($m . ' Data tidak disimpan.'));
 
   remove_action('save_post_layanan', 'sgi_save_layanan');
   foreach (sgi_layanan_meta_keys() as $key) {
-    if (array_key_exists($key, $_POST)) {
+    if ($key === '_sgi_tiers') {
+      update_post_meta($post_id, $key, wp_json_encode($tiers));
+    } elseif (array_key_exists($key, $_POST)) {
       update_post_meta($post_id, $key, wp_kses_post(wp_unslash($_POST[$key])));
     }
   }

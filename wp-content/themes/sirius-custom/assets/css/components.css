@@ -80,6 +80,8 @@
   background: var(--bg-tint); border: 1px solid #d8e4ff; margin-bottom: 16px; color: var(--navy-700);
 }
 .card-icon.teal { background: var(--teal-100); border-color: #bfe9da; color: var(--teal-600); }
+.card-icon.has-img { overflow: hidden; padding: 6px; }
+.card-icon img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
 .card h3 { margin-bottom: 8px; }
 .card p { color: var(--ink-600); font-size: 0.96rem; }
 

@@ -8,6 +8,18 @@ $h = sgi_home();
 $hero = $h['hero']; $cta = $h['cta'];
 $order = sgi_home_order($h['home_order'] ?? []);
 $hp = $h['hero_photo'];
+$custom_hero_id = (int) get_theme_mod('sgi_hero_photo', 0);
+if ($custom_hero_id > 0) {
+  $img_src = wp_get_attachment_image_url($custom_hero_id, 'full');
+  if ($img_src) {
+    $meta = wp_get_attachment_metadata($custom_hero_id);
+    $hp['src'] = $img_src;
+    if (!empty($meta['width'])) $hp['w'] = $meta['width'];
+    if (!empty($meta['height'])) $hp['h'] = $meta['height'];
+    $alt = get_post_meta($custom_hero_id, '_wp_attachment_image_alt', true);
+    if ($alt) $hp['alt'] = $alt;
+  }
+}
 $kpis = array_pad(array_values((array)$h['kpi_counts']), 3, '0');
 $kpiLabels = array_pad(array_values((array)$h['kpi_labels']), 3, '');
 $stats = array_pad(array_values((array)$h['stat_counts']), 4, '0');
@@ -36,12 +48,40 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     </div>
     <div class="hero-visual">
       <img class="photo" src="<?php echo esc_url($hp['src']); ?>" alt="<?php echo esc_attr($hp['alt']); ?>" width="<?php echo (int)$hp['w']; ?>" height="<?php echo (int)$hp['h']; ?>" fetchpriority="high">
+      <?php 
+      $allowedLinks = ['a' => ['href' => [], 'target' => [], 'rel' => [], 'class' => []], 'span' => ['class' => []], 'b' => [], 'strong' => []];
+      $renderCardLine = function(string $text, string $linkWord, string $url) use ($allowedLinks): string {
+        $text = trim($text);
+        if ($text === '') return '';
+        $linkWord = trim($linkWord);
+        $url = trim($url);
+        if ($linkWord !== '' && $url !== '') {
+          $escapedWord = preg_quote($linkWord, '/');
+          $linkHtml = '<a href="' . esc_url($url) . '" target="_blank" rel="noopener">' . esc_html($linkWord) . '</a>';
+          if (preg_match('/' . $escapedWord . '/i', $text)) {
+            $text = preg_replace('/' . $escapedWord . '/i', $linkHtml, $text, 1);
+          } else {
+            $text .= ' (' . $linkHtml . ')';
+          }
+        }
+        return wp_kses($text, $allowedLinks);
+      };
+      ?>
       <div class="hero-photo-card">
-        <b><?php echo esc_html($hero['card1t']); ?></b>
-        <div class="small muted"><?php echo esc_html($hero['card1a']); ?></div>
-        <div class="small muted"><?php echo esc_html($hero['card1b']); ?></div>
-        <div class="small muted"><?php echo esc_html($hero['card1c']); ?></div>
+        <b><?php echo wp_kses((string)($hero['card1t'] ?? ''), $allowedLinks); ?></b>
+        <?php if (!empty($hero['card1a'])): ?><div class="small muted"><?php echo $renderCardLine((string)$hero['card1a'], (string)($hero['card1a_link_text'] ?? ''), (string)($hero['card1a_link_url'] ?? '')); ?></div><?php endif; ?>
+        <?php if (!empty($hero['card1b'])): ?><div class="small muted"><?php echo $renderCardLine((string)$hero['card1b'], (string)($hero['card1b_link_text'] ?? ''), (string)($hero['card1b_link_url'] ?? '')); ?></div><?php endif; ?>
+        <?php if (!empty($hero['card1c'])): ?><div class="small muted"><?php echo $renderCardLine((string)$hero['card1c'], (string)($hero['card1c_link_text'] ?? ''), (string)($hero['card1c_link_url'] ?? '')); ?></div><?php endif; ?>
       </div>
+      <?php 
+      $hasKpi = false;
+      foreach ($kpis as $ki => $kv) {
+        if ((int)$kv > 0 || trim((string)($kpiLabels[$ki] ?? "")) !== "") {
+          $hasKpi = true;
+          break;
+        }
+      }
+      if ($hasKpi): ?>
       <div class="dash-card">
         <div class="kpi-row">
           <div class="kpi"><b><span data-count="<?php echo (int)($kpis[0] ?? 18); ?>">0</span>+</b><span><?php echo esc_html($kpiLabels[0]); ?></span></div>
@@ -49,6 +89,7 @@ if (in_array('hero', $order, true)): ob_start(); ?>
           <div class="kpi"><b><span data-count="<?php echo (int)($kpis[2] ?? 40); ?>">0</span>+</b><span><?php echo esc_html($kpiLabels[2]); ?></span></div>
         </div>
       </div>
+      <?php endif; ?>
     </div>
   </div>
 </section>
@@ -78,7 +119,11 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     <div class="grid services-grid" style="margin-top:30px">
       <?php foreach ($svcCards as $sc): ?>
       <article class="card reveal">
+        <?php if (!empty($sc['id']) && has_post_thumbnail($sc['id'])): ?>
+        <div class="card-icon has-img<?php echo esc_attr($sc['cls']); ?>"><?php echo get_the_post_thumbnail($sc['id'], 'thumbnail', ['alt' => $sc['t']]); ?></div>
+        <?php else: ?>
         <div class="card-icon<?php echo esc_attr($sc['cls']); ?>"><?php echo esc_html($sc['icon']); ?></div>
+        <?php endif; ?>
         <h3><?php echo esc_html($sc['t']); ?></h3>
         <p><?php echo esc_html($sc['d']); ?></p>
         <p style="margin-top:14px"><a class="link-more" href="<?php echo esc_url($sc['url']); ?>">→ <span>Pelajari detail</span></a></p>
