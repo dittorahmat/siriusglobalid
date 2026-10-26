@@ -1,0 +1,11 @@
+# Auto normalize all text files to LF to prevent CRLF edit mismatch
+* text=auto eol=lf
+
+# Explicit text files
+*.php text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf

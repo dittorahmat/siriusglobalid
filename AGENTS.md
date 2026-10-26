@@ -10,8 +10,9 @@
 - CSS/JS theme di-port dari aset lama; i18n dan toggle bahasa dihapus (ID-only).
   Situs lama (`*.php` publik, `admin/`, `includes/`, `templates/`, `css/`,
   `js/`) dipertahankan sebagai sumber migrasi **read-only**.
-- Fonts via Google Fonts. ID-only (multilanguage di-scrap di change
-  `wp-mysql-id-only`; sisi `en` seed diabaikan).
+- Fonts via Google Fonts. Antarmuka tema mendukung bilingual otomatis (ID/EN)
+  mengikuti Site Language WordPress via `inc/i18n.php` dan `get_locale()`
+  (tanpa plugin runtime eksternal / toggle bahasa publik).
 
 ## WAJIB: review frontend via better-interface
 
@@ -110,6 +111,10 @@ tidak terbaca. Jangan tambah tool/abstraksi/check tanpa pemakai nyata.
 5. Shell: PowerShell. Baca `docs/agents/shell-notes.md` sebelum loop/jaringan.
 6. Usulan retro yang disetujui **HARUS** mendarat sebagai check/AGENTS di change
    yang sama, bukan hanya catatan chat.
+7. Line endings repo distandarkan LF via `.gitattributes`. Hindari asumsi file Windows CRLF
+   saat mengedit string target file.
+8. Klarifikasi UI link: saat user meminta elemen kartu dibuat clickable, pastikan
+   apakah link mencakup 1 kartu utuh (block-level) atau inline kata/frasa tertentu.
 
 ## Agent skills
 

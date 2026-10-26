@@ -31,6 +31,10 @@ $check('AGENTS bebas lang-toggle', !str_contains($agents, 'lang-toggle'));
 $check('AGENTS bebas js/i18n.js', !str_contains($agents, 'js/i18n.js'));
 $check('AGENTS bebas scope css/*.css', !preg_match('/(?<!assets\/)css\/\*\.css/', $agents));
 
+// Guardrail: meta.php tidak boleh memanggil wp_die tanpa sanitasi fallback array
+$metaContent = file_get_contents($theme . "/inc/meta.php");
+$check("meta.php punya parser tiers fleksibel", str_contains($metaContent, "sgi_parse_tiers_input"));
+
 if ($fail) {
   echo 'GAGAL: ' . implode(', ', $fail) . PHP_EOL;
   exit(1);
