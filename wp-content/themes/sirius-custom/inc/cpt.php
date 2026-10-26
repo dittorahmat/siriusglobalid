@@ -10,7 +10,7 @@ function sgi_register_types(): void {
     'has_archive' => true,
     'rewrite' => ['slug' => 'layanan'],
     'show_in_rest' => true,
-    'supports' => ['title', 'editor', 'custom-fields'],
+    'supports' => ['title', 'editor', 'thumbnail', 'custom-fields'],
     'menu_icon' => 'dashicons-hammer',
   ]);
 
