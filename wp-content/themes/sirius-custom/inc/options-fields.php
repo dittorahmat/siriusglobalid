@@ -39,6 +39,10 @@ function sgi_options_panel_header(array $s): void {
   echo '<h2>Logo</h2>';
   echo '<p class="description">Ganti logo header/footer via <a href="' . esc_url(admin_url('customize.php?autofocus[section]=title_tagline')) . '">Tampilan &gt; Sesuaikan &gt; Identitas Situs</a> (Logo + Logo footer varian terang). Boleh lockup landscape penuh; jika kosong, tampil bintang + teks bawaan. Favicon via Ikon Situs di halaman yang sama.</p>';
 
+  echo '<h2>Warna Latar Footer</h2>';
+  $footerBg = get_theme_mod('sgi_footer_bg', '#0b2447');
+  sgi_opt_input('sgi_footer_bg', 'Warna Latar Footer (Hex: #0b2447)', (string)$footerBg, '#0b2447');
+
   echo '<h2>Label navigasi</h2>';
   if ($nav['items']) {
     echo '<p class="description">Ubah teks yang tampil di header. Tautan, urutan, dan struktur tetap diatur di Tampilan &gt; Menu.</p>';
