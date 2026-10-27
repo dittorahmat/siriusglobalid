@@ -125,7 +125,7 @@ function sgi_options_panel_sections(array $h): void {
   sgi_opt_input('sgi_combo_t', 'Judul kartu kombinasi', (string)($h['combo_t'] ?? ''));
   sgi_opt_area('sgi_combo_d', 'Deskripsi kartu kombinasi', (string)($h['combo_d'] ?? ''), '', 2);
   sgi_opt_input('sgi_combo_btn', 'Tombol kartu kombinasi', (string)($h['combo_btn'] ?? ''));
-  sgi_opt_input('sgi_layanan_count', 'Jumlah kartu (1-8)', (string)($h['layanan_count'] ?? 5));
+  sgi_opt_input('sgi_layanan_count', 'Jumlah kartu (1-24)', (string)($h['layanan_count'] ?? 5));
   sgi_opt_area('sgi_layanan_hide', 'Sembunyikan slug (satu per baris)', implode("\n", (array)($h['layanan_hide'] ?? [])));
   echo '<p><label><input type="checkbox" name="sgi_layanan_combo" value="1"' . checked((string)($h['layanan_combo'] ?? '1'), '1', false) . '> Tampilkan kartu kombinasi</label></p>';
   echo '<h2>Keunggulan</h2>';

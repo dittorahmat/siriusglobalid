@@ -100,7 +100,7 @@ function sgi_options_handle_save(): void {
     'clients' => $clients,
     'svc_eye' => $txt('sgi_svc_eye'), 'svc_t' => $txt('sgi_svc_t'), 'svc_d' => $txt('sgi_svc_d'),
     'combo_t' => $txt('sgi_combo_t'), 'combo_d' => $txt('sgi_combo_d'), 'combo_btn' => $txt('sgi_combo_btn'),
-    'layanan_count' => max(1, min(8, (int)($_POST['sgi_layanan_count'] ?? 5))),
+    'layanan_count' => max(1, min(24, (int)($_POST['sgi_layanan_count'] ?? 5))),
     'layanan_hide' => array_slice($hide, 0, 20),
     'layanan_combo' => isset($_POST['sgi_layanan_combo']) ? '1' : '',
     'why_t' => $txt('sgi_why_t'),

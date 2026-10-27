@@ -20,7 +20,7 @@ function sgi_limits(): array {
     'service.checklist' => 20, 'service.metrics' => 8, 'service.steps' => 8,
     'tentang.values' => 12, 'tentang.timeline' => 12, 'tentang.team' => 12,
     'home.clients' => 12, 'home.cases' => 6,
-    'home.services' => 8, 'home.why' => 6, 'home.steps' => 8, 'home.testi' => 6,
+    'home.services' => 24, 'home.why' => 6, 'home.steps' => 8, 'home.testi' => 6,
   ];
 }
 

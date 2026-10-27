@@ -205,7 +205,7 @@ function sgi_home_service_cards(array $home): array {
     ['icon' => '⬢', 'cls' => '', 't' => 'Fleet Management', 'd' => 'GPS tracking, BBM, maintenance & driver scoring dalam satu dasbor.', 'url' => home_url('layanan/fleet-management/')],
   ];
   if (!function_exists('get_posts')) return $fallback;
-  $count = max(1, min(8, (int)($home['layanan_count'] ?? 5)));
+  $count = max(1, min(24, (int)($home['layanan_count'] ?? 5)));
   $hide = array_map('strtolower', array_map('trim', (array)($home['layanan_hide'] ?? [])));
   $posts = get_posts([
     'post_type' => 'layanan', 'post_status' => 'publish',
