@@ -10,7 +10,7 @@ function sgi_register_types(): void {
     'has_archive' => true,
     'rewrite' => ['slug' => 'layanan'],
     'show_in_rest' => true,
-    'supports' => ['title', 'editor', 'thumbnail', 'custom-fields'],
+    'supports' => ['title', 'editor', 'thumbnail', 'custom-fields', 'page-attributes'],
     'menu_icon' => 'dashicons-hammer',
   ]);
 
@@ -28,7 +28,7 @@ function sgi_register_types(): void {
     'has_archive' => true,
     'rewrite' => ['slug' => 'portofolio-item'],
     'show_in_rest' => true,
-    'supports' => ['title', 'editor', 'thumbnail', 'custom-fields'],
+    'supports' => ['title', 'editor', 'thumbnail', 'custom-fields', 'page-attributes'],
     'menu_icon' => 'dashicons-briefcase',
   ]);
 

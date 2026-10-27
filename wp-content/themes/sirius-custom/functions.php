@@ -208,7 +208,7 @@ function sgi_home_service_cards(array $home): array {
   $hide = array_map('strtolower', array_map('trim', (array)($home['layanan_hide'] ?? [])));
   $posts = get_posts([
     'post_type' => 'layanan', 'post_status' => 'publish',
-    'numberposts' => 50, 'orderby' => 'title', 'order' => 'ASC',
+    'numberposts' => 50, 'orderby' => ['menu_order' => 'ASC', 'title' => 'ASC'],
     'suppress_filters' => true,
   ]);
   if (!is_array($posts) || !$posts) return $fallback;
