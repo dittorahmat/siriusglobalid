@@ -117,16 +117,15 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     <h2 class="reveal"><?php echo esc_html($h['svc_t']); ?></h2>
     <p class="lead reveal" style="margin-top:12px"><?php echo esc_html($h['svc_d']); ?></p>
     <div class="grid services-grid" style="margin-top:30px">
-      <?php foreach ($svcCards as $sc): ?>
-      <article class="card reveal">
-        <?php if (!empty($sc['id']) && has_post_thumbnail($sc['id'])): ?>
-        <div class="card-icon has-img<?php echo esc_attr($sc['cls']); ?>"><?php echo get_the_post_thumbnail($sc['id'], 'thumbnail', ['alt' => $sc['t']]); ?></div>
-        <?php else: ?>
-        <div class="card-icon<?php echo esc_attr($sc['cls']); ?>"><?php echo esc_html($sc['icon']); ?></div>
-        <?php endif; ?>
-        <h3><?php echo esc_html($sc['t']); ?></h3>
-        <p><?php echo esc_html($sc['d']); ?></p>
-        <p style="margin-top:14px"><a class="link-more" href="<?php echo esc_url($sc['url']); ?>">→ <span>Pelajari detail</span></a></p>
+      <?php foreach ($svcCards as $sc):
+        $has_bg = !empty($sc['thumb']);
+      ?>
+      <article class="card reveal<?php echo $has_bg ? ' card-bg-img' : ''; ?>"<?php if ($has_bg): ?> style="--card-bg:url('<?php echo esc_url($sc['thumb']); ?>');"<?php endif; ?>>
+        <div class="card-inner">
+          <h3><?php echo esc_html($sc['t']); ?></h3>
+          <p><?php echo esc_html($sc['d']); ?></p>
+          <p style="margin-top:14px"><a class="link-more" href="<?php echo esc_url($sc['url']); ?>">→ <span>Pelajari detail</span></a></p>
+        </div>
       </article>
       <?php endforeach; ?>
       <?php if ($showCombo): ?>
@@ -168,7 +167,13 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     <h2 class="reveal"><?php echo esc_html($h['proc_t']); ?></h2>
     <div class="grid steps" style="margin-top:28px">
       <?php foreach ($steps as $st): ?>
-      <div class="card step reveal"><h3><?php echo esc_html($st['t'] ?? ''); ?></h3><p><?php echo esc_html($st['d'] ?? ''); ?></p></div>
+      <div class="card step reveal">
+        <?php if (!empty($st['icon'])): ?>
+        <?php echo sgi_render_step_icon((string)$st['icon'], (string)($st['t'] ?? '')); ?>
+        <?php endif; ?>
+        <h3><?php echo esc_html($st['t'] ?? ''); ?></h3>
+        <p><?php echo esc_html($st['d'] ?? ''); ?></p>
+      </div>
       <?php endforeach; ?>
     </div>
   </div>

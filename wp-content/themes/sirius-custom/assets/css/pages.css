@@ -68,6 +68,45 @@
 .services-grid .card:first-child p { color: #c6d4ee; }
 .services-grid .card:first-child .card-icon { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); color: #fff; }
 
+/* Service cards with background image */
+.services-grid .card.card-bg-img {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: var(--card-bg);
+  overflow: hidden;
+  border-color: rgba(11, 36, 71, 0.4);
+}
+.services-grid .card.card-bg-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 36, 71, 0.55) 0%, rgba(11, 36, 71, 0.70) 100%);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.22s var(--ease);
+}
+.services-grid .card.card-bg-img:hover::before {
+  background: linear-gradient(180deg, rgba(11, 36, 71, 0.50) 0%, rgba(11, 36, 71, 0.65) 100%);
+}
+.services-grid .card.card-bg-img .card-inner {
+  position: relative;
+  z-index: 2;
+}
+.services-grid .card.card-bg-img h3 {
+  color: #ffffff;
+}
+.services-grid .card.card-bg-img p {
+  color: #d1ddf4;
+}
+.services-grid .card.card-bg-img .link-more {
+  color: #38d9b9;
+}
+.services-grid .card.card-bg-img .link-more:hover {
+  color: #ffffff;
+}
+
 /* Steps */
 .steps { grid-template-columns: repeat(4, 1fr); counter-reset: step; }
 .step { position: relative; }

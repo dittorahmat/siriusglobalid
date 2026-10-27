@@ -115,6 +115,11 @@ tidak terbaca. Jangan tambah tool/abstraksi/check tanpa pemakai nyata.
    saat mengedit string target file.
 8. Klarifikasi UI link: saat user meminta elemen kartu dibuat clickable, pastikan
    apakah link mencakup 1 kartu utuh (block-level) atau inline kata/frasa tertentu.
+9. Lint sintaks PHP lokal: sebelum commit atau membuat laporan code-review,
+   selalu jalankan sintaks lint `php -l` pada semua file PHP yang disentuh
+   (atau `git ls-files "*.php" | ForEach-Object { php -l $_ }`) agar tidak
+   pernah commit kode dengan syntax error yang memecahkan CI. Laporan
+   review dilarang menyatakan "ALL PASS" sebelum tes verifikasi lulus secara riil.
 
 ## Agent skills
 

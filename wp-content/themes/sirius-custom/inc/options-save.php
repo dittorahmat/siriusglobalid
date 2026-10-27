@@ -42,7 +42,7 @@ function sgi_options_handle_save(): void {
   $kpiPairs = sgi_pair_lines(wp_unslash($_POST['sgi_kpi'] ?? ''), 2);
   $statPairs = sgi_pair_lines(wp_unslash($_POST['sgi_stats'] ?? ''), 2);
   $whyPairs = sgi_pair_lines(wp_unslash($_POST['sgi_why'] ?? ''), 2);
-  $stepPairs = sgi_pair_lines(wp_unslash($_POST['sgi_steps'] ?? ''), 2);
+  $stepTriples = sgi_pair_lines(wp_unslash($_POST['sgi_steps'] ?? ''), 3);
   $caseTriples = sgi_pair_lines(wp_unslash($_POST['sgi_cases'] ?? ''), 3);
   $testiPairs = sgi_pair_lines(wp_unslash($_POST['sgi_testis'] ?? ''), 2);
   $clients = array_slice(array_values(array_filter(array_map('trim', explode("\n", wp_unslash($_POST['sgi_clients'] ?? ''))))), 0, 12);
@@ -53,7 +53,7 @@ function sgi_options_handle_save(): void {
   }
   foreach ([
     'home.clients' => $clients, 'home.cases' => $caseTriples,
-    'home.why' => $whyPairs, 'home.steps' => $stepPairs, 'home.testi' => $testiPairs,
+    'home.why' => $whyPairs, 'home.steps' => $stepTriples, 'home.testi' => $testiPairs,
   ] as $k => $items) {
     if ($m = sgi_over_limit($k, $items)) {
       wp_die(esc_html($m . ' Data tidak disimpan.'));
@@ -106,7 +106,7 @@ function sgi_options_handle_save(): void {
     'why_t' => $txt('sgi_why_t'),
     'why' => $td($whyPairs),
     'proc_t' => $txt('sgi_proc_t'),
-    'steps' => $td($stepPairs),
+    'steps' => array_map(function ($p) { return ['t' => (string)($p[0] ?? ''), 'd' => (string)($p[1] ?? ''), 'icon' => (string)($p[2] ?? '')]; }, $stepTriples),
     'cases_eye' => $txt('sgi_cases_eye'), 'cases_t' => $txt('sgi_cases_t'), 'cases_all' => $txt('sgi_cases_all'),
     'cases' => array_map(function ($p) { return ['c' => (string)($p[0] ?? ''), 't' => (string)($p[1] ?? ''), 'd' => (string)($p[2] ?? '')]; }, $caseTriples),
     'testi_t' => $txt('sgi_testi_t'),

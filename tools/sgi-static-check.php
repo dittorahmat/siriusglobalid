@@ -35,6 +35,23 @@ $check('AGENTS bebas scope css/*.css', !preg_match('/(?<!assets\/)css\/\*\.css/'
 $metaContent = file_get_contents($theme . "/inc/meta.php");
 $check("meta.php punya parser tiers fleksibel", str_contains($metaContent, "sgi_parse_tiers_input"));
 
+// Guardrail: seluruh file PHP di theme harus valid secara sintaks (php -l)
+$phpLintOk = true;
+$phpLintErr = "";
+foreach ($files as $f) {
+  if (strtolower(pathinfo($f, PATHINFO_EXTENSION)) === "php") {
+    $out = [];
+    $code = 0;
+    exec("php -l " . escapeshellarg($f) . " 2>&1", $out, $code);
+    if ($code !== 0) {
+      $phpLintOk = false;
+      $phpLintErr = implode(" ", $out);
+      break;
+    }
+  }
+}
+$check("seluruh file PHP theme lolos sintaks lint php -l", $phpLintOk, $phpLintErr);
+
 if ($fail) {
   echo 'GAGAL: ' . implode(', ', $fail) . PHP_EOL;
   exit(1);

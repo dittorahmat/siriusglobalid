@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/inc/i18n.php';
 require_once __DIR__ . '/inc/helpers.php';
+require_once __DIR__ . '/inc/icons.php';
 require_once __DIR__ . '/inc/logo.php';
 require_once __DIR__ . '/inc/cpt.php';
 require_once __DIR__ . '/inc/meta.php';
@@ -208,7 +209,7 @@ function sgi_home_service_cards(array $home): array {
   $hide = array_map('strtolower', array_map('trim', (array)($home['layanan_hide'] ?? [])));
   $posts = get_posts([
     'post_type' => 'layanan', 'post_status' => 'publish',
-    'numberposts' => 50, 'orderby' => 'title', 'order' => 'ASC',
+    'numberposts' => 50, 'orderby' => ['menu_order' => 'ASC', 'title' => 'ASC'],
     'suppress_filters' => true,
   ]);
   if (!is_array($posts) || !$posts) return $fallback;
@@ -221,10 +222,12 @@ function sgi_home_service_cards(array $home): array {
       $desc = (string)wp_trim_words((string)($p->post_excerpt ?: $p->post_content), 18);
     }
     $slot = $icons[count($cards) % count($icons)];
+    $thumb = has_post_thumbnail((int)$p->ID) ? (string)get_the_post_thumbnail_url((int)$p->ID, 'large') : '';
     $cards[] = [
       'icon' => $slot[0], 'cls' => $slot[1],
       'id' => (int)$p->ID, 't' => (string)$p->post_title, 'd' => $desc,
       'url' => get_permalink((int)$p->ID),
+      'thumb' => $thumb,
     ];
     if (count($cards) >= $count) break;
   }

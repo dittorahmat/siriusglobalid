@@ -133,7 +133,7 @@ function sgi_options_panel_sections(array $h): void {
   sgi_opt_area('sgi_why', 'Item (satu per baris "judul | deskripsi", maks 6)', implode("\n", array_map(function ($w) { return ($w['t'] ?? '') . ' | ' . ($w['d'] ?? ''); }, (array)$h['why'])), '', 6);
   echo '<h2>Alur kerja</h2>';
   sgi_opt_input('sgi_proc_t', 'Judul', (string)($h['proc_t'] ?? ''));
-  sgi_opt_area('sgi_steps', 'Tahapan (satu per baris "judul | deskripsi", maks 8)', implode("\n", array_map(function ($st) { return ($st['t'] ?? '') . ' | ' . ($st['d'] ?? ''); }, (array)$h['steps'])), '', 6);
+  sgi_opt_area('sgi_steps', 'Tahapan / Solusi Inovatif (satu per baris "judul | deskripsi | icon", maks 8)', implode("\n", array_map(function ($st) { $ic = trim((string)($st['icon'] ?? '')); return ($st['t'] ?? '') . ' | ' . ($st['d'] ?? '') . ($ic !== '' ? ' | ' . $ic : ''); }, (array)$h['steps'])), 'Pilihan nama icon library: ai, bot, sales, legal, finance, cloud, backup, iot, chart, server, shield, code. Atau masukkan URL gambar icon (https://...).', 8);
   echo '<h2>Studi kasus</h2>';
   sgi_opt_input('sgi_cases_eye', 'Eyebrow', (string)($h['cases_eye'] ?? ''));
   sgi_opt_input('sgi_cases_t', 'Judul', (string)($h['cases_t'] ?? ''));
