@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/inc/i18n.php';
 require_once __DIR__ . '/inc/helpers.php';
+require_once __DIR__ . '/inc/icons.php';
 require_once __DIR__ . '/inc/logo.php';
 require_once __DIR__ . '/inc/cpt.php';
 require_once __DIR__ . '/inc/meta.php';

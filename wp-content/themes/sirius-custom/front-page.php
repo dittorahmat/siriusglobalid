@@ -168,7 +168,13 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     <h2 class="reveal"><?php echo esc_html($h['proc_t']); ?></h2>
     <div class="grid steps" style="margin-top:28px">
       <?php foreach ($steps as $st): ?>
-      <div class="card step reveal"><h3><?php echo esc_html($st['t'] ?? ''); ?></h3><p><?php echo esc_html($st['d'] ?? ''); ?></p></div>
+      <div class="card step reveal">
+        <?php if (!empty($st['icon']) || function_exists('sgi_render_step_icon')): ?>
+        <?php echo sgi_render_step_icon((string)($st['icon'] ?? ''), (string)($st['t'] ?? '')); ?>
+        <?php endif; ?>
+        <h3><?php echo esc_html($st['t'] ?? ''); ?></h3>
+        <p><?php echo esc_html($st['d'] ?? ''); ?></p>
+      </div>
       <?php endforeach; ?>
     </div>
   </div>
