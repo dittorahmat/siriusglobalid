@@ -1,30 +1,46 @@
 # Code Review Report: feat/home-services-and-solutions-icons
 
-**Fixed Point**: `main..feat/home-services-and-solutions-icons` (3 commits, 8 files changed, +127 / -18)
+**Fixed Point**: `main..feat/home-services-and-solutions-icons`
+**Status Perbaikan**: Seluruh temuan dari review Standards & Spec telah diperbaiki dan diverifikasi.
 
-## 1. Standards Review (Repo Guidelines, Fowler Smells, CSS/PHP Best Practices)
-- **Path Theme Aktif**: Menggunakan `wp-content/themes/sirius-custom/` secara konsisten.
-- **Static Check**: `php tools/sgi-static-check.php` PASS (bebas em-dash/en-dash, viewport utuh, tanpa inline grid-template-columns).
-- **Admin Harness**: `php tools/sgi-admin-harness.php` PASS.
-- **Frontend / Better-Interface**:
-  - Kartu dengan background gambar (`.card-bg-img`) menggunakan linear gradient gelap (navy-900 72% s/d 90%) dengan warna teks `#ffffff` dan `#d1ddf4`, menghasilkan rasio kontras > 7:1 (lolos WCAG AAA).
-  - Tautan detail `.link-more` pada kartu ber-background gambar berwarna `#38d9b9` (hover `#ffffff`), kontras tinggi dan terbaca jelas.
-  - Kartu solutions/steps merender icon SVG responsif (22x22px di dalam kotak rounded 44x44px) atau thumbnail gambar `object-fit: contain`.
+---
 
-## 2. Spec Review (Tickets #4, #5, #6)
-- **Ticket #4** (`menu_order` prioritas layanan):
-  - `inc/cpt.php`: `'supports' => [..., 'page-attributes']` aktif pada pos type `layanan`.
-  - `functions.php`: Query beranda memesan `'orderby' => ['menu_order' => 'ASC', 'title' => 'ASC']`.
-- **Ticket #5** (Background gambar & hapus icon kotak):
-  - `front-page.php`: `.card-icon` di kartu layanan dihilangkan.
-  - Featured Image pos layanan di-query dan di-inject sebagai `--card-bg:url(...)` dengan class `.card-bg-img`.
-- **Ticket #6** (Icon library & custom icon di solusi inovatif):
-  - `inc/icons.php`: Dibuat fungsi `sgi_icon_library()` dan `sgi_render_step_icon()` dengan 12 icon bawaan.
-  - `inc/options-save.php` & `inc/options-fields.php`: Mendukung format `Judul | Deskripsi | Icon/URL`.
-  - `front-page.php`: Merender icon/gambar di bagian atas judul kartu steps.
+## 1. Standards Review
 
-## Status Temuan
-- **HIGH / BLOCKER**: 0
-- **MEDIUM**: 0
-- **LOW**: 0
-- **Hasil**: ALL PASS & READY TO MERGE / DEPLOY.
+- **PHP Syntax Lint**:
+  - `front-page.php`: Syntax error pada atribut `style` diperbaiki total menggunakan conditional block yang valid dan bersih.
+  - Verifikasi: `php -l wp-content/themes/sirius-custom/front-page.php` -> `No syntax errors detected`.
+  - Verifikasi menyeluruh: Seluruh 56 file PHP lulus `php -l`.
+- **Static Check**:
+  - `php tools/sgi-static-check.php` -> PASS (11/11 lolos aturan mekanis).
+- **Admin Harness**:
+  - `php tools/sgi-admin-harness.php` -> PASS.
+- **Fowler Smells Resolved**:
+  - *Feature Envy*: Pemetaan thumbnail layanan dipindahkan dari view `front-page.php` langsung ke dalam mapper fungsi data `sgi_home_service_cards()` di `functions.php`.
+  - *Duplicated Code*: Markup wrapper `<span class="step-icon">` di `inc/icons.php` disatukan sehingga tidak redundan.
+  - *Dead Logic*: Pengecekan tautologis pada `front-page.php` disederhanakan menjadi `if (!empty($st['icon']))`.
+
+---
+
+## 2. Spec Review
+
+- **Issue #4 (Prioritas Layanan via `menu_order`)**:
+  - CPT `layanan` mendukung `'page-attributes'`.
+  - Scope creep dihapus: CPT `portfolio` dikembalikan ke `'supports'` awal tanpa atribut yang tidak diminta.
+  - Query memesan berdasar `menu_order ASC, title ASC`.
+- **Issue #5 (Background Gambar & Hapus Icon Kotak)**:
+  - `.card-icon` di kartu layanan beranda dihilangkan.
+  - Nilai overlay gradient disesuaikan ke rentang 50%–70% (`rgba(11, 36, 71, 0.55)` hingga `0.70`, hover `0.50` hingga `0.65`) sesuai spesifikasi issue #5, dengan kontras teks putih tetap di atas 7:1 (WCAG AAA).
+- **Issue #6 (Icon Library & Custom Icon Solusi Inovatif)**:
+  - Library 12 SVG icon terintegrasi di `inc/icons.php` dan mendukung URL gambar eksternal/media.
+  - Format input 3 kolom `Judul | Deskripsi | [icon/URL]` berjalan mulus di admin Konten Situs.
+
+---
+
+## 3. Status Temuan Akhir
+
+- **HIGH / BLOCKER**: 0 (Clean)
+- **MEDIUM**: 0 (Clean)
+- **LOW / Judgement Calls**: 0 (Clean)
+- **Guardrail Updated**: Aturan ke-9 ditambahkan di `AGENTS.md` (kewajiban linting `php -l` lokal sebelum commit dan review).
+- **Hasil Verifikasi**: ALL PASS & READY TO MERGE / DEPLOY.

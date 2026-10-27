@@ -222,10 +222,12 @@ function sgi_home_service_cards(array $home): array {
       $desc = (string)wp_trim_words((string)($p->post_excerpt ?: $p->post_content), 18);
     }
     $slot = $icons[count($cards) % count($icons)];
+    $thumb = has_post_thumbnail((int)$p->ID) ? (string)get_the_post_thumbnail_url((int)$p->ID, 'large') : '';
     $cards[] = [
       'icon' => $slot[0], 'cls' => $slot[1],
       'id' => (int)$p->ID, 't' => (string)$p->post_title, 'd' => $desc,
       'url' => get_permalink((int)$p->ID),
+      'thumb' => $thumb,
     ];
     if (count($cards) >= $count) break;
   }

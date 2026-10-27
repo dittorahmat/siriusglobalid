@@ -82,13 +82,13 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 36, 71, 0.72) 0%, rgba(11, 36, 71, 0.90) 100%);
+  background: linear-gradient(180deg, rgba(11, 36, 71, 0.55) 0%, rgba(11, 36, 71, 0.70) 100%);
   pointer-events: none;
   z-index: 1;
   transition: opacity 0.22s var(--ease);
 }
 .services-grid .card.card-bg-img:hover::before {
-  background: linear-gradient(180deg, rgba(11, 36, 71, 0.65) 0%, rgba(11, 36, 71, 0.86) 100%);
+  background: linear-gradient(180deg, rgba(11, 36, 71, 0.50) 0%, rgba(11, 36, 71, 0.65) 100%);
 }
 .services-grid .card.card-bg-img .card-inner {
   position: relative;

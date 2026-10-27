@@ -28,7 +28,7 @@ function sgi_register_types(): void {
     'has_archive' => true,
     'rewrite' => ['slug' => 'portofolio-item'],
     'show_in_rest' => true,
-    'supports' => ['title', 'editor', 'thumbnail', 'custom-fields', 'page-attributes'],
+    'supports' => ['title', 'editor', 'thumbnail', 'custom-fields'],
     'menu_icon' => 'dashicons-briefcase',
   ]);
 

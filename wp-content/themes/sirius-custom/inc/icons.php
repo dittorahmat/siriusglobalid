@@ -29,8 +29,6 @@ function sgi_render_step_icon(string $val, string $title = ''): string {
   }
   $lib = sgi_icon_library();
   $key = strtolower($val);
-  if (isset($lib[$key])) {
-    return '<span class="step-icon">' . $lib[$key] . '</span>';
-  }
-  return '<span class="step-icon">' . $lib['ai'] . '</span>';
+  $svg = $lib[$key] ?? $lib['ai'];
+  return '<span class="step-icon">' . $svg . '</span>';
 }

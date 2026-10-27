@@ -118,10 +118,9 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     <p class="lead reveal" style="margin-top:12px"><?php echo esc_html($h['svc_d']); ?></p>
     <div class="grid services-grid" style="margin-top:30px">
       <?php foreach ($svcCards as $sc):
-        $thumb_url = (!empty($sc['id']) && has_post_thumbnail($sc['id'])) ? get_the_post_thumbnail_url($sc['id'], 'large') : "";
-        $has_bg = !empty($thumb_url);
+        $has_bg = !empty($sc['thumb']);
       ?>
-      <article class="card reveal<?php echo $has_bg ? " card-bg-img" : ""; ?>"<?php echo $has_bg ? " style="--card-bg:url('<?php echo esc_url($thumb_url); ?>');" : ""; ?>>
+      <article class="card reveal<?php echo $has_bg ? ' card-bg-img' : ''; ?>"<?php if ($has_bg): ?> style="--card-bg:url('<?php echo esc_url($sc['thumb']); ?>');"<?php endif; ?>>
         <div class="card-inner">
           <h3><?php echo esc_html($sc['t']); ?></h3>
           <p><?php echo esc_html($sc['d']); ?></p>
@@ -169,8 +168,8 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     <div class="grid steps" style="margin-top:28px">
       <?php foreach ($steps as $st): ?>
       <div class="card step reveal">
-        <?php if (!empty($st['icon']) || function_exists('sgi_render_step_icon')): ?>
-        <?php echo sgi_render_step_icon((string)($st['icon'] ?? ''), (string)($st['t'] ?? '')); ?>
+        <?php if (!empty($st['icon'])): ?>
+        <?php echo sgi_render_step_icon((string)$st['icon'], (string)($st['t'] ?? '')); ?>
         <?php endif; ?>
         <h3><?php echo esc_html($st['t'] ?? ''); ?></h3>
         <p><?php echo esc_html($st['d'] ?? ''); ?></p>
