@@ -117,16 +117,16 @@ if (in_array('hero', $order, true)): ob_start(); ?>
     <h2 class="reveal"><?php echo esc_html($h['svc_t']); ?></h2>
     <p class="lead reveal" style="margin-top:12px"><?php echo esc_html($h['svc_d']); ?></p>
     <div class="grid services-grid" style="margin-top:30px">
-      <?php foreach ($svcCards as $sc): ?>
-      <article class="card reveal">
-        <?php if (!empty($sc['id']) && has_post_thumbnail($sc['id'])): ?>
-        <div class="card-icon has-img<?php echo esc_attr($sc['cls']); ?>"><?php echo get_the_post_thumbnail($sc['id'], 'thumbnail', ['alt' => $sc['t']]); ?></div>
-        <?php else: ?>
-        <div class="card-icon<?php echo esc_attr($sc['cls']); ?>"><?php echo esc_html($sc['icon']); ?></div>
-        <?php endif; ?>
-        <h3><?php echo esc_html($sc['t']); ?></h3>
-        <p><?php echo esc_html($sc['d']); ?></p>
-        <p style="margin-top:14px"><a class="link-more" href="<?php echo esc_url($sc['url']); ?>">→ <span>Pelajari detail</span></a></p>
+      <?php foreach ($svcCards as $sc):
+        $thumb_url = (!empty($sc['id']) && has_post_thumbnail($sc['id'])) ? get_the_post_thumbnail_url($sc['id'], 'large') : "";
+        $has_bg = !empty($thumb_url);
+      ?>
+      <article class="card reveal<?php echo $has_bg ? " card-bg-img" : ""; ?>"<?php echo $has_bg ? " style="--card-bg:url('<?php echo esc_url($thumb_url); ?>');" : ""; ?>>
+        <div class="card-inner">
+          <h3><?php echo esc_html($sc['t']); ?></h3>
+          <p><?php echo esc_html($sc['d']); ?></p>
+          <p style="margin-top:14px"><a class="link-more" href="<?php echo esc_url($sc['url']); ?>">→ <span>Pelajari detail</span></a></p>
+        </div>
       </article>
       <?php endforeach; ?>
       <?php if ($showCombo): ?>
