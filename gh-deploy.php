@@ -51,8 +51,14 @@ $data = json_decode($payload, true);
 if (($_SERVER['HTTP_X_GITHUB_EVENT'] ?? '') !== 'push') {
     exit('ignored: bukan push');
 }
-if (($data['ref'] ?? '') !== 'refs/heads/main') {
-    exit('ignored: bukan branch main');
+// Normalisasi ref: terima baik refs/heads/main maupun commit payload langsung
+$ref = (string)($data['ref'] ?? '');
+if ($ref !== 'refs/heads/main' && $ref !== 'main') {
+    // Bila webhook dari pull_request event yang di-merge ke main
+    $prMergedToMain = isset($data['pull_request']) && ($data['pull_request']['base']['ref'] ?? '') === 'main' && !empty($data['pull_request']['merged']);
+    if (!$prMergedToMain) {
+        exit('ignored: bukan branch main (ref: ' . $ref . ')');
+    }
 }
 
 ignore_user_abort(true);
