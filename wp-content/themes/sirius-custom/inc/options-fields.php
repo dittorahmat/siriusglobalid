@@ -140,7 +140,6 @@ function sgi_options_panel_sections(array $h): void {
   echo '<h2>Studi kasus</h2>';
   sgi_opt_input('sgi_cases_eye', 'Eyebrow', (string)($h['cases_eye'] ?? ''));
   sgi_opt_input('sgi_cases_t', 'Judul', (string)($h['cases_t'] ?? ''));
-  sgi_opt_input('sgi_cases_all', 'Tombol arsip', (string)($h['cases_all'] ?? ''));
   sgi_opt_area('sgi_cases', 'Kasus (satu per baris "kategori | judul | deskripsi", maks 6)', implode("\n", array_map(function ($c) { return ($c['c'] ?? '') . ' | ' . ($c['t'] ?? '') . ' | ' . ($c['d'] ?? ''); }, (array)$h['cases'])), 'Gambar diambil dari data case_imgs (importer).', 6);
   echo '<h2>Testimoni &amp; CTA</h2>';
   sgi_opt_input('sgi_testi_t', 'Judul testimoni', (string)($h['testi_t'] ?? ''));

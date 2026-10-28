@@ -80,3 +80,46 @@
     });
   });
 })();
+
+/* Handler generik untuk field media picker admin (upload & remove).
+   Dapat digunakan kembali oleh meta box / CPT manapun yang menggunakan .sgi-media-field */
+(function () {
+  if (typeof jQuery === 'undefined') return;
+  jQuery(document).ready(function ($) {
+    $(document).on('click', '.sgi-upload-btn', function (e) {
+      e.preventDefault();
+      var btn = $(this);
+      var targetInput = $(btn.data('target'));
+      var preview = $(btn.data('target') + '_preview');
+      var removeBtn = btn.siblings('.sgi-remove-btn');
+      if (typeof wp === 'undefined' || !wp.media) return;
+      var frame = wp.media({
+        title: 'Pilih / Unggah Gambar',
+        button: { text: 'Gunakan Gambar Ini' },
+        multiple: false
+      });
+      frame.on('select', function () {
+        var attachment = frame.state().get('selection').first().toJSON();
+        targetInput.val(attachment.url);
+        preview.find('img').attr('src', attachment.url);
+        preview.show();
+        btn.text('Ganti Gambar');
+        removeBtn.show();
+      });
+      frame.open();
+    });
+
+    $(document).on('click', '.sgi-remove-btn', function (e) {
+      e.preventDefault();
+      var btn = $(this);
+      var targetInput = $(btn.data('target'));
+      var preview = $(btn.data('target') + '_preview');
+      var uploadBtn = btn.siblings('.sgi-upload-btn');
+      targetInput.val('');
+      preview.find('img').attr('src', '');
+      preview.hide();
+      btn.hide();
+      uploadBtn.text('Pilih / Unggah Gambar');
+    });
+  });
+})();

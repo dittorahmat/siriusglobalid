@@ -10,6 +10,7 @@ $intro_h = get_post_meta($id, '_sgi_intro_heading', true);
 $intro_b = get_post_meta($id, '_sgi_intro_body', true);
 $checklist = array_values(array_filter(array_map('trim', explode("\n", (string)get_post_meta($id, '_sgi_checklist', true)))));
 $metrics_raw = array_values(array_filter(array_map('trim', explode("\n", (string)get_post_meta($id, '_sgi_metrics', true)))));
+$detail_img = (string)get_post_meta($id, '_sgi_detail_image', true);
 $metrics = [];
 foreach ($metrics_raw as $ln) {
   $parts = array_map('trim', explode('|', $ln, 2));
@@ -35,15 +36,19 @@ $nTiers = count($tiers);
 <p class="lead" style="margin-top:12px"><?php echo esc_html($lead); ?></p>
 <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
   <a class="btn btn-primary" href="<?php echo esc_url($need); ?>">Konsultasi Gratis</a>
-  <a class="btn btn-ghost" href="<?php echo esc_url(home_url('/portofolio/')); ?>">Lihat Studi Kasus</a>
 </div>
 </div></section>
-<?php if ($checklist || $metrics): ?>
+<?php if ($checklist || $metrics || $detail_img !== ''): ?>
 <section class="section"><div class="container split"><div>
 <h2><?php echo esc_html($intro_h); ?></h2>
 <?php if ($intro_b !== ''): ?><p class="muted" style="margin-top:10px"><?php echo esc_html($intro_b); ?></p><?php endif; ?>
 <?php if ($checklist): ?><ul class="check-list" style="margin-top:18px"><?php foreach ($checklist as $li): ?><li>✓ <?php echo esc_html($li); ?></li><?php endforeach; ?></ul><?php endif; ?>
-</div><?php if ($metrics): ?><div class="panel-img"><?php foreach ($metrics as $mm): ?><div class="mini-metric"><span class="small muted"><?php echo esc_html($mm['label']); ?></span><b><?php echo esc_html($mm['value']); ?></b></div><?php endforeach; ?></div><?php endif; ?></div></section>
+</div><?php if ($detail_img !== '' || $metrics): ?><div class="panel-img<?php echo $detail_img !== '' ? ' has-img' : ''; ?>">
+<?php if ($detail_img !== ''): ?>
+  <div class="panel-img-media"><img src="<?php echo esc_url($detail_img); ?>" alt="<?php echo esc_attr($intro_h ?: $title); ?>" loading="lazy"></div>
+<?php endif; ?>
+<?php foreach ($metrics as $mm): ?><div class="mini-metric"><span class="small muted"><?php echo esc_html($mm['label']); ?></span><b><?php echo esc_html($mm['value']); ?></b></div><?php endforeach; ?>
+</div><?php endif; ?></div></section>
 <?php endif; ?>
 <?php if ($tiers): ?>
 <section class="section" style="padding-top:0"><div class="container">
@@ -66,9 +71,17 @@ $nTiers = count($tiers);
 </div>
 </div></section>
 <?php endif; ?>
-<section class="section section-soft"><div class="container"><h2>FAQ singkat</h2><div style="margin-top:18px;max-width:760px">
+<?php if ($faqs_raw || $cta_t !== ''): ?>
+<section class="section section-soft"><div class="container">
+<?php if ($faqs_raw): ?>
+<h2>FAQ singkat</h2>
+<div style="margin-top:18px;max-width:760px">
 <?php foreach ($faqs_raw as $ln): $p = array_map('trim', explode('|', $ln, 2)); ?>
 <div class="faq"><button aria-expanded="false"><?php echo esc_html($p[0]); ?> <span>+</span></button><div class="panel"><div><?php echo esc_html($p[1] ?? ''); ?></div></div></div>
 <?php endforeach; ?>
-</div><?php if ($cta_t !== ''): ?><div class="cta-band" style="margin-top:36px"><div><h2><?php echo esc_html($cta_t); ?></h2><p><?php echo esc_html($cta_d); ?></p></div><a class="btn btn-primary" href="<?php echo esc_url($cta_href); ?>"><?php echo esc_html($cta_b); ?></a></div><?php endif; ?></div></section>
+</div>
+<?php endif; ?>
+<?php if ($cta_t !== ''): ?><div class="cta-band"<?php echo $faqs_raw ? ' style="margin-top:36px"' : ''; ?>><div><h2><?php echo esc_html($cta_t); ?></h2><p><?php echo esc_html($cta_d); ?></p></div><a class="btn btn-primary" href="<?php echo esc_url($cta_href); ?>"><?php echo esc_html($cta_b); ?></a></div><?php endif; ?>
+</div></section>
+<?php endif; ?>
 <?php get_footer(); ?>

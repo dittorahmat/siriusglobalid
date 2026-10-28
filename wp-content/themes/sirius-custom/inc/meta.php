@@ -9,7 +9,7 @@ function sgi_layanan_meta_keys(): array {
   return [
     '_sgi_h1', '_sgi_meta_desc', '_sgi_lead',
     '_sgi_intro_heading', '_sgi_intro_body', '_sgi_checklist',
-    '_sgi_metrics', '_sgi_pricing_heading', '_sgi_pricing_body',
+    '_sgi_metrics', '_sgi_detail_image', '_sgi_pricing_heading', '_sgi_pricing_body',
     '_sgi_quote_btn', '_sgi_tiers',
     '_sgi_steps_heading', '_sgi_steps',
     '_sgi_faqs', '_sgi_cta_title', '_sgi_cta_desc', '_sgi_cta_btn', '_sgi_cta_href',
@@ -34,11 +34,25 @@ add_action('init', 'sgi_register_meta');
 
 function sgi_layanan_boxes(): void {
   add_meta_box('sgi-hero', 'Hero Layanan', 'sgi_box_hero', 'layanan', 'normal', 'high');
-  add_meta_box('sgi-intro', 'Intro + Checklist + Metrik', 'sgi_box_intro', 'layanan', 'normal', 'default');
+  add_meta_box('sgi-intro', 'Intro + Checklist + Metrik + Gambar', 'sgi_box_intro', 'layanan', 'normal', 'default');
   add_meta_box('sgi-pricing', 'Harga (tiers JSON)', 'sgi_box_pricing', 'layanan', 'normal', 'default');
   add_meta_box('sgi-steps', 'Tahapan + FAQ + CTA', 'sgi_box_steps', 'layanan', 'normal', 'default');
 }
 add_action('add_meta_boxes', 'sgi_layanan_boxes');
+
+function sgi_layanan_admin_scripts(string $hook): void {
+  global $post_type;
+  if (!in_array($hook, ['post.php', 'post-new.php'], true) || $post_type !== 'layanan') {
+    return;
+  }
+  wp_enqueue_media();
+  $uri = get_stylesheet_directory_uri();
+  $dir = get_stylesheet_directory();
+  $ver = wp_get_theme()->get('Version');
+  $js = '/assets/js/admin.js';
+  wp_enqueue_script('sgi-admin-media', $uri . $js, ['jquery'], file_exists($dir . $js) ? (string)filemtime($dir . $js) : $ver, true);
+}
+add_action('admin_enqueue_scripts', 'sgi_layanan_admin_scripts');
 
 function sgi_field(string $name, string $label, string $value, string $type = 'text'): void {
   $n = esc_attr($name); $v = esc_attr($value);
@@ -61,6 +75,25 @@ function sgi_box_intro($post): void {
   sgi_field('_sgi_intro_body', 'Paragraf intro', (string)get_post_meta($post->ID, '_sgi_intro_body', true), 'area');
   sgi_field('_sgi_checklist', 'Checklist (satu per baris, maks 20)', (string)get_post_meta($post->ID, '_sgi_checklist', true), 'area');
   sgi_field('_sgi_metrics', 'Metrik (satu per baris "label | value", maks 8)', (string)get_post_meta($post->ID, '_sgi_metrics', true), 'area');
+  sgi_image_field('_sgi_detail_image', 'Gambar Ilustrasi Detail Layanan (Tampil di samping intro)', (string)get_post_meta($post->ID, '_sgi_detail_image', true));
+}
+
+function sgi_image_field(string $name, string $label, string $value): void {
+  $n = esc_attr($name);
+  $v = esc_attr($value);
+  $hasImg = !empty($value);
+  echo '<p><label><strong>' . esc_html($label) . '</strong></label></p>';
+  echo '<div class="sgi-media-field" style="margin-top:6px;display:flex;align-items:center;gap:12px">';
+  echo '<input type="hidden" id="' . $n . '" name="' . $n . '" value="' . $v . '">';
+  echo '<div id="' . $n . '_preview" style="max-width:180px;max-height:120px;border-radius:8px;overflow:hidden;border:1px solid #ccd0d4;background:#f0f0f1;' . ($hasImg ? '' : 'display:none;') . '">';
+  echo '<img src="' . ($hasImg ? esc_url($value) : '') . '" style="max-width:100%;height:auto;display:block">';
+  echo '</div>';
+  echo '<div style="display:flex;gap:8px;align-items:center">';
+  echo '<button type="button" class="button sgi-upload-btn" data-target="#' . $n . '">' . ($hasImg ? 'Ganti Gambar' : 'Pilih / Unggah Gambar') . '</button>';
+  echo '<button type="button" class="button sgi-remove-btn" data-target="#' . $n . '" style="' . ($hasImg ? '' : 'display:none;') . 'color:#b32d2e;">Hapus</button>';
+  echo '</div>';
+  echo '</div>';
+  echo '<p class="description" style="margin-top:4px">Gambar khusus untuk halaman detail layanan ini (tidak mempengaruhi Featured Image yang menjadi cover kartu di arsip).</p>';
 }
 
 

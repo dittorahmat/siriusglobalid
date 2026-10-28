@@ -193,7 +193,6 @@ if (in_array('hero', $order, true)): ob_start(); ?>
       </article>
       <?php endforeach; ?>
     </div>
-    <p style="margin-top:22px"><a class="btn btn-ghost" href="<?php echo esc_url(home_url('/portofolio/')); ?>"><?php echo esc_html($h['cases_all']); ?></a></p>
   </div>
 </section>
 <?php $sec['cases'] = ob_get_clean(); endif; ?>

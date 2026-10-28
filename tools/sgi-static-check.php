@@ -35,6 +35,20 @@ $check('AGENTS bebas scope css/*.css', !preg_match('/(?<!assets\/)css\/\*\.css/'
 $metaContent = file_get_contents($theme . "/inc/meta.php");
 $check("meta.php punya parser tiers fleksibel", str_contains($metaContent, "sgi_parse_tiers_input"));
 
+// Guardrail: template publik tidak boleh memiliki inline style pada tag <img>
+$publicTemplates = glob($theme . "/*.php") ?: [];
+$imgInlineStyleOk = true;
+$badImgFile = "";
+foreach ($publicTemplates as $tpl) {
+  $content = file_get_contents($tpl);
+  if (preg_match('/<img[^>]+style\s*=\s*["\'][^"\']*(width|border-radius|display)/i', $content)) {
+    $imgInlineStyleOk = false;
+    $badImgFile = basename($tpl);
+    break;
+  }
+}
+$check("template publik bebas inline style pada tag img", $imgInlineStyleOk, $badImgFile);
+
 // Guardrail: seluruh file PHP di theme harus valid secara sintaks (php -l)
 $phpLintOk = true;
 $phpLintErr = "";

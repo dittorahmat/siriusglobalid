@@ -125,9 +125,17 @@ tidak terbaca. Jangan tambah tool/abstraksi/check tanpa pemakai nyata.
     yang valid saat di-render ke markup. Jangan biarkan elemen tag judul (`<h1>`, `<h2>`)
     atau tombol menghasilkan tag kosong jika admin mengosongkan input di panel.
 11. Isolasi CSS & inline styles: hindari menyisipkan inline CSS layout/spacing ad-hoc
-    (seperti `style="margin-top:..."` pada markup template). Pindahkan ke stylesheet
+    (seperti `style="margin-top:..."` atau `style="width:...;border-radius:..."` pada markup template). Pindahkan ke stylesheet
     komponen/halaman (`assets/css/pages.css` atau `components.css`) agar styling tetap terisolasi
     dan konsisten pada mode responsif.
+12. Isolasi custom field & script admin: letakkan logic media picker / uploader admin dengan aman
+    menggunakan hook admin yang tepat (`admin_enqueue_scripts`), dan pastikan field media mendukung
+    preview responsif serta pembersihan data (`display:none` dinamis) tanpa meninggalkan inline style kompleks
+    pada template publik. Template publik (`single-*.php`, `archive-*.php`, `page-*.php`) dilarang
+    menyisipkan inline styling pada elemen gambar (`<img>`).
+13. Header & FAQ kondisional: elemen section FAQ, metrik, atau komponen berulang yang opsional WAJIB
+    dibungkus pengecekan kondisi array (`if (!empty($faqs))` dsb.). Judul section (`<h2>FAQ</h2>`)
+    dilarang tampil sebagai section kosong jika datanya kosong dari CMS/editor.
 
 ## Agent skills
 
