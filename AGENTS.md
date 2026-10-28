@@ -120,6 +120,14 @@ tidak terbaca. Jangan tambah tool/abstraksi/check tanpa pemakai nyata.
    (atau `git ls-files "*.php" | ForEach-Object { php -l $_ }`) agar tidak
    pernah commit kode dengan syntax error yang memecahkan CI. Laporan
    review dilarang menyatakan "ALL PASS" sebelum tes verifikasi lulus secara riil.
+10. Fallback teks & opsi situs: setiap teks/copy dinamis yang dibaca dari opsi situs
+    (`sgi_home`, `sgi_settings`, `sgi_kontak`) WAJIB memiliki fallback nilai bawaan
+    yang valid saat di-render ke markup. Jangan biarkan elemen tag judul (`<h1>`, `<h2>`)
+    atau tombol menghasilkan tag kosong jika admin mengosongkan input di panel.
+11. Isolasi CSS & inline styles: hindari menyisipkan inline CSS layout/spacing ad-hoc
+    (seperti `style="margin-top:..."` pada markup template). Pindahkan ke stylesheet
+    komponen/halaman (`assets/css/pages.css` atau `components.css`) agar styling tetap terisolasi
+    dan konsisten pada mode responsif.
 
 ## Agent skills
 

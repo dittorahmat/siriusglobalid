@@ -40,6 +40,16 @@ $check('cta kosong -> bawaan',
   ($setEmpty['ctaLabel'] ?? '') === 'Konsultasi Gratis' && ($setEmpty['ctaHref'] ?? '') === '/kontak/');
 unset($GLOBALS['sgi_smoke_options']['sgi_settings']);
 
+// 2b. Home & Archive: hero fallback saat opsi dikosongkan.
+$hInit = sgi_home();
+$check('sgi_home bawaan punya archive_svc_title_html',
+  !empty($hInit['archive_svc_title_html']) && str_contains($hInit['archive_svc_title_html'], 'Sembilan kapabilitas'));
+$GLOBALS['sgi_smoke_options']['sgi_home'] = ['archive_svc_title_html' => ''];
+$hEmpty = sgi_home();
+$check('archive hero kosong tetap tersimpan sebagai string kosong (view punya fallback)',
+  array_key_exists('archive_svc_title_html', $hEmpty));
+unset($GLOBALS['sgi_smoke_options']['sgi_home']);
+
 // 3. Rename nav: hanya judul yang berubah, atribut lain disalin apa adanya.
 $fakeItem = (object)[
   'ID' => 42, 'object_id' => 7, 'object' => 'page', 'menu_item_parent' => 0,

@@ -125,6 +125,7 @@
 
 /* Page hero */
 .page-hero { background: var(--bg-soft); border-bottom: 1px solid var(--line); padding: 56px 0 44px; }
+.page-hero .lead { margin-top: 12px; }
 .breadcrumb { font-size: 0.88rem; color: var(--ink-600); margin-bottom: 12px; }
 .breadcrumb a:hover { text-decoration: underline; }
 

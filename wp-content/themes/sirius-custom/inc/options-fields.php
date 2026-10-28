@@ -119,9 +119,12 @@ function sgi_options_panel_sections(array $h): void {
   sgi_opt_input('sgi_home_order', 'Urutan (pisah koma)', implode(',', sgi_home_order($h['home_order'] ?? [])));
   echo '<p class="description">Nama valid: <code>hero,stats,layanan,why,alur,cases,testi,cta</code>. Hapus nama untuk menyembunyikan section. Contoh: <code>hero,layanan,alur,cases,cta</code>.</p>';
   echo '<h2>Layanan (otomatis dari menu Layanan)</h2>';
-  sgi_opt_input('sgi_svc_eye', 'Eyebrow', (string)($h['svc_eye'] ?? ''));
-  sgi_opt_input('sgi_svc_t', 'Judul', (string)($h['svc_t'] ?? ''));
-  sgi_opt_area('sgi_svc_d', 'Deskripsi', (string)($h['svc_d'] ?? ''), '', 2);
+  sgi_opt_input('sgi_svc_eye', 'Eyebrow beranda', (string)($h['svc_eye'] ?? ''));
+  sgi_opt_input('sgi_svc_t', 'Judul beranda', (string)($h['svc_t'] ?? ''));
+  sgi_opt_area('sgi_svc_d', 'Deskripsi beranda', (string)($h['svc_d'] ?? ''), '', 2);
+  sgi_opt_input('sgi_archive_svc_eye', 'Eyebrow arsip (/layanan/)', (string)($h['archive_svc_eye'] ?? ''));
+  sgi_opt_input('sgi_archive_svc_title_html', 'Judul hero arsip (/layanan/)', (string)($h['archive_svc_title_html'] ?? ''), 'Mendukung tag <span> untuk highlight');
+  sgi_opt_area('sgi_archive_svc_lead', 'Deskripsi hero arsip (/layanan/)', (string)($h['archive_svc_lead'] ?? ''), '', 2);
   sgi_opt_input('sgi_combo_t', 'Judul kartu kombinasi', (string)($h['combo_t'] ?? ''));
   sgi_opt_area('sgi_combo_d', 'Deskripsi kartu kombinasi', (string)($h['combo_d'] ?? ''), '', 2);
   sgi_opt_input('sgi_combo_btn', 'Tombol kartu kombinasi', (string)($h['combo_btn'] ?? ''));
