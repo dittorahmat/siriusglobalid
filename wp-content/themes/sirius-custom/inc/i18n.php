@@ -35,6 +35,7 @@ function sgi_t(string $key, ?string $fallback = null): string {
       'contact.message' => ['id' => 'Ceritakan singkat', 'en' => 'Brief description'],
       'contact.message_placeholder' => ['id' => 'Contoh: kami punya 80 armada, ingin pantau BBM + integrasi ke pembukuan...', 'en' => 'Example: We have 80 fleets and need fuel monitoring + ERP integration...'],
       'contact.privacy_consent' => ['id' => 'Saya setuju data ini dipakai untuk menghubungi saya, sesuai kebijakan privasi.', 'en' => 'I agree to the processing of this information to contact me, in accordance with the privacy policy.'],
+      'contact.privacy_prefix' => ['id' => 'Saya setuju data ini dipakai untuk menghubungi saya, sesuai ', 'en' => 'I agree to the processing of this information to contact me, in accordance with the '],
       'contact.privacy_link' => ['id' => 'kebijakan privasi', 'en' => 'privacy policy'],
       'contact.submit' => ['id' => 'Kirim via WhatsApp', 'en' => 'Send via WhatsApp'],
       'contact.direct_reach' => ['id' => 'Atau hubungi langsung:', 'en' => 'Or reach out directly:'],

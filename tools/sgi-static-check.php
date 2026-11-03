@@ -49,6 +49,19 @@ foreach ($publicTemplates as $tpl) {
 }
 $check("template publik bebas inline style pada tag img", $imgInlineStyleOk, $badImgFile);
 
+// Guardrail: template publik dilarang menggunakan ternary sgi_is_en() di markup (wajib sgi_t)
+$i18nTernaryOk = true;
+$badI18nFile = "";
+foreach ($publicTemplates as $tpl) {
+  $content = file_get_contents($tpl);
+  if (preg_match('/<\?php\s+echo\s+esc_html\(\s*sgi_is_en\(\)\s*\?/i', $content)) {
+    $i18nTernaryOk = false;
+    $badI18nFile = basename($tpl);
+    break;
+  }
+}
+$check("template publik bebas inline ternary sgi_is_en()", $i18nTernaryOk, $badI18nFile);
+
 // Guardrail: seluruh file PHP di theme harus valid secara sintaks (php -l)
 $phpLintOk = true;
 $phpLintErr = "";
