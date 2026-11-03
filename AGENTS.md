@@ -136,6 +136,12 @@ tidak terbaca. Jangan tambah tool/abstraksi/check tanpa pemakai nyata.
 13. Header & FAQ kondisional: elemen section FAQ, metrik, atau komponen berulang yang opsional WAJIB
     dibungkus pengecekan kondisi array (`if (!empty($faqs))` dsb.). Judul section (`<h2>FAQ</h2>`)
     dilarang tampil sebagai section kosong jika datanya kosong dari CMS/editor.
+14. Standar i18n & kamus terpusat: antarmuka dwibahasa (ID/EN) WAJIB menggunakan helper
+    `sgi_t('key', 'Fallback')` yang terdaftar pada kamus terpusat di `inc/i18n.php`.
+    Dilarang menggunakan ternary ad-hoc di template markup (seperti `sgi_is_en() ? 'EN' : 'ID'`)
+    atau hardcoded string matching opsi CMS tanpa penanganan coalescing tipe aman
+    (`(string)($opts['key'] ?? '')`). Breadcrumb dan label antarmuka umum WAJIB memakai
+    grup kunci terstandar `common.*` (`common.home`, `common.services`, `common.contact`, dst.).
 
 ## Agent skills
 

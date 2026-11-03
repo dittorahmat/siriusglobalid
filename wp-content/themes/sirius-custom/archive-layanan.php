@@ -13,11 +13,11 @@ $q = new WP_Query([
 <section class="page-hero">
   <div class="container">
     <p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(sgi_t('common.home', 'Beranda')); ?></a> / <span><?php echo esc_html(sgi_t('common.services', 'Layanan')); ?></span></p>
-    <?php 
-      $eye = !empty($h['archive_svc_eye']) ? $h['archive_svc_eye'] : sgi_t('common.services', 'Layanan');
-      if (sgi_is_en() && strtolower(trim((string)$h['archive_svc_eye'])) === 'layanan') {
-        $eye = sgi_t('common.services', 'Services');
-      }
+    <?php
+      $customEye = trim((string)($h['archive_svc_eye'] ?? ''));
+      $eye = ($customEye !== '' && strcasecmp($customEye, 'Layanan') !== 0)
+        ? $customEye
+        : sgi_t('common.services', 'Layanan');
     ?>
     <span class="eyebrow"><?php echo esc_html($eye); ?></span>
     <h1><?php

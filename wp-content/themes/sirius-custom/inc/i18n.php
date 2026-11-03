@@ -52,6 +52,8 @@ function sgi_t(string $key, ?string $fallback = null): string {
       'common.back_to_home' => ['id' => 'Kembali ke Beranda', 'en' => 'Back to Home'],
       'common.contact_us' => ['id' => 'Hubungi Kami', 'en' => 'Contact Us'],
       'common.skip_to_content' => ['id' => 'Lewati ke konten', 'en' => 'Skip to content'],
+      'error.404_title' => ['id' => 'Halaman tidak ditemukan', 'en' => 'Page Not Found'],
+      'error.404_desc' => ['id' => 'Tautan yang Anda buka sudah dipindah atau dihapus. Silakan kembali ke beranda atau hubungi kami.', 'en' => 'The page you are looking for has been moved or removed. Please return home or contact us.'],
       'footer.services' => ['id' => 'Layanan', 'en' => 'Services'],
       'footer.company' => ['id' => 'Perusahaan', 'en' => 'Company'],
       'footer.contact' => ['id' => 'Kontak', 'en' => 'Contact'],

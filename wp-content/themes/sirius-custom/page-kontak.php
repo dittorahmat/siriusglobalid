@@ -20,8 +20,8 @@ $formD = $kontak['form_d'] ?? 'Isi detail kebutuhan. Pesan Anda terkirim sebagai
 $pre = isset($_GET['layanan']) ? sanitize_key($_GET['layanan']) : '';
 ?>
 <section class="page-hero"><div class="container">
-<p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(sgi_t('contact.home', 'Beranda')); ?></a> / <span><?php echo esc_html(sgi_t('contact.breadcrumb', 'Kontak')); ?></span></p>
-<span class="eyebrow">Kontak</span>
+<p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(sgi_t('common.home', 'Beranda')); ?></a> / <span><?php echo esc_html(sgi_t('common.contact', 'Kontak')); ?></span></p>
+<span class="eyebrow"><?php echo esc_html(sgi_t('common.contact', 'Kontak')); ?></span>
 <h1><?php echo esc_html($heroH1); ?></h1>
 </div></section>
 <section class="section"><div class="container contact-grid">
