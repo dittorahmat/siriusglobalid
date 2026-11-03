@@ -6,8 +6,8 @@ $filters = [['all', 'Semua'], ['erp', 'ERP'], ['ai', 'AI'], ['fleet', 'Fleet'], 
 $q = new WP_Query(['post_type' => 'portfolio', 'posts_per_page' => 24, 'orderby' => 'menu_order title', 'order' => 'ASC']);
 ?>
 <section class="page-hero"><div class="container">
-<p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a> / <span>Portofolio</span></p>
-<span class="eyebrow">Portofolio</span>
+<p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(sgi_t('common.home', 'Beranda')); ?></a> / <span><?php echo esc_html(sgi_t('common.portfolio', 'Portofolio')); ?></span></p>
+<span class="eyebrow"><?php echo esc_html(sgi_t('common.portfolio', 'Portofolio')); ?></span>
 <h1>Proyek pilihan dengan <span>dampak terukur</span></h1>
 <div class="pills" style="margin-top:20px">
 <?php $fi = 0; foreach ($filters as [$f, $label]): $fi++; ?>

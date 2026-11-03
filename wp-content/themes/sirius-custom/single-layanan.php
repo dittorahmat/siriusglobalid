@@ -25,17 +25,17 @@ $steps_raw = array_values(array_filter(array_map('trim', explode("\n", (string)g
 $faqs_raw = array_values(array_filter(array_map('trim', explode("\n", (string)get_post_meta($id, '_sgi_faqs', true)))));
 $cta_t = get_post_meta($id, '_sgi_cta_title', true);
 $cta_d = get_post_meta($id, '_sgi_cta_desc', true);
-$cta_b = get_post_meta($id, '_sgi_cta_btn', true) ?: 'Konsultasi Gratis';
+$cta_b = get_post_meta($id, '_sgi_cta_btn', true) ?: sgi_t('common.consultation_free', 'Konsultasi Gratis');
 $cta_href = get_post_meta($id, '_sgi_cta_href', true) ?: home_url('/kontak/?layanan=' . get_post_field('post_name'));
 $need = home_url('/kontak/?layanan=' . get_post_field('post_name'));
 $nTiers = count($tiers);
 ?>
 <section class="page-hero"><div class="container">
-<p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a> / <a href="<?php echo esc_url(home_url('/layanan/')); ?>">Layanan</a> / <?php echo esc_html($title); ?></p>
-<span class="eyebrow">Layanan</span><h1><?php echo esc_html($h1); ?></h1>
+<p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(sgi_t('common.home', 'Beranda')); ?></a> / <a href="<?php echo esc_url(home_url('/layanan/')); ?>"><?php echo esc_html(sgi_t('common.services', 'Layanan')); ?></a> / <?php echo esc_html($title); ?></p>
+<span class="eyebrow"><?php echo esc_html(sgi_t('common.services', 'Layanan')); ?></span><h1><?php echo esc_html($h1); ?></h1>
 <p class="lead" style="margin-top:12px"><?php echo esc_html($lead); ?></p>
 <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
-  <a class="btn btn-primary" href="<?php echo esc_url($need); ?>">Konsultasi Gratis</a>
+  <a class="btn btn-primary" href="<?php echo esc_url($need); ?>"><?php echo esc_html(sgi_t('common.consultation_free', 'Konsultasi Gratis')); ?></a>
 </div>
 </div></section>
 <?php if ($checklist || $metrics || $detail_img !== ''): ?>

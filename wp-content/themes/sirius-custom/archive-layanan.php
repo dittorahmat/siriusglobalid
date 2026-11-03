@@ -12,10 +12,14 @@ $q = new WP_Query([
 ?>
 <section class="page-hero">
   <div class="container">
-    <p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a> / <span>Layanan</span></p>
-    <?php if (!empty($h['archive_svc_eye'])): ?>
-      <span class="eyebrow"><?php echo esc_html($h['archive_svc_eye']); ?></span>
-    <?php endif; ?>
+    <p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(sgi_t('common.home', 'Beranda')); ?></a> / <span><?php echo esc_html(sgi_t('common.services', 'Layanan')); ?></span></p>
+    <?php 
+      $eye = !empty($h['archive_svc_eye']) ? $h['archive_svc_eye'] : sgi_t('common.services', 'Layanan');
+      if (sgi_is_en() && strtolower(trim((string)$h['archive_svc_eye'])) === 'layanan') {
+        $eye = sgi_t('common.services', 'Services');
+      }
+    ?>
+    <span class="eyebrow"><?php echo esc_html($eye); ?></span>
     <h1><?php
       $title = trim((string)($h['archive_svc_title_html'] ?? ''));
       if ($title === '') {
@@ -43,7 +47,7 @@ $q = new WP_Query([
       <div class="card-inner">
         <h3><?php the_title(); ?></h3>
         <p><?php echo esc_html($lead); ?></p>
-        <p style="margin-top:14px"><a class="link-more" href="<?php the_permalink(); ?>">→ <span>Pelajari detail</span></a></p>
+        <p style="margin-top:14px"><a class="link-more" href="<?php the_permalink(); ?>">→ <span><?php echo esc_html(sgi_t('common.learn_more', 'Pelajari detail')); ?></span></a></p>
       </div>
     </article>
     <?php endwhile; wp_reset_postdata(); ?>

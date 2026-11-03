@@ -70,9 +70,9 @@ function sgi_pair_lines($raw, int $cols = 2): array {
 function sgi_default_nav(): array {
   if (!function_exists('home_url')) return [];
   return [
-    ['href' => home_url('/'), 'label' => 'Beranda', 'key' => 'home'],
-    ['href' => home_url('/layanan/'), 'label' => 'Layanan', 'key' => 'layanan'],
-    ['href' => home_url('/kontak/'), 'label' => 'Kontak', 'key' => 'kontak'],
+    ['href' => home_url('/'), 'label' => sgi_t('common.home', 'Beranda'), 'key' => 'home'],
+    ['href' => home_url('/layanan/'), 'label' => sgi_t('common.services', 'Layanan'), 'key' => 'layanan'],
+    ['href' => home_url('/kontak/'), 'label' => sgi_t('common.contact', 'Kontak'), 'key' => 'kontak'],
   ];
 }
 

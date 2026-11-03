@@ -14,7 +14,7 @@ if (!$nav) {
 $current = get_queried_object();
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo('charset'); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@ $current = get_queried_object();
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<a class="skip-link" href="#main">Lewati ke konten</a>
+<a class="skip-link" href="#main"><?php echo esc_html(sgi_t('common.skip_to_content', 'Lewati ke konten')); ?></a>
 <header class="site-header">
   <div class="container header-inner">
     <a class="<?php echo esc_attr(sgi_brand_class('header')); ?>" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Sirius Global Indonesia">

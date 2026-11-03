@@ -8,7 +8,7 @@ $timeline = json_decode((string)get_post_meta($id, '_sgi_timeline', true), true)
 $team = json_decode((string)get_post_meta($id, '_sgi_team', true), true) ?: [];
 ?>
 <section class="page-hero"><div class="container">
-  <p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a> / <span>Tentang</span></p>
+  <p class="breadcrumb"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(sgi_t('common.home', 'Beranda')); ?></a> / <span><?php echo esc_html(sgi_t('common.about', 'Tentang')); ?></span></p>
   <span class="eyebrow">Tentang kami</span>
   <h1>Partner teknologi yang <span>mengerti operasional</span>, bukan sekadar coding</h1>
   <p class="lead" style="margin-top:14px">Kami berdiri untuk satu hal sederhana: software yang benar-benar dipakai di lapangan dan memberi hasil bisnis.</p>
